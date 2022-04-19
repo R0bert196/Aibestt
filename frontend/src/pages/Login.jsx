@@ -4,7 +4,7 @@ import LoginImage from '../components/LoginImage'
 
 function Login() {
   return (
-    <div className='container mx-auto px-16 flex max-h-screen'>
+    <div className='container mx-auto px-4 max-w-5xl overflow-hidden flex max-h-screen'>
       <div className='w-2/4 my-16 overflow-hidden mw1024:hidden'>
         <LoginImage />
       </div>
