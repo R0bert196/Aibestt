@@ -1,10 +1,10 @@
 
 function LoginForm() {
   return (
-    <>
-      <form action="localhost:4000/users" method="post">
+    <div>
+      <form action="localhost:4000/users" method="post" className='center-center'>
         <div>
-          <input type="email" placeholder="Enter Email Address..."  name="email" id="password"/>
+          <input className="block" type="email" placeholder="Enter Email Address..." name="email" id="password" />
         </div>
         <div>
           <input type="password" placeholder="Password" name="password" id="password" />
@@ -16,7 +16,7 @@ function LoginForm() {
           <button type="submit">Login</button>
         </div>
       </form>
-    </>
+    </div>
   )
 }
 
