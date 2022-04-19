@@ -1,12 +1,16 @@
-
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import Login from './pages/Login';
 
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">test</header>
-      <h1 class="text-3xl font-bold hover:underline">Hello world!</h1>
-    </div>
+    <Router>
+
+      <Routes>
+        <Route path='/' element={<Login />}/>
+      </Routes>
+      
+    </Router>
   );
 }
 
