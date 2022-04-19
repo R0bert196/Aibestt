@@ -1,13 +1,36 @@
+import {useState} from 'react'
+
 
 function LoginForm() {
+ const [formData, setFormData] = useState({
+        email: '', // required
+        password: '' // required
+    })
+
+    function handleSubmit(e) {
+        e.preventDefault()
+        fetch('http://localhost:4000/login', {
+            method: 'POST',
+            headers: {'Content-Type' : 'application/json'},
+            body: JSON.stringify(formData)
+        })
+        .then(res => res.json())
+        .then(data => console.log(data.user))
+    }
+
+    function handleChange(e) {
+        setFormData({...formData, [e.target.name] : e.target.value})
+    }
+
+
   return (
     <div>
-      <form action="localhost:4000/users" method="post" className='center-center border-b border-solid'>
+      <form onSubmit={e => handleSubmit(e)} className='center-center border-b border-solid'>
         <div>
-          <input className="w-full py-4 rounded-3xl my-4 px-4 border-solid border" type="email" placeholder="Enter Email Address..." name="email" id="password" />
+          <input className="w-full py-4 rounded-3xl my-4 px-4 border-solid border" defaultValue={formData.email} onChange={e => handleChange(e)} type="email" placeholder="Enter Email Address..." name="email" id="password" />
         </div>
         <div>
-          <input className="w-full py-4 rounded-3xl my-4 px-4 border-solid border" type="password" placeholder="Password" name="password" id="password" />
+          <input className="w-full py-4 rounded-3xl my-4 px-4 border-solid border" value={formData.password} onChange={e => handleChange(e)} type="password" placeholder="Password" name="password" id="password" />
         </div>
         <div>
           <input className="" type="checkbox" name="rememebr-me" id="remember-me" />
