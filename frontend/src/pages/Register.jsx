@@ -8,7 +8,7 @@ function Register() {
       <h1>Create an Account!</h1>
       <RegisterForm />
       <>
-        <div>
+        <div text-center>
           <Link to='/login'>Already have an account? Login!</Link>
         </div>
         <div>
