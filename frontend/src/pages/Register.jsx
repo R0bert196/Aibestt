@@ -4,18 +4,18 @@ import { Link } from 'react-router-dom';
 
 function Register() {
   return (
-      <>
-      <h1>Create an Account!</h1>
-      <RegisterForm />
-      <>
-        <div text-center>
-          <Link to='/login'>Already have an account? Login!</Link>
+      <div className="px-16 py-2 bg-white rounded  w-3/5 mx-auto my-16">
+        <h1 className="text-center">Create an Account!</h1>
+        <RegisterForm />
+        <div className="flex flex-col justify-end">
+          <div className="inline-block self-end mt-2 pd-2 hover:brightness-200 hover:bg-primary hover:text-secondary hover:max-w-max rounded-lg">
+            <Link to='/login'>Already have an account? Login!</Link>
+          </div>
+          <div className="inline-block self-end mt-2 pd-2 hover:brightness-200 hover:bg-primary hover:text-secondary hover:max-w-max rounded-lg">
+            <Link  to='/'>Home Page</Link>
+          </div>
         </div>
-        <div>
-          <Link to='/'>Home Page</Link>
-        </div>
-      </>
-      </>
+      </div>
   )
 }
 
