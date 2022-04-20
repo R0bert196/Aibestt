@@ -6,9 +6,12 @@ import IndiactorCard from "../components/IndicatorCard";
 import { useAtom } from "jotai";
 import SideBar from '../components/SideBar';
 import state from "../state";
+import { useState } from "react";
 
 function Dashbord() {
     const [token, setToken] = useAtom(state.token);
+
+    const [activeSidebar, setActiveSidebar] = useState(true);
 
     const navigate = useNavigate();
 
@@ -18,10 +21,10 @@ function Dashbord() {
 
     return (
         <div className='flex'>
-            <SideBar />
+            <SideBar isActive={activeSidebar} setIsActive={ setActiveSidebar }/>
             <div className="container mx-auto px-4 max-w-5xl overflow-hidden min-w-fit">
                 <div className="text-gray-900 text-3xl mt-8">
-                    <h1>Dashboard</h1>
+                    <h1 onClick={() => setActiveSidebar(!activeSidebar)} >Dashboard</h1>
                 </div>
                 <div className="flex flex-wrap">
                     <IndiactorCard />
