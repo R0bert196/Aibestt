@@ -1,7 +1,17 @@
+import { Link } from "react-router-dom"
+import { useNavigate } from "react-router-dom";
+import { useAtom } from "jotai";
+import state from "../state";
+
 function SideBar({ isActive, setIsActive }) {
 
+    const setLogout = () => {
+        setToken("");
+    };
 
+    const navigate = useNavigate();
 
+    const [token, setToken] = useAtom(state.token);
 
   return (
       <nav style={{ left: isActive ? '0' : '-100%', position: isActive ? 'relative' : 'fixed' }} className="px-16 bg-primary text-white relative transition-all duration-300">
@@ -10,19 +20,27 @@ function SideBar({ isActive, setIsActive }) {
           </div>
           <ul style={{ color: 'rgba(255,255,255,.8)', left: '-50px' }} className="relative">
               <li className="py-4">
-                  <a className="hover:text-white" href="#">Profile</a>
+                  <Link to={'/'} className="hover:text-white">Profile</Link>
               </li>
               <li className="py-4">
-                  <a className="hover:text-white" href="#">Table</a>
+                  <Link to={'/'} className="hover:text-white">Table</Link>
               </li>
               <li className="py-4">
-                  <a className="hover:text-white" href="#">Login</a>
+                  <Link to={'/login'} className="hover:text-white">Login</Link>
               </li>
               <li className="py-4">
-                  <a className="hover:text-white" href="#">Register</a>
+                  <Link to={'/register'} className="hover:text-white">Register</Link>
               </li>
               <li className="py-4">
-                  <a className="hover:text-white" href="#">Logout</a>
+                  <button
+                      className="hover:text-accent"
+                      onClick={() => {
+                          setLogout();
+                          navigate("/");
+                          navigate(0);
+                      }}>
+                      Logout
+                  </button>
               </li>
           </ul>
         

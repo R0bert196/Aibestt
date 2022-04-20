@@ -50,6 +50,20 @@
       "company-group-name": "ddddd",
       "company-cui": "fffff",
       "id": 4
+    },
+    {
+      "email": "rob@rob.com",
+      "password": "$2a$10$eqjd8nreVIvbGZH10qibDOINpBoG6Q/GgvDwl3np6IXnLo1F3uqzS",
+      "firstName": "",
+      "lastName": "",
+      "group": "",
+      "cui": "",
+      "first-name": "Robert",
+      "last-name": "Chiriac",
+      "repeat-password": "codecool",
+      "company-group-name": "coca cola",
+      "company-cui": "123123123123123",
+      "id": 5
     }
   ],
   "posts": [
