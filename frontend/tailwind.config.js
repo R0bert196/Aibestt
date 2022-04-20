@@ -9,8 +9,8 @@ module.exports = {
       current: 'currentColor',
       'white': '#ffffff',
       'black': '#000000',
-      'primary': '#0000ff',
-      'secondary':'#d8d8d8',
+      'primary': '#4e73df',
+      'secondary':'#f8f9fc',
       'accent':'#ff0000'
     },
     fontFamily: {
