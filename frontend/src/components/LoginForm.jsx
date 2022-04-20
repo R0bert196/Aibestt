@@ -1,12 +1,16 @@
 import {useState} from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useAtom } from 'jotai';
+import state from '../state';
 
 
-function LoginForm({setToken}) {
+function LoginForm() {
  const [formData, setFormData] = useState({
         email: '', // required
         password: '' // required
     })
+
+    const [token, setToken] = useAtom(state.token)
 
     let navigate = useNavigate();
 
@@ -19,10 +23,8 @@ function LoginForm({setToken}) {
         })
         .then(res => res.json())
         .then(data => {
-            console.log(data)
             setToken(data.accessToken)
             navigate("/")
-            navigate(0)
         })
     }
 

@@ -36,6 +36,20 @@
       "company-group-name": "aaa",
       "company-cui": "aaa",
       "id": 3
+    },
+    {
+      "email": "hhhhhh@kfj.omc",
+      "password": "$2a$10$Jf8B0wRS/9tW.rsVqpBEO.aHByd1uZrHvc.gRDkaHfwuL/IO92iKK",
+      "firstName": "",
+      "lastName": "",
+      "group": "",
+      "cui": "",
+      "first-name": "hhhhhh",
+      "last-name": "hhhhhhh",
+      "repeat-password": "codecool",
+      "company-group-name": "ddddd",
+      "company-cui": "fffff",
+      "id": 4
     }
   ],
   "posts": [
