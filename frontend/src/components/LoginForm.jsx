@@ -1,11 +1,14 @@
 import {useState} from 'react'
+import { useNavigate } from 'react-router-dom'
 
 
-function LoginForm() {
+function LoginForm({setToken}) {
  const [formData, setFormData] = useState({
         email: '', // required
         password: '' // required
     })
+
+    let navigate = useNavigate();
 
     function handleSubmit(e) {
         e.preventDefault()
@@ -15,7 +18,12 @@ function LoginForm() {
             body: JSON.stringify(formData)
         })
         .then(res => res.json())
-        .then(data => console.log(data.user))
+        .then(data => {
+            console.log(data)
+            setToken(data.accessToken)
+            navigate("/")
+            navigate(0)
+        })
     }
 
     function handleChange(e) {
