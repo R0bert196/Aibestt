@@ -22,7 +22,7 @@ function App() {
     <Router>
 
       <Routes>
-          <Route path='/' element={<DashOrHome setLogout={handleLogout}/>} exact /> : 
+          <Route path='/' element={<DashOrHome />} exact /> : 
         <Route path='/login' element={<Login setToken={setToken} />} />
         <Route path='/register' element={<Register setToken={setToken}/>} />
         <Route path='*' element={<ErrorPage />} />
