@@ -1,16 +1,69 @@
 import GraphHeader from "./GraphHeader"
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend,
+} from 'chart.js';
+import { Line } from 'react-chartjs-2';
+// import faker from 'faker';
+import { faker } from '@faker-js/faker';
+    
 
 function EmployeeGraph() {
+    ChartJS.register(
+                    CategoryScale,
+                    LinearScale,
+                    PointElement,
+                    LineElement,
+                    Title,
+                    Tooltip,
+                    Legend
+                    );
+
+     const options = {
+                        responsive: true,
+                        plugins: {
+                            legend: {
+                            position: 'top',
+                            },
+                            title: {
+                            display: true,
+                            text: 'Chart.js Line Chart',
+                            },
+                        },
+                    };
+
+const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
+
+const data = {
+  labels,
+  datasets: [
+    {
+      label: 'Dataset 1',
+      data: labels.map(() => faker.datatype.number({ min: -1000, max: 1000 })),
+      borderColor: 'rgb(255, 99, 132)',
+      backgroundColor: 'rgba(255, 99, 132, 0.5)',
+    },
+    {
+      label: 'Dataset 2',
+      data: labels.map(() => faker.datatype.number({ min: -1000, max: 1000 })),
+      borderColor: 'rgb(53, 162, 235)',
+      backgroundColor: 'rgba(53, 162, 235, 0.5)',
+    },
+  ],
+};
+
     return (
         <div>
             <GraphHeader title={'Employee Overview'}/>
-            <div style={{ borderBottom: '1px solid #e3e6f0', borderLeft: '1px solid #e3e6f0', borderRight: '1px solid #e3e6f0'}} className="rounded-b-md bg-white h-80">
-                <canvas id="lineCanvas1" width="795" height="396" style={{ display: 'block', boxSizing: 'border-box', height: '198px', width: '397.5px'}}></canvas>
-            </div>
-            
-        </div>
-    
-  )
+            <Line options={options} data={data} />            
+        </div>    
+    )
 }
 
 export default EmployeeGraph
