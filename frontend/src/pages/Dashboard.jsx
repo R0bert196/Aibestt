@@ -26,13 +26,16 @@ function Dashbord() {
                 <IndiactorCard />
                 <IndiactorCard />
             </div>
-            <div className="flex">
-                <DoughnutGraph />
-                <DoughnutGraph />
+            <div className="flex justify-between "> 
+                <div>
+                    <EmployeeGraph />      
+                </div>         
+                <div className="min-h-min">
+                          
+                </div>
+                 <DoughnutGraph />
             </div>
-            <div className="my-8">
-                <EmployeeGraph />
-            </div>
+
 
             <button
                 className="py-2 bg-accent text-white hover:brightness-200 px-4 my-4 rounded-3xl"
