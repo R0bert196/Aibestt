@@ -1,7 +1,8 @@
 import {useState} from 'react'
+import { useNavigate } from 'react-router-dom'
 
 
-function RegisterForm() {
+function RegisterForm({setToken}) {
 
    const [formData, setFormData] = useState({
         firstName: '',
@@ -12,6 +13,8 @@ function RegisterForm() {
         cui: '',
     })
 
+    let navigate = useNavigate()
+
     function handleSubmit(e) {
         e.preventDefault()
         fetch('http://localhost:4000/users', {
@@ -20,7 +23,12 @@ function RegisterForm() {
             body: JSON.stringify(formData)
         })
         .then(res => res.json())
-        .then(data => console.log(data))
+        .then(data => {
+          console.log(data)
+          setToken(data.accessToken)
+          navigate("/")
+          navigate(0)
+        })
     }
 
     function handleChange(e) {

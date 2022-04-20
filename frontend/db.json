@@ -10,7 +10,7 @@
       "cui": 12345
     },
     {
-      "email": "codecool@C.com",
+      "email": "code@cool.com",
       "password": "$2a$10$8MU4fAlVBKKDPFJ6qzhSsOppc2Y32r4YL7gOaMoxFKNKc9omlP2sW",
       "firstName": "",
       "lastName": "",
@@ -22,6 +22,20 @@
       "company-group-name": "codecool",
       "company-cui": "codecool",
       "id": 2
+    },
+    {
+      "email": "ong1@ong1.com",
+      "password": "$2a$10$d2CkR6qWQk.kUIsEpJRQ5u3VT65SLfF3BlNCEArX190KW09Wi4q1K",
+      "firstName": "",
+      "lastName": "",
+      "group": "",
+      "cui": "",
+      "first-name": "gogu",
+      "last-name": "gogu",
+      "repeat-password": "codecool",
+      "company-group-name": "aaa",
+      "company-cui": "aaa",
+      "id": 3
     }
   ],
   "posts": [
