@@ -16,7 +16,7 @@ function SideBar({ isActive, setIsActive }) {
   return (
       <nav style={{ left: isActive ? '0' : '-100%', position: isActive ? 'relative' : 'fixed' }} className="px-16 bg-primary text-white relative transition-all duration-300">
           <div className="font-bold py-6 px-4 align-center text-center">
-             <a href="#">HOME</a> 
+              <Link to={'/'} className="hover:text-white">HOME</Link>
           </div>
           <ul style={{ color: 'rgba(255,255,255,.8)', left: '-50px' }} className="relative">
               <li className="py-4">
