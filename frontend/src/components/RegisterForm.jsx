@@ -1,8 +1,12 @@
 import {useState} from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useAtom } from "jotai";
+import state from "../state";
 
 
-function RegisterForm({setToken}) {
+function RegisterForm() {
+  
+  const [token, setToken] = useAtom(state.token);
 
    const [formData, setFormData] = useState({
         firstName: '',
@@ -24,10 +28,8 @@ function RegisterForm({setToken}) {
         })
         .then(res => res.json())
         .then(data => {
-          console.log(data)
           setToken(data.accessToken)
           navigate("/")
-          navigate(0)
         })
     }
 
@@ -41,31 +43,31 @@ function RegisterForm({setToken}) {
     <form onSubmit={e => handleSubmit(e)} className='center-center border-b border-solid'>
         <div>
           <div>
-            <input className="w-full py-4 rounded-3xl my-4 px-4 border-solid border" type="text" defaultValue={formData.firstName} onChange={e => handleChange(e)}  placeholder="First Name" name="first-name" id="first-name"/>
+            <input className="w-full py-4 rounded-3xl my-4 px-4 border-solid border" type="text" defaultValue={formData.firstName} onChange={handleChange}  placeholder="First Name" name="first-name" id="first-name"/>
           </div>
           <div>
-            <input className="w-full py-4 rounded-3xl my-4 px-4 border-solid border" type="text" defaultValue={formData.lastName} onChange={e => handleChange(e)}  placeholder="Last Name" name="last-name" id="last-name"/>     
-          </div>
-        </div>
-        <div>
-          <div>
-            <input className="w-full py-4 rounded-3xl my-4 px-4 border-solid border" type="email" value={formData.email} onChange={e => handleChange(e)} placeholder="Email Address" name="email" id="email" />
+            <input className="w-full py-4 rounded-3xl my-4 px-4 border-solid border" type="text" defaultValue={formData.lastName} onChange={handleChange}  placeholder="Last Name" name="last-name" id="last-name"/>     
           </div>
         </div>
         <div>
           <div>
-            <input className="w-full py-4 rounded-3xl my-4 px-4 border-solid border" type="password" value={formData.password} onChange={e => handleChange(e)} placeholder="Password" name="password" id="password" />
-          </div>
-          <div>
-            <input className="w-full py-4 rounded-3xl my-4 px-4 border-solid border"  type="password" value={formData.confirm} onChange={e => handleChange(e)} placeholder="Repeat Password" name="repeat-password" id="repeat-password" />
+            <input className="w-full py-4 rounded-3xl my-4 px-4 border-solid border" type="email" value={formData.email} onChange={handleChange} placeholder="Email Address" name="email" id="email" />
           </div>
         </div>
         <div>
           <div>
-            <input className="w-full py-4 rounded-3xl my-4 px-4 border-solid border" type="text" defaultValue={formData.group} onChange={e => handleChange(e)} placeholder="Company Group Name" name="company-group-name" id="company-group-name"/>
+            <input className="w-full py-4 rounded-3xl my-4 px-4 border-solid border" type="password" value={formData.password} onChange={handleChange} placeholder="Password" name="password" id="password" />
           </div>
           <div>
-            <input className="w-full py-4 rounded-3xl my-4 px-4 border-solid border" type='text' defaultValue={formData.cui} onChange={e => handleChange(e)} placeholder="Company CUI" name="company-cui" id="company-cui" />
+            <input className="w-full py-4 rounded-3xl my-4 px-4 border-solid border"  type="password" value={formData.confirm} onChange={handleChange} placeholder="Repeat Password" name="repeat-password" id="repeat-password" />
+          </div>
+        </div>
+        <div>
+          <div>
+            <input className="w-full py-4 rounded-3xl my-4 px-4 border-solid border" type="text" defaultValue={formData.group} onChange={handleChange} placeholder="Company Group Name" name="company-group-name" id="company-group-name"/>
+          </div>
+          <div>
+            <input className="w-full py-4 rounded-3xl my-4 px-4 border-solid border" type='text' defaultValue={formData.cui} onChange={handleChange} placeholder="Company CUI" name="company-cui" id="company-cui" />
           </div>
         </div>
         <div>
