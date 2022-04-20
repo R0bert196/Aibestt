@@ -5,6 +5,7 @@ import state from "../state";
 
 const DashOrHome = () => {
     const [token] = useAtom(state.token);
+    
     if (token) return <Dashbord />;
     return <HomePage />;
 };
