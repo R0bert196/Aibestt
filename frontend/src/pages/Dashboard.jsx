@@ -35,7 +35,7 @@ function Dashbord() {
                     <IndiactorCard />
                     <IndiactorCard />
                 </div>
-                <div className="flex">
+                <div className="flex mx-auto max-w-fit">
                     <DoughnutGraph />
                     <DoughnutGraph />
                 </div>
