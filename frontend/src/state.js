@@ -1,5 +1,7 @@
-import { atom } from "jotai";
+import { atomWithStorage } from "jotai/utils";
 
-const state = {token: atom("")}
+const token = atomWithStorage("token", "");
 
-export default state
+const state = { token };
+
+export default state;
