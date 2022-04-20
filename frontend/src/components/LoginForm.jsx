@@ -45,7 +45,7 @@ function LoginForm({setToken}) {
           <label className="mx-4" htmlFor="remember-me">Remember Me</label>
         </div>
         <div>
-          <button className="py-2 bg-primary text-white hover:brightness-200 w-full px-4 my-4 rounded-3xl" type="submit">Login</button>
+          <button className="py-2 bg-primary text-white hover:brightness-125 w-full px-4 my-4 rounded-3xl" type="submit">Login</button>
         </div>
       </form>
     </div>
