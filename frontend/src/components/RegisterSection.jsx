@@ -7,10 +7,10 @@ function RegisterSection() {
           {/* <a href="#">Forgot Password?</a> */}
         </div>
       <div className='my-2'>
-        <Link className='' to='/register'>Create an Account!</Link>
+        <Link className='hover:text-primary' to='/register'>Create an Account!</Link>
         </div>
       <div className='my-2'>
-        <Link className='' to='/'>Back</Link>
+        <Link className='hover:text-primary' to='/'>Back</Link>
         </div>
       </div>
   )
