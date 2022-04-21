@@ -36,7 +36,7 @@ let data = {
 };
 
     return (
-      <div className="max-w-xl mx-4"> 
+      <div className=" mx-4"> 
             <GraphHeader title={'Employees Distribution'} />
             <Doughnut data={data} />
       </div>
