@@ -60,8 +60,8 @@ const data = {
 
     return (
         <div>
-            <GraphHeader title={'Employee Overview'}/>
-            <Line options={options} data={data} />            
+        <GraphHeader title={'Employee Overview'} className='shadow-md'/>
+        <Line style={{ backgroundColor: '#f8f9fc', border: '1px solid #e3e6f0' }} options={options} data={data} className="p-2 rounded-b-md outline-2 text-primary font-bold "/>            
         </div>    
     )
 }

@@ -11,7 +11,7 @@ import { useState } from "react";
 function Dashbord() {
     const [token, setToken] = useAtom(state.token);
 
-    const [activeSidebar, setActiveSidebar] = useState(true);
+    const [activeSidebar, setActiveSidebar] = useState(false);
 
     const navigate = useNavigate();
 
@@ -20,22 +20,22 @@ function Dashbord() {
     };
 
     return (
-        <div className='flex'>
+        <div className='container mx-auto flex'>
             <SideBar isActive={activeSidebar} setIsActive={setActiveSidebar} />
             <div className="text-center">
-                <button style={{ backgroundColor: activeSidebar ? 'rgba(255,255,255,.2)' : '#4e73df', position: 'absolute', left: '20px' }} className="rounded-full py-2 px-4 mt-4 z-10 hover:brightness-125" onClick={() => setActiveSidebar(!activeSidebar)}>{activeSidebar ? '<' : '>'}</button>
+                <button style={{ backgroundColor: activeSidebar ? 'rgba(255,255,255,.2)' : '#4e73df', position: 'absolute', left: '20px' }} className="rounded-full py-2 px-4 mt-4 z-10 hover:brightness-125" onClick={() => setActiveSidebar(prevActiveSidebar  => !prevActiveSidebar)}>{activeSidebar ? '<' : '>'}</button>
             </div>
-            <div style={{}} className="container mx-auto px-4 max-w-5xl overflow-hidden min-w-fit transition-all duration-300">
-                <div className="text-gray-900 text-3xl mt-8">
+            <div style={{}} className="container mx-auto px-4  overflow-hidden  transition-all duration-300">
+                <div className="text-gray-900 text-3xl mt-12">
                     <h1>Dashboard</h1>
                 </div>
-                <div className="flex flex-wrap">
+                <div className="flex flex-wrap justify-center gap-4">
                     <IndiactorCard />
                     <IndiactorCard />
                     <IndiactorCard />
                     <IndiactorCard />
                 </div>
-                <div className="flex mx-auto max-w-fit">
+                <div className="flex mx-auto justify-center gap-4 flex-wrap">
                     <DoughnutGraph />
                     <DoughnutGraph />
                 </div>
