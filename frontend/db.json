@@ -1,15 +1,6 @@
 {
   "users": [
     {
-      "id": 1,
-      "firstName": "gligor",
-      "a": "b",
-      "email": "email@email.com",
-      "password": "$2a$10$8MU4fAlVBKKDPFJ6qzhSsOppc2Y32r4YL7gOaMoxFKNKc9omlP2sW",
-      "group": "meth",
-      "cui": 12345
-    },
-    {
       "email": "code@cool.com",
       "password": "$2a$10$8MU4fAlVBKKDPFJ6qzhSsOppc2Y32r4YL7gOaMoxFKNKc9omlP2sW",
       "firstName": "",
@@ -22,62 +13,57 @@
       "company-group-name": "codecool",
       "company-cui": "codecool",
       "id": 2
-    },
+    },    
     {
-      "email": "ong1@ong1.com",
-      "password": "$2a$10$d2CkR6qWQk.kUIsEpJRQ5u3VT65SLfF3BlNCEArX190KW09Wi4q1K",
+      "email": "test@test.com",
+      "password": "$2a$10$pZ451iUFZch0AxrzIOtK1uEhi9bRRPDVhYSQYRNY1hd1YwUNhl/Wu",
       "firstName": "",
       "lastName": "",
       "group": "",
       "cui": "",
-      "first-name": "gogu",
-      "last-name": "gogu",
+      "first-name": "tete",
+      "last-name": "etgrg",
       "repeat-password": "codecool",
-      "company-group-name": "aaa",
-      "company-cui": "aaa",
-      "id": 3
-    },
-    {
-      "email": "hhhhhh@kfj.omc",
-      "password": "$2a$10$Jf8B0wRS/9tW.rsVqpBEO.aHByd1uZrHvc.gRDkaHfwuL/IO92iKK",
-      "firstName": "",
-      "lastName": "",
-      "group": "",
-      "cui": "",
-      "first-name": "hhhhhh",
-      "last-name": "hhhhhhh",
-      "repeat-password": "codecool",
-      "company-group-name": "ddddd",
-      "company-cui": "fffff",
-      "id": 4
-    },
-    {
-      "email": "rob@rob.com",
-      "password": "$2a$10$eqjd8nreVIvbGZH10qibDOINpBoG6Q/GgvDwl3np6IXnLo1F3uqzS",
-      "firstName": "",
-      "lastName": "",
-      "group": "",
-      "cui": "",
-      "first-name": "Robert",
-      "last-name": "Chiriac",
-      "repeat-password": "codecool",
-      "company-group-name": "coca cola",
-      "company-cui": "123123123123123",
-      "id": 5
+      "company-group-name": "asdasfa",
+      "company-cui": "asfasfdsf",
+      "id": 6
     }
   ],
-  "posts": [
+  "positions": [
     {
       "id": 1,
-      "title": "json-server",
-      "author": "typicode"
+      "name": "red",
+      "employees": 12
+    },
+    {
+      "id": 2,
+      "name": "blue",
+      "employees": 12
+    },
+    {
+      "id": 3,
+      "name": "yellow",
+      "employees": 12
+    },
+    {
+      "id": 4,
+      "name": "green",
+      "employees": 12
+    },
+    {
+      "id": 5,
+      "name": "purple",
+      "employees": 12
+    },
+    {
+      "id": 6,
+      "name": "orange",
+      "employees": 12
     }
   ],
-  "comments": [
+  "colors": [
     {
-      "id": 1,
-      "body": "some comment",
-      "postId": 1
+      "body": "rgba(255, 99, 132, 0.2)"
     }
   ],
   "profile": {

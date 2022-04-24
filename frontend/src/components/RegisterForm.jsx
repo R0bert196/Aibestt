@@ -34,7 +34,6 @@ function RegisterForm() {
     }
 
     function handleChange(e) {
-        console.log(e.target)
         setFormData({...formData, [e.target.name] : e.target.value})
     }
 

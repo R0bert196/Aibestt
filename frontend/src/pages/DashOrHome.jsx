@@ -7,8 +7,7 @@ import state from '../state';
 
 function DashOrHome({setLogout}) {
     
-   const [token] = useAtom(state.token)
-   console.log(state.token)
+  const [token] = useAtom(state.token)
   return token? <Dashboard setLogout={setLogout}/> : <HomePage /> 
 }
 
