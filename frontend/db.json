@@ -61,9 +61,42 @@
       "employees": 12
     }
   ],
-  "colors": [
+  "empGraph": [
     {
-      "body": "rgba(255, 99, 132, 0.2)"
+      "id": 1,
+      "name": "jan",
+      "dataset1": 12,
+      "dataset2": 15
+    },
+    {
+      "id": 1,
+      "name": "feb",
+      "dataset1": 15,
+      "dataset2": 12
+    },
+    {
+      "id": 1,
+      "name": "mar",
+      "dataset1": 12,
+      "dataset2": 15
+    },
+    {
+      "id": 1,
+      "name": "apr",
+      "dataset1": 15,
+      "dataset2": 12
+    },
+    {
+      "id": 1,
+      "name": "may",
+      "dataset1": 12,
+      "dataset2": 15
+    },
+    {
+      "id": 1,
+      "name": "june",
+      "dataset1": 15,
+      "dataset2": 12
     }
   ],
   "profile": {

@@ -21,11 +21,11 @@ useEffect(() => {
 }, [])
 
       let nutData = {
-        labels: chart.map(x => x.name),
+        labels: chart?.map(x => x.name),
         datasets: [
           {
             label: '# of Votes',
-            data: chart.map(x => x.employees),
+            data: chart?.map(x => x.employees),
             backgroundColor: [
               'rgba(255, 99, 132, 0.2)',
               'rgba(54, 162, 235, 0.2)',
