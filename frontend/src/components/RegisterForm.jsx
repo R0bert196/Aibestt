@@ -2,8 +2,7 @@ import {useState} from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAtom } from "jotai";
 import state from "../state";
-import userSchema from '../validations/UserValidation';
-import * as yup from "yup";
+import RegisterSchema from '../validations/RegisterSchema';
 import { Formik, Form, ErrorMessage } from 'formik';
 import TextField from './TextField';
 
@@ -11,7 +10,7 @@ import TextField from './TextField';
 function RegisterForm() {
   
   const [token, setToken] = useAtom(state.token);
-  let navigate = useNavigate()
+    let navigate = useNavigate()
 
 
   return (
@@ -27,7 +26,7 @@ function RegisterForm() {
           group: '',
           cui: '',
         }}
-        validationSchema={userSchema}
+        validationSchema={RegisterSchema}
         onSubmit={values => {
           console.log(values)
           fetch('http://localhost:4000/users', {
@@ -82,7 +81,6 @@ function RegisterForm() {
      
         }}
     </Formik>
-    
     </>
   )
 }

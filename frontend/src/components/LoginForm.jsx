@@ -2,70 +2,48 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAtom } from "jotai";
 import state from "../state";
+import LoginSchema from "../validations/LoginSchema";
+import { Formik, Form, ErrorMessage } from 'formik';
+import TextField from './TextField';
 
 function LoginForm() {
-    const [formData, setFormData] = useState({
-        email: "", // required
-        password: "", // required
-    });
-
     const [token, setToken] = useAtom(state.token);
 
     let navigate = useNavigate();
 
-    function handleSubmit(e) {
-        e.preventDefault();
-        fetch("http://localhost:4000/login", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(formData),
-        })
-            .then((res) => res.json())
-            .then((data) => {
-                setToken(data.accessToken);
-                navigate("/");
-            });
-    }
+    return <Formik
+        initialValues={{
+            email: '',
+            password: '',
+        }}
+        validationSchema={LoginSchema}
+        onSubmit={values => {
+            console.log(values)
+            fetch('http://localhost:4000/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(values)
+            })
+                .then(res => res.json())
+                .then(data => {
+                    setToken(data.accessToken)
+                    navigate("/")
+                })
+        }}
+    >
 
-    function handleChange(e) {
-        setFormData({ ...formData, [e.target.name]: e.target.value });
-    }
-
-    return (
-        <div>
-            <form
-                onSubmit={handleSubmit}
+        {formik => {
+           return <Form
                 className="center-center border-b border-solid">
                 <div>
-                    <input
-                        className="w-full py-4 rounded-3xl my-4 px-4 border-solid border"
-                        defaultValue={formData.email}
-                        onChange={handleChange}
-                        type="email"
-                        placeholder="Enter Email Address..."
-                        name="email"
-                        id="email"
-                    />
+                    <TextField label='Enter Email Address...' name='email' type='email' />
                 </div>
                 <div>
-                    <input
-                        className="w-full py-4 rounded-3xl my-4 px-4 border-solid border"
-                        value={formData.password}
-                        onChange={handleChange}
-                        type="password"
-                        placeholder="Password"
-                        name="password"
-                        id="password"
-                    />
+                    <TextField label='Password' name='password' type='password' />
                 </div>
-                <div>
-                    <input
-                        className=""
-                        type="checkbox"
-                        name="rememebr-me"
-                        id="remember-me"
-                    />
-                    <label className="mx-4" htmlFor="remember-me">
+                <div className="flex gap-2 mt-4">
+                    <TextField label='Remember Me' name='rememberMe' type='checkbox' />
+                    <label className="" htmlFor="rememberMe">
                         Remember Me
                     </label>
                 </div>
@@ -76,9 +54,9 @@ function LoginForm() {
                         Login
                     </button>
                 </div>
-            </form>
-        </div>
-    );
+            </Form>
+        }}
+    </Formik>
 }
 
 export default LoginForm;
