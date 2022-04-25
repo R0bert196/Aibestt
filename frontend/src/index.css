@@ -16,4 +16,14 @@
         100px 0);
         clip-path: polygon(0 0, 0 100%, 100% 80%, 100% 0);
     }
+
+    .invalid-input {
+        border: 2px solid red;
+    }
+
+    .error {
+        position: absolute;
+        color: red;
+        font-size: .6rem ;
+    }
 }

@@ -13,7 +13,7 @@
       "company-group-name": "codecool",
       "company-cui": "codecool",
       "id": 2
-    },    
+    },
     {
       "email": "test@test.com",
       "password": "$2a$10$pZ451iUFZch0AxrzIOtK1uEhi9bRRPDVhYSQYRNY1hd1YwUNhl/Wu",
@@ -27,6 +27,16 @@
       "company-group-name": "asdasfa",
       "company-cui": "asfasfdsf",
       "id": 6
+    },
+    {
+      "email": "robertchiriac196@gmail.com",
+      "password": "$2a$10$kZwCSZsHFcyIGMCEZOf1X.pnaCf61lBp0Unw4Ug4RhiBk1WCILi4m",
+      "firstName": "Robert",
+      "lastName": "Chiriac",
+      "confirmPassword": "123456",
+      "group": "Cola",
+      "cui": "RO12345674",
+      "id": 7
     }
   ],
   "positions": [
