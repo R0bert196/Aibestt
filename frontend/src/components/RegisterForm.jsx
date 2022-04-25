@@ -74,7 +74,7 @@ function RegisterForm() {
               </div>
             </div>
             <div>
-              <button className="py-2 bg-primary text-white hover:brightness-125 w-full px-4 my-4 rounded-3xl" type="submit">Register</button>
+              <button className="py-4 bg-primary text-white hover:brightness-125 w-full px-4 my-4 rounded-3xl" type="submit">Register</button>
             </div>
           </Form>
          
