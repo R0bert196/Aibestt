@@ -5,6 +5,9 @@ import state from "../state";
 import LoginSchema from "../validations/LoginSchema";
 import { Formik, Form, ErrorMessage } from 'formik';
 import TextField from './TextField';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 function LoginForm() {
     const [token, setToken] = useAtom(state.token);
@@ -27,7 +30,13 @@ function LoginForm() {
                 .then(res => res.json())
                 .then(data => {
                     setToken(data.accessToken)
+                    toast.success("You are now logged in!")
                     navigate("/")
+                })
+                .catch(err => {
+                    if (err) {
+                        toast.error("Bad Credentials!")
+                    }
                 })
         }}
     >
