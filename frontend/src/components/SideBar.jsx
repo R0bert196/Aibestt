@@ -20,10 +20,10 @@ function SideBar({ isActive, setIsActive }) {
           </div>
           <ul style={{ color: 'rgba(255,255,255,.8)', left: '-50px' }} className="relative">
               <li className="py-4">
-                  <Link to={'/'} className="hover:text-white">Profile</Link>
+                  <Link to={'/profile'} className="hover:text-white">Profile</Link>
               </li>
               <li className="py-4">
-                  <Link to={'/'} className="hover:text-white">Table</Link>
+                  <Link to={'/employees'} className="hover:text-white">Table</Link>
               </li>
               <li className="py-4">
                   <Link to={'/login'} className="hover:text-white">Login</Link>

@@ -1,29 +1,23 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Login from './pages/Login';
 import Register from './pages/Register';
+import Employees from './components/Employees';
+import Profile from './pages/Profile';
 import ErrorPage from './pages/ErrorPage';
 
 import DashOrHome from './pages/DashOrHome';
+import MainDashPage from './components/MainDashPage';
 
-function setToken(userToken) {
-  sessionStorage.setItem('token', JSON.stringify(userToken));
-}
-
-function getToken() {
-    return sessionStorage.getItem('token');
-}
-
-function handleLogout(){
-  sessionStorage.clear()
-}
 
 function App() {
   return (
     <Router>
       <Routes>       
-        <Route path='/' element={<DashOrHome getToken={getToken} setLogout={handleLogout}/>} exact />
-        <Route path='/login' element={<Login setToken={setToken} />} />
-        <Route path='/register' element={<Register setToken={setToken}/>} />
+        <Route path='/' element={<DashOrHome component={<MainDashPage />} />} exact/>
+        <Route path='/profile' element={<DashOrHome component={<Profile />}/>} exact/>
+        <Route path='/employees' element={<DashOrHome component={<Employees />} />} exact/>
+        <Route path='/login' element={<Login />} />
+        <Route path='/register' element={<Register />}/>
         <Route path='*' element={<ErrorPage />} />
       </Routes>
     </Router>
