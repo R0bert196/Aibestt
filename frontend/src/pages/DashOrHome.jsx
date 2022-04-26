@@ -5,10 +5,10 @@ import { useAtom } from 'jotai';
 import state from '../state';
 
 
-function DashOrHome({setLogout}) {
+function DashOrHome({component}) {
     
   const [token] = useAtom(state.token)
-  return token? <Dashboard setLogout={setLogout}/> : <HomePage /> 
+  return token? <Dashboard component={component}/> : <HomePage /> 
 }
 
 export default DashOrHome
