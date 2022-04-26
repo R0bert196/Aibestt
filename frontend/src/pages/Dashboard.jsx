@@ -28,16 +28,6 @@ function Dashbord({component}) {
             <SideBar isActive={activeSidebar} setIsActive={setActiveSidebar} />
             <ToggleSidebarButton activeSidebar={activeSidebar} setActiveSidebar={setActiveSidebar}/>
            {component}
-        
-            {/* <button
-                className="py-2 bg-accent text-white hover:brightness-200 px-4 my-4 rounded-3xl"
-                onClick={() => {
-                    setLogout();
-                    navigate("/");
-                    navigate(0);
-                }}>
-                Logout
-            </button> */}
         </div>
     );
 }
