@@ -8,6 +8,11 @@ import { useState } from "react";
 import MainDashPage from "../components/MainDashPage";
 import Employees from "../components/Employees";
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faChevronLeft } from '@fortawesome/free-solid-svg-icons'
+import { faChevronRight } from '@fortawesome/free-solid-svg-icons'
+import ToggleSidebarButton from "../components/ToggleSidebarButton";
+
 function Dashbord({component}) {
     const [token, setToken] = useAtom(state.token);
 
@@ -27,13 +32,10 @@ function Dashbord({component}) {
         
         <div className='container mx-auto flex'>
             <SideBar isActive={activeSidebar} setIsActive={setActiveSidebar} />
-            <div className="text-center">
-                <button style={{ backgroundColor: activeSidebar ? 'rgba(255,255,255,.2)' : '#4e73df', position: 'absolute', left: '20px' }} className="rounded-full py-2 px-4 mt-4 z-10 hover:brightness-125" onClick={() => setActiveSidebar(prevActiveSidebar  => !prevActiveSidebar)}>{activeSidebar ? '<' : '>'}</button>
-            </div>
-            
+            <ToggleSidebarButton activeSidebar={activeSidebar} setActiveSidebar={setActiveSidebar}/>
            {component}
         
-            <button
+            {/* <button
                 className="py-2 bg-accent text-white hover:brightness-200 px-4 my-4 rounded-3xl"
                 onClick={() => {
                     setLogout();
@@ -41,7 +43,7 @@ function Dashbord({component}) {
                     navigate(0);
                 }}>
                 Logout
-            </button>
+            </button> */}
         </div>
     );
 }
