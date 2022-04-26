@@ -8,9 +8,6 @@ import { useState } from "react";
 import MainDashPage from "../components/MainDashPage";
 import Employees from "../components/Employees";
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faChevronLeft } from '@fortawesome/free-solid-svg-icons'
-import { faChevronRight } from '@fortawesome/free-solid-svg-icons'
 import ToggleSidebarButton from "../components/ToggleSidebarButton";
 
 function Dashbord({component}) {
@@ -24,10 +21,7 @@ function Dashbord({component}) {
         setToken("");
     };
 
-  
 
-
-    
     return (
         
         <div className='container mx-auto flex'>

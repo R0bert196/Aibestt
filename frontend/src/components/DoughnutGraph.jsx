@@ -52,7 +52,7 @@ useEffect(() => {
 
 
     return (
-      <div className=" mx-4 shadow-md"> 
+      <div className=" mx-4 shadow-md rounded-b-md"> 
         <GraphHeader title={'Employees Distribution'} />
         <Doughnut style={{ backgroundColor: '#f8f9fc', border: '1px solid #e3e6f0' }} data={nutData} className="p-2 rounded-b-md outline-2 text-primary font-bold "/>
       </div>

@@ -7,6 +7,7 @@ import ErrorPage from './pages/ErrorPage';
 import { ToastContainer, toast } from 'react-toastify';
 import DashOrHome from './pages/DashOrHome';
 import MainDashPage from './components/MainDashPage';
+import Footer from './components/Footer';
 
 
 function App() {
@@ -22,7 +23,8 @@ function App() {
         <Route path='*' element={<ErrorPage />} />
       </Routes>
     </Router>
-    <ToastContainer />
+      <ToastContainer />
+      <Footer />
      </>
     
   );

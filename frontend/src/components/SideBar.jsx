@@ -2,9 +2,7 @@ import { Link } from "react-router-dom"
 import { useNavigate } from "react-router-dom";
 import { useAtom } from "jotai";
 import state from "../state";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faChevronLeft } from '@fortawesome/free-solid-svg-icons'
-import { faChevronRight } from '@fortawesome/free-solid-svg-icons'
+
 
 function SideBar({ isActive, setIsActive }) {
 
@@ -17,7 +15,7 @@ function SideBar({ isActive, setIsActive }) {
     const [token, setToken] = useAtom(state.token);
 
   return (
-      <nav style={{ left: isActive ? '0' : '-100%', position: isActive ? 'fiexd' : 'fixed', height: '100%'}} className="px-16 bg-primary text-white relative transition-all duration-300">
+      <nav style={{ left: isActive ? '0' : '-100%', position: 'fixed', height: '100%'}} className="px-16 bg-primary text-white relative transition-all duration-300">
           <div className="font-bold py-6 px-4 align-center text-center">
               <Link to={'/'} className="hover:text-white">AIBEST</Link>
           </div>
