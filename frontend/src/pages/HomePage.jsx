@@ -4,7 +4,7 @@ import Hero from '../components/Hero';
 function HomePage() {
   return (
       <>
-          <Hero />
+        <Hero />
 
         <div>
             <div>
@@ -14,7 +14,7 @@ function HomePage() {
                 <Link to='/register'>Register</Link>
             </div>
         </div>
-        
+    
       </>
   )
 }
