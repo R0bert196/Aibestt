@@ -1,4 +1,4 @@
-import React from 'react'
+import { ToastContainer, toast } from 'react-toastify';
 
 function FileUploadButton() {
 
@@ -31,6 +31,7 @@ function FileUploadButton() {
       .then( response => response.json())
       .then(succes => {
         console.log("robert aici")
+        toast.success("Employees updates successfully")
         console.log(succes);
       })
   }
