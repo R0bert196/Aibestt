@@ -1,7 +1,7 @@
 package com.aibest.controllers;
 
 
-import com.aibest.entities.RegistrationParams;
+import com.aibest.models.RegistrationParams;
 import com.aibest.entities.Users;
 import com.aibest.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +22,7 @@ public class UserController {
     }
 
     @PostMapping("/register")
+//    todo secure endpoint via https
     public ResponseEntity<Users> registerUser(@RequestBody RegistrationParams registrationParameters){
         return ResponseEntity.ok(userService.registerUser(registrationParameters));
     }
