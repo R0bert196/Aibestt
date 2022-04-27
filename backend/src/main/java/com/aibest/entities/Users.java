@@ -1,5 +1,6 @@
 package com.aibest.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -24,12 +25,14 @@ public class Users {
     private String password;
 
     @ManyToOne(
+            cascade = CascadeType.ALL,
             fetch = FetchType.LAZY
     )
     @JoinColumn (
             name = "company_group_id",
             referencedColumnName = "id"
     )
+    @JsonIgnore
     private CompanyGroup companyGroup;
     private UserRole userRole;
 }
