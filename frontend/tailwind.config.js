@@ -11,7 +11,8 @@ module.exports = {
       'black': '#000000',
       'primary': '#4e73df',
       'secondary':'#f8f9fc',
-      'accent':'#ff0000'
+      'accent': '#ff0000',
+      'gray': '#6c757d',
     },
     fontFamily: {
        'nunito': ['Lato', 'sans-serif', 'Staatliches', 'cursive'],

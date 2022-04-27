@@ -1,19 +1,12 @@
 import { Link } from 'react-router-dom';
 import Hero from '../components/Hero';
+import LandingStatsCard from '../components/LandingStatsCard';
 
 function HomePage() {
   return (
       <>
         <Hero />
-
-        <div>
-            <div>
-                <Link to='/login'>Login</Link>
-            </div>
-            <div>
-                <Link to='/register'>Register</Link>
-            </div>
-        </div>
+        <LandingStatsCard />
     
       </>
   )
