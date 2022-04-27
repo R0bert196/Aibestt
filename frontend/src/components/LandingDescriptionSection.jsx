@@ -15,7 +15,7 @@ function LandingDescriptionSection() {
             </div>
           </div>
           <div>
-            <div className='text-3xl rounded-br-xl bg-secondary p-6'>
+            <div className='text-3xl rounded-br-xl bg-secondary p-6 font-light'>
                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Esse placeat dolore nemo consequuntur, cumque doloremque eum voluptatum repellat maxime neque laboriosam obcaecati inventore eveniet dicta quisquam consectetur, iure error facilis.</p>   
             </div>
           </div>
