@@ -4,11 +4,11 @@ import LandingStatsCard from '../components/LandingStatsCard';
 
 function HomePage() {
   return (
-      <>
+      <div className='bg-secondary'>
         <Hero />
         <LandingStatsCard />
     
-      </>
+      </div>
   )
 }
 

@@ -1,6 +1,6 @@
 function LandingStatsCard() {
   return (
-      <div style={{top: '-120px'}} className="flex shadow-lg m-4 py-10 relative">
+      <div style={{top: '-120px'}} className="flex flex-col md:flex-row gap-4 shadow-lg m-4 py-10 relative bg-white">
           <div className="px-8 flex-1">
               <div className="text-center flex flex-col gap-4">
                   <h2 style={{color: 'orange'}} className='text-5xl'>93%</h2>
