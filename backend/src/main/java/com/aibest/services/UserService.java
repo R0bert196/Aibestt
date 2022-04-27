@@ -2,6 +2,7 @@ package com.aibest.services;
 
 
 import com.aibest.entities.*;
+import com.aibest.models.RegistrationParams;
 import com.aibest.repositories.CompanyGroupRepository;
 import com.aibest.repositories.CompanyRepository;
 import com.aibest.repositories.UserRepository;

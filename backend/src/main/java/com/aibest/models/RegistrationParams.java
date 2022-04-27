@@ -1,4 +1,4 @@
-package com.aibest.entities;
+package com.aibest.models;
 
 
 import lombok.AllArgsConstructor;
