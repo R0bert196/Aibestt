@@ -1,8 +1,7 @@
 package com.aibest.controllers;
 
 
-import com.aibest.entities.Company;
-import com.aibest.entities.CompanyGroup;
+import com.aibest.entities.RegistrationParams;
 import com.aibest.entities.Users;
 import com.aibest.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,8 +9,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.Map;
 
 @RestController
 public class UserController {
@@ -25,7 +22,7 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<Users> registerUser(@RequestBody Map<String, String> registrationParameters){
+    public ResponseEntity<Users> registerUser(@RequestBody RegistrationParams registrationParameters){
         return ResponseEntity.ok(userService.registerUser(registrationParameters));
     }
 }

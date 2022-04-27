@@ -1,17 +1,12 @@
 package com.aibest.services;
 
 
-import com.aibest.entities.Company;
-import com.aibest.entities.CompanyGroup;
-import com.aibest.entities.UserRole;
-import com.aibest.entities.Users;
+import com.aibest.entities.*;
 import com.aibest.repositories.CompanyGroupRepository;
 import com.aibest.repositories.CompanyRepository;
 import com.aibest.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.Map;
 
 @Service
 public class UserService {
@@ -30,27 +25,28 @@ public class UserService {
         this.groupRepository = groupRepository;
     }
 
-    public Users registerUser(Map<String, String> registrationParameters){
+    public Users registerUser(RegistrationParams registrationParams){
         //todo verifications
 
         //
         CompanyGroup group = new CompanyGroup();
-        group.setName(registrationParameters.get("groupName"));
+        group.setName(registrationParams.getGroupName());
+//        aici are si id-ul
         group = groupRepository.save(group);
 
         Company company = new Company();
-        company.setCaen(Integer.parseInt(registrationParameters.get("caen")));
-        company.setDeni(registrationParameters.get("deni"));
-        company.setCodPostal(registrationParameters.get("codPostal"));
+        company.setCaen(registrationParams.getCaen());
+        company.setDeni(registrationParams.getDeni());
+        company.setCodPostal(registrationParams.getCodPostal());
         company.setCompanyGroup(group);
         company = companyRepository.save(company);
 
         Users user = new Users();
-        user.setFirstName(registrationParameters.get("firstName"));
-        user.setLastName(registrationParameters.get("lastName"));
-        user.setEmail(registrationParameters.get("email"));
+        user.setFirstName(registrationParams.getFirstName());
+        user.setLastName(registrationParams.getLastName());
+        user.setEmail(registrationParams.getEmail());
         //todo encrypt password
-        user.setPassword(registrationParameters.get("password"));
+        user.setPassword(registrationParams.getPassword());
         //
         user.setCompanyGroup(group);
         user.setUserRole(UserRole.ADMIN);
