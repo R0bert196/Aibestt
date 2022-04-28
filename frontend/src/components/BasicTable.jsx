@@ -3,47 +3,36 @@ import { useTable } from "react-table";
 import FileUploadButton from "./FileUploadButton";
 
 function BasicTable() {
-  const data = useMemo(
-    () => [
+  const [tableData, setTableData] = useState({
+    employees: [
       {
-        id: 5,
-        name: "ghita",
-        start_date: "01-01-1001",
-        salary: 855,
-      },
-      {
-        id: 6,
-        name: "ghi1ta",
-        start_date: "01-05-1001",
-        salary: 64353,
-      },
-      {
-        id: 5,
-        name: "ghi33ta",
-        start_date: "01-01-2001",
-        salary: 2344,
+        id: "",
+        name: "",
+        start_date: "",
+        salary: "",
       },
     ],
-    []
-  );
+  });
+
+  const data = useMemo(() => tableData.employees, [tableData]);
 
   const columns = useMemo(
     () => [
       {
-        Header: "Id",
-        accessor: "id",
+        Header: "Funtie",
+        accessor: "function",
       },
       {
-        Header: "Name",
-        accessor: "name",
-      },
-      {
-        Header: "Start date",
-        accessor: "start_date",
-      },
-      {
-        Header: "Salary",
+        Header: "Salariu",
         accessor: "salary",
+      },
+      {
+        Header: "Data Start",
+        accessor: "startDate",
+      },
+      {
+        Header: "Data Stop",
+        accessor: "endDate",
       },
     ],
     []
@@ -68,7 +57,7 @@ function BasicTable() {
             Upload From File
           </button>
         </div>
-        {toggleUpload && <FileUploadButton />}
+        {toggleUpload && <FileUploadButton setData={setTableData} />}
       </div>
 
       {/* Content */}

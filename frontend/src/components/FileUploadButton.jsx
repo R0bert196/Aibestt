@@ -1,6 +1,6 @@
 import { ToastContainer, toast } from "react-toastify";
 
-function FileUploadButton() {
+function FileUploadButton({ setData }) {
   const onSelectFile = (e) => {
     let companyId = document.querySelector("#companyId").value;
     let file = document.querySelector("#file").files[0];
@@ -46,7 +46,10 @@ function FileUploadButton() {
         (response) => response.json() // if the response is a JSON object
       )
       .then(
-        (success) => console.log(success) // Handle the success response object
+        (success) => {
+          console.log(success)
+          setData(success)
+        } // Handle the success response object
       )
       .catch(
         (error) => console.log(error) // Handle the error response object
