@@ -57,7 +57,7 @@ function FileUploadButton({ setData, toggleUpload }) {
   };
 
   return (
-    <div className='p-4 transition-all duration-300' style={{opacity: toggleUpload ? '0' : '100', position: 'relative', top: toggleUpload ? '-5px': '0px'}}>
+    <div className='p-4 transition-all duration-300' style={{opacity: toggleUpload ? '1000' : '0', position: 'relative', top: toggleUpload ? '0px': '-5px'}}>
       <div className='md:grid grid-cols-3  gap-6'>
         <input
           style={{ border: "1.6px solid #e3e6f0" }}
