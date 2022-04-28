@@ -46,7 +46,7 @@ function BasicTable() {
   return (
     <div className='bg-white shadow-md'>
       {/* Header */}
-      <div style={{ border: "1px solid #e3e6f0" }} className='rounded-t-md p-4'>
+      <div style={{ border: "1px solid #e3e6f0", height: toggleUpload ? '5rem': '15rem' }} className='rounded-t-md p-4 h-60 transition-all duration-300'>
         <div>
           <button
             className='px-4 py-3 bg-primary text-white hover:brightness-125 w-full rounded-lg'
@@ -57,7 +57,12 @@ function BasicTable() {
             Upload From File
           </button>
         </div>
-        {toggleUpload && <FileUploadButton setData={setTableData} />}
+        {
+          <FileUploadButton
+            toggleUpload={toggleUpload}
+            setData={setTableData}
+          />
+        }
       </div>
 
       {/* Content */}

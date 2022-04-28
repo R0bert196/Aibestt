@@ -1,6 +1,6 @@
 import { ToastContainer, toast } from "react-toastify";
 
-function FileUploadButton({ setData }) {
+function FileUploadButton({ setData, toggleUpload }) {
   const onSelectFile = (e) => {
     let companyId = document.querySelector("#companyId").value;
     let file = document.querySelector("#file").files[0];
@@ -57,7 +57,7 @@ function FileUploadButton({ setData }) {
   };
 
   return (
-    <div className='p-4'>
+    <div className='p-4 transition-all duration-300' style={{opacity: toggleUpload ? '0' : '100', position: 'relative', top: toggleUpload ? '-5px': '0px'}}>
       <div className='md:grid grid-cols-3  gap-6'>
         <input
           style={{ border: "1.6px solid #e3e6f0" }}
