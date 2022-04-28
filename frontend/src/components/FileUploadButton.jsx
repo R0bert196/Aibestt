@@ -4,47 +4,44 @@ function FileUploadButton() {
 
 
   const onSelectFile = (e) => {
-      // upload(this.files[0]);
-      // console.log(e.target.files[0])
-    const reader = new FileReader()
-    reader.onload = handleFileLoad;
-    reader.readAsText(e.target.files[0])
+    let companyId = document.querySelector("#companyId").value;
+    let file = document.querySelector("#file").files[0];
+    console.log(companyId);
+    console.log(file);
+    let toSend = {
+      companyId,
+      file
+    }
+    upload(toSend);
   } 
   
 
-
-  function handleFileLoad(e) {
-    let stringContent = e.target.result
-    // console.log(stringContent);
-    // var obj = JSON.parse(e.target.result);
-    sendFile(stringContent);
-  }
-
-  const sendFile = (content) => {
-    const req = fetch("/api/add-employees", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: content,
-    })
-      .then( response => response.json())
-      .then(succes => {
-        console.log("robert aici")
-        toast.success("Employees updates successfully")
-        console.log(succes);
-      })
-  }
+  // const sendFile = (content) => {
+  //   const req = fetch("https://aibest.herokuapp.com/api/get-employees", {
+  //     method: "POST",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //     body: content,
+  //   })
+  //     .then( response => response.json())
+  //     .then(succes => {
+  //       console.log("robert aici")
+  //       toast.success("Employees updates successfully")
+  //       console.log(succes);
+  //     })
+  // }
 
     
     const upload = (file) => {
-      fetch('http://www.example.net', { // Your POST endpoint
+      console.log(file);
+      fetch('https://aibest.herokuapp.com/api/get-employees', { // Your POST endpoint
         method: 'POST',
         headers: {
           // Content-Type may need to be completely **omitted**
           // or you may need something
           // remove conent type is it doesen't work
-          "Content-Type": "multipart/form-data; boundary=—-WebKitFormBoundaryfgtsKTYLsT7PNUVD"
+          // "Content-Type": "multipart/form-data; boundary=—-WebKitFormBoundaryfgtsKTYLsT7PNUVD"
         },
       body: file // This is your file object
       }).then(
@@ -57,16 +54,16 @@ function FileUploadButton() {
 };
 
   return (
-    <div>
-        <form>
-            <div>
-               <label>Select file to upload</label>
-                <input type="search" />
-                <input onChange={onSelectFile} type="file"></input>
-            </div>
-            <button type="submit">Convert</button>
-        </form> 
+    <div className='flex'>
+        <div>
+          <input id='companyId' type="search"  placeholder='Search for your company'/>
+          <input id='file' type="file"></input>
+        </div>
+        <div>
+          <button onClick={onSelectFile} type="submit">Upload Employees</button>
+        </div>
     </div>
+  
   )
 }
 
