@@ -33,4 +33,4 @@ function MainDashPage() {
   )
 }
 
-export default MainDashPage
+export default MainDashPage;

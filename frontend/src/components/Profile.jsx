@@ -1,4 +1,5 @@
 import avatar from '../images/avatar.png'
+import Hero from './Hero'
 
 
 function Profile() {
@@ -14,8 +15,7 @@ function Profile() {
                 <h4><b>John Doe</b></h4>
                 <p>Engineer</p>
               </div>
-          </div>
-
+        </div>
           <div className='flex flex-col justify'>
             <h3 className='mb-3'>Setari cont</h3>
             <form className='grid grid-cols-3 gap-4' > 
