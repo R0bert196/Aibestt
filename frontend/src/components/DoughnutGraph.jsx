@@ -14,7 +14,7 @@ const [chart, setChart] = useState([])
 
 useEffect(() => {
   const getData = async () => {
-    api.get("positions")
+    api.get("positions?companyId=1")
     .then(response => setChart(response.data))
   }
   getData();

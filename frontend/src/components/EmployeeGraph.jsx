@@ -12,7 +12,6 @@ import {
 import { Line } from 'react-chartjs-2';
 import { useEffect, useState } from "react";
 import api from "../utilities/Api";
-import { faker } from '@faker-js/faker';
     
 
 function EmployeeGraph() {
