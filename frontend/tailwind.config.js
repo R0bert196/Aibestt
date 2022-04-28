@@ -32,7 +32,8 @@ module.exports = {
 
       '2xl': '1536px',
       // => @media (min-width: 1536px) { ... }
-      'mw1024': {'max': '1024px'}
+      'mw1024': { 'max': '1024px' },
+      'mw768': {'max': '768px'},
     }
   },
   plugins: [],

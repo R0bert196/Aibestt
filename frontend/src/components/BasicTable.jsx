@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import React, { useMemo, useState } from 'react'
 import { useTable } from 'react-table'
 import FileUploadButton from './FileUploadButton'
 
@@ -53,24 +53,33 @@ function BasicTable() {
 
  
 
-   const {
-     getTableProps,
-     getTableBodyProps,
-     headerGroups,
-     rows,
-     prepareRow,
-   } = useTable({ columns, data })
+  const {
+    getTableProps,
+    getTableBodyProps,
+    headerGroups,
+    rows,
+    prepareRow,
+  } = useTable({ columns, data })
  
+
+  const [toggleUpload, setToggleUpload] = useState(false);
+  
+  
 
   return (
      
-    <div className='bg-white'>
-      <div style={{ border: '1px solid #e3e6f0' }} className='mb-10 rounded-t-md'>
-        <h2>Employee Info</h2>
-        <FileUploadButton />
+    <div className='bg-white shadow-md'>
+
+      {/* Header */}
+      <div style={{ border: '1px solid #e3e6f0'}} className='rounded-t-md p-4'>
+        <div>
+          <button className='px-4 py-3 bg-primary text-white hover:brightness-125 w-full rounded-lg' onClick={() => setToggleUpload(prevToggleUpload => !prevToggleUpload)}>Upload From File</button>
+        </div>
+        { toggleUpload && <FileUploadButton />}
       </div>
 
-      <table {...getTableProps()} className='' >
+      {/* Content */}
+      <table style={{borderBottom: '1px solid #e3e6f0', borderLeft: '1px solid #e3e6f0', borderRight: '1px solid #e3e6f0' }}  className='rounded-b-lg p-4 w-full h-full' {...getTableProps()}>
         <thead>
           {headerGroups.map(headerGroup => (
             <tr {...headerGroup.getHeaderGroupProps()}>

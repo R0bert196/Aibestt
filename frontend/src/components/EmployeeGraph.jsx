@@ -45,7 +45,7 @@ const labels = chartData?.map(x => x.name)
 
 useEffect(() => {
   const getData = async () => {
-    api.get("empGraph")
+    api.get("empGraph?companyId=1")
     .then(response => setChartData(response.data))
   }
   getData();

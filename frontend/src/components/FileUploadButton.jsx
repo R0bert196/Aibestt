@@ -54,13 +54,26 @@ function FileUploadButton() {
 };
 
   return (
-    <div className='flex'>
-        <div>
-          <input id='companyId' type="search"  placeholder='Search for your company'/>
-          <input id='file' type="file"></input>
+    <div className='p-4'>
+      <div className='md:grid grid-cols-3  gap-6'>
+        <input style={{border: '1.6px solid #e3e6f0'}} className='
+    block
+    w-full
+    text-xl
+    font-normal
+    text-gray-700
+    bg-white bg-clip-padding
+    rounded
+    transition
+    col-start-1
+    col-end-2
+    ease-in-out
+    m-0' id='file' type="file"></input>
+          <input style={{border: '1.6px solid #e3e6f0'}} className='flex-auto min-w-0 block w-full px-3 py-1.5 text-base font-normal bg-white bg-clip-padding rounded transition ease-in-out m-0 focus:outline-none col-start-2 col-end-4 mw768:mt-4' id='companyId' type="search"  placeholder='Search for your company'/>
+          
         </div>
         <div>
-          <button onClick={onSelectFile} type="submit">Upload Employees</button>
+          <button className='p-2 mt-6 bg-primary rounded-lg text-white hover:brightness-125' onClick={onSelectFile} type="submit">Upload Employees</button>
         </div>
     </div>
   
