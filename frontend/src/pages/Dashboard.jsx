@@ -24,7 +24,7 @@ function Dashbord({component}) {
 
     return (
         
-        <div className='container mx-auto flex'>
+        <div className='container mx-auto flex min-h-[92vh]'>
             <SideBar isActive={activeSidebar} setIsActive={setActiveSidebar} />
             <ToggleSidebarButton activeSidebar={activeSidebar} setActiveSidebar={setActiveSidebar}/>
            {component}

@@ -10,7 +10,7 @@ import { faTrophy } from '@fortawesome/free-solid-svg-icons';
 function MainDashPage() {
   return (
     <>
-        <div style={{}} className="container mx-auto px-4 overflow-hidden  transition-all duration-300">
+        <div style={{}} className="container mx-auto px-4 overflow-hidden  transition-all duration-300 ">
             <div className="text-gray-900 text-3xl mt-12">
                 <h1>Dashboard</h1>
             </div>

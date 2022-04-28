@@ -29,7 +29,6 @@ public class UserController {
     @PostMapping("/register")
 //    todo secure endpoint via https
     public ResponseEntity<String> registerUser(@RequestBody RegistrationParams registrationParameters){
-        System.out.println(registrationParameters);
         return ResponseEntity.ok(userService.registerUser(registrationParameters));
     }
 
@@ -37,8 +36,6 @@ public class UserController {
     @PostMapping("/login")
 //    todo secure endpoint via https
     public ResponseEntity<String> login(@RequestBody LoginParams loginParams){
-        System.out.println(loginParams);
-
         return ResponseEntity.ok("jwt token goes in here");
     }
 }

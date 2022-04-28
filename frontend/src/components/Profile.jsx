@@ -6,17 +6,17 @@ function Profile() {
     <div className='w-full'>
         <h1>My profile</h1>
           <div className="grid grid-cols-2 gap-4 mt-3 ml-5">        
-           <div>
-             <div className="w-10 min-w-[25%]">
+           <div className='flex flex-col items-center'>
+              <div className="w-10 min-w-[25%] ">
                 <img src={avatar} alt="pic"/>
-             </div>            
-            <div >
-              <h4><b>John Doe</b></h4>
-              <p>Engineer</p>
-            </div>
+              </div>            
+              <div >
+                <h4><b>John Doe</b></h4>
+                <p>Engineer</p>
+              </div>
           </div>
 
-          <div>
+          <div className='flex flex-col justify'>
             <h3 className='mb-3'>Setari cont</h3>
             <form className='grid grid-cols-3 gap-4' > 
               <label htmlFor="email">Adresa email</label>
