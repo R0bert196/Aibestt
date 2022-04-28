@@ -5,6 +5,7 @@ import state from "../state";
 import RegisterSchema from '../validations/RegisterSchema';
 import { Formik, Form, ErrorMessage } from 'formik';
 import TextField from './TextField';
+import Api from '../utilities/Api'
 
 
 function RegisterForm() {
@@ -14,8 +15,7 @@ function RegisterForm() {
 
 
   return (
-    <>
-      
+    <>      
       <Formik
         initialValues={{
           firstName: '',
@@ -28,17 +28,19 @@ function RegisterForm() {
         }}
         validationSchema={RegisterSchema}
         onSubmit={values => {
-          console.log(values)
-          fetch('http://localhost:4000/users', {
-            method: 'POST',
-            headers: {'Content-Type' : 'application/json'},
-            body: JSON.stringify(values.firstName, values.lastName, values.email, values.password, values.group, values.cui)
-        })
-              .then(res => res.json())
-              .then(data => {
-                setToken(data.accessToken)
-                navigate("/")
-              })
+          Api.post("register", 
+                    {"firstName": values.firstName, 
+                    "lastName":values.lastName, 
+                    "email":values.email, 
+                    "password": values.password, 
+                    "group": values.group, 
+                    "cui": values.cui})
+          .then(data => {
+            console.log(data)
+            // set it up later as an access token (data.accessToken)
+            setToken(data.data)
+            navigate("/")
+          })
         }}
       >
         {formik => {
@@ -77,8 +79,6 @@ function RegisterForm() {
               <button className="py-4 bg-primary text-white hover:brightness-125 w-full px-4 my-4 rounded-3xl" type="submit">Register</button>
             </div>
           </Form>
-         
-     
         }}
     </Formik>
     </>

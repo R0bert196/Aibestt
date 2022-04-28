@@ -26,9 +26,8 @@ public class UserService {
         this.groupRepository = groupRepository;
     }
 
-    public Users registerUser(RegistrationParams registrationParams){
+    public String registerUser(RegistrationParams registrationParams){
         //todo verifications
-
         //
         CompanyGroup group = new CompanyGroup();
         group.setName(registrationParams.getGroupName());
@@ -52,7 +51,7 @@ public class UserService {
         user.setCompanyGroup(group);
         user.setUserRole(UserRole.ADMIN);
 
-        return userRepository.save(user);
+        return "implement a proper jwt token as a response if the user was properly added to the database";
     }
 
 }
