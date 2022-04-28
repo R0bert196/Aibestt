@@ -12,7 +12,6 @@ import {
 import { Line } from 'react-chartjs-2';
 import { useEffect, useState } from "react";
 import api from "../utilities/Api";
-import { faker } from '@faker-js/faker';
     
 
 function EmployeeGraph() {
@@ -45,7 +44,7 @@ const labels = chartData?.map(x => x.name)
 
 useEffect(() => {
   const getData = async () => {
-    api.get("empGraph")
+    api.get("empGraph?companyId=1")
     .then(response => setChartData(response.data))
   }
   getData();
