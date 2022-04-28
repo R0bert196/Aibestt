@@ -77,12 +77,6 @@ function BasicTable() {
               {headerGroup.headers.map(column => (
                 <th
                   {...column.getHeaderProps()}
-                  //  style={{
-                  //    borderBottom: 'solid 3px red',
-                  //    background: 'aliceblue',
-                  //    color: 'black',
-                  //    fontWeight: 'bold',
-                  //  }}
                 >
                   {column.render('Header')}
                 </th>

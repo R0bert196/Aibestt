@@ -1,6 +1,7 @@
 package com.aibest.controllers;
 
 
+import com.aibest.models.LoginParams;
 import com.aibest.models.RegistrationParams;
 import com.aibest.entities.Users;
 import com.aibest.services.UserService;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@CrossOrigin(origins="http://localhost:3000")
 public class UserController {
 
     final
@@ -23,11 +25,20 @@ public class UserController {
     }
 
 
-    @CrossOrigin(origins="http://localhost:3000")
+
     @PostMapping("/register")
 //    todo secure endpoint via https
     public ResponseEntity<String> registerUser(@RequestBody RegistrationParams registrationParameters){
         System.out.println(registrationParameters);
         return ResponseEntity.ok(userService.registerUser(registrationParameters));
+    }
+
+
+    @PostMapping("/login")
+//    todo secure endpoint via https
+    public ResponseEntity<String> login(@RequestBody LoginParams loginParams){
+        System.out.println(loginParams);
+
+        return ResponseEntity.ok("jwt token goes in here");
     }
 }

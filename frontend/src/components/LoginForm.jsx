@@ -7,6 +7,7 @@ import { Formik, Form, ErrorMessage } from 'formik';
 import TextField from './TextField';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Api from "../utilities/Api";
 
 
 function LoginForm() {
@@ -21,15 +22,15 @@ function LoginForm() {
         }}
         validationSchema={LoginSchema}
         onSubmit={values => {
-            console.log(values)
-            fetch('http://localhost:4000/login', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(values)
+           Api.post("login", 
+               {
+                   "username": values.email,
+                   "password": values.password
+
             })
-                .then(res => res.json())
                 .then(data => {
-                    setToken(data.accessToken)
+                    //todo change data.data to data.accessToken
+                    setToken(data.data)
                     toast.success("You are now logged in!")
                     navigate("/")
                 })
