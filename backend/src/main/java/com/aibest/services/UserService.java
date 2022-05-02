@@ -28,10 +28,9 @@ public class UserService {
 
     public String registerUser(RegistrationParams registrationParams){
         //todo verifications
-        //
+        //redo with builder pattern
         CompanyGroup group = new CompanyGroup();
         group.setName(registrationParams.getGroupName());
-//        aici are si id-ul
         group = groupRepository.save(group);
 
         Company company = new Company();

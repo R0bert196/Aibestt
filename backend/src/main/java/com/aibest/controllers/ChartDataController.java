@@ -17,7 +17,7 @@ public class ChartDataController {
     @GetMapping("/companySearch")
     public ResponseEntity<List<Company>> companySearch(){
 
-        CompanyGroup group =CompanyGroup.builder().id(61264).name("test").build();
+        CompanyGroup group = CompanyGroup.builder().id(61264).name("test").build();
 
         List<Company> companies = Arrays.asList(
                 Company.builder().id(9999).deni("c1").companyGroup(group).build(),
@@ -115,6 +115,4 @@ public class ChartDataController {
 
         return data;
     }
-
-
 }
