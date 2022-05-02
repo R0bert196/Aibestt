@@ -13,7 +13,7 @@ import Footer from './components/Footer';
 function App() {
   return (
     <>
-    <Router>
+      <Router>
       <Routes>       
         <Route path='/' element={<DashOrHome component={<MainDashPage />} />} exact/>
         <Route path='/profile' element={<DashOrHome component={<Profile />}/>} exact/>
@@ -21,7 +21,7 @@ function App() {
         <Route path='/login' element={<Login />} />
         <Route path='/register' element={<Register />}/>
         <Route path='*' element={<ErrorPage />} />
-      </Routes>
+        </Routes>
     </Router>
       <ToastContainer />
       <Footer />
