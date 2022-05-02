@@ -1,13 +1,18 @@
 import { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import api from "../utilities/Api";
+import { useAtom } from "jotai";
+import state from "../state";
 
 function FileUploadButton({ setData, toggleUpload }) {
   const [companies, setCompanies] = useState();
 
   const [isFileUploaded, setIsFileUploaded] = useState(false);
   const [isCompanySelected, setIsCompanySelected] = useState(false);
-  const [inputValue, setInputValue] = useState("");
+
+  // const [inputValue, setInputValue] = useState("");
+  const [inputValue, setInputValue] = useAtom(state.companyNameSearched);
+
   const [isSelectedField, setIsSelectedField] = useState(false);
 
   const onSelectFile = (e) => {
