@@ -11,7 +11,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Users {
+public class AppUser {
 
     @Id
     @GeneratedValue(

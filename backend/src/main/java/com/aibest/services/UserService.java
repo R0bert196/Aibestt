@@ -7,10 +7,16 @@ import com.aibest.repositories.CompanyGroupRepository;
 import com.aibest.repositories.CompanyRepository;
 import com.aibest.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+
 @Service
-public class UserService {
+public class UserService implements UserDetailsService {
 
     final UserRepository userRepository;
     final CompanyRepository companyRepository;
@@ -40,7 +46,7 @@ public class UserService {
         company.setCompanyGroup(group);
         company = companyRepository.save(company);
 
-        Users user = new Users();
+        AppUser user = new AppUser();
         user.setFirstName(registrationParams.getFirstName());
         user.setLastName(registrationParams.getLastName());
         user.setEmail(registrationParams.getEmail());
@@ -51,6 +57,15 @@ public class UserService {
         user.setUserRole(UserRole.ADMIN);
 
         return "implement a proper jwt token as a response if the user was properly added to the database";
+    }
+
+
+    @Override
+    public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
+
+        //Logic to get the user form the Database
+
+        return new User("admin","password",new ArrayList<>());
     }
 
 }
