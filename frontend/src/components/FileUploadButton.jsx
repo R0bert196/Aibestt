@@ -3,6 +3,7 @@ import { ToastContainer, toast } from "react-toastify";
 import api from "../utilities/Api";
 import { useAtom } from "jotai";
 import state from "../state";
+import AutoCompleteBox from "./AutoCompleteBox";
 
 function FileUploadButton({ setData, toggleUpload }) {
   const [companies, setCompanies] = useState();
@@ -93,21 +94,7 @@ function FileUploadButton({ setData, toggleUpload }) {
         <div>
           <input
             style={{ border: "1.6px solid #e3e6f0" }}
-            className='
-    shadow
-    block
-    w-full
-    max-h-10
-    text-xl
-    font-normal
-    text-gray-700
-    bg-white bg-clip-padding
-    rounded
-    transition
-    col-start-1
-    col-end-2
-    ease-in-out
-    m-0'
+            className='shadow block w-full max-h-10 text-xl font-normal text-gray-700 bg-white bg-clip-padding rounded transition col-start-1 col-end-2 ease-in-out m-0'
             id='file'
             onChange={() => setIsFileUploaded(true)}
             type='file'
@@ -144,26 +131,12 @@ function FileUploadButton({ setData, toggleUpload }) {
             value={inputValue}
           />
           {isSelectedField && (
-            <div className='py-3 px-2 max-h-44 overflow-hidden'>
-              <ul className='list-none search-box cursor-pointer'>
-                {companies?.map((company, key) => {
-                  return (
-                    <li
-                      key={key}
-                      onClick={(e) => {
-                        console.log(e.target.innerHTML);
-                        console.log(e.parentElement);
-                        setInputValue(e.target.innerHTML);
-                        setIsCompanySelected(true);
-                        setIsSelectedField(false);
-                      }}
-                    >
-                      {company.deni}
-                    </li>
-                  );
-                })}
-              </ul>
-            </div>
+            <AutoCompleteBox
+              setIsSelectedField={setIsSelectedField}
+              setIsCompanySelected={setIsCompanySelected}
+              setInputValue={setInputValue}
+              companies={companies}
+            />
           )}
         </div>
       </div>
