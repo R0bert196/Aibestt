@@ -65,7 +65,7 @@ public class UserService implements UserDetailsService {
 
         //Logic to get the user form the Database
 
-        return new User("admin","password",new ArrayList<>());
+        return new User("admin","$2a$12$LnoEBGHmRGZ2lCdajCCN9elK45LmZgdYGdIZ.mjxT6Eflp52SLvBa",new ArrayList<>());
     }
 
 }
