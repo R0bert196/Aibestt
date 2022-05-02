@@ -3,7 +3,6 @@ package com.aibest.controllers;
 
 import com.aibest.models.LoginParams;
 import com.aibest.models.RegistrationParams;
-import com.aibest.entities.Users;
 import com.aibest.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
