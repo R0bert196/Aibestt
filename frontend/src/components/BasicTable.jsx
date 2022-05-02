@@ -14,7 +14,7 @@ function BasicTable() {
     ],
   });
 
-  const data = useMemo(() => tableData.employees, [tableData]);
+  const data = useMemo(() => tableData?.employees, [tableData]);
 
   const columns = useMemo(
     () => [
@@ -77,7 +77,7 @@ function BasicTable() {
       >
         <thead className='bg-white border-b'>
           {headerGroups.map((headerGroup) => (
-            <tr {...headerGroup.getHeaderGroupProps()}>
+            <tr {...headerGroup.getHeaderGroupProps()} >
               {headerGroup.headers.map((column) => (
                 <th
                   className='px-6 py-4 text-left text-sm font-medium'

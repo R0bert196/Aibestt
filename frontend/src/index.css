@@ -31,3 +31,12 @@
         font-size: .6rem ;
     }
 }
+
+.search-box li {
+    padding: 8px 12px;
+}
+
+.search-box li:hover {
+    background: #efefef;
+    border-radius: 3px;
+}
