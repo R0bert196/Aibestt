@@ -3,9 +3,12 @@ import { ToastContainer, toast } from "react-toastify";
 import api from "../utilities/Api";
 
 function FileUploadButton({ setData, toggleUpload }) {
-
   const [companies, setCompanies] = useState();
 
+  const [isFileUploaded, setIsFileUploaded] = useState(false);
+  const [isCompanySelected, setIsCompanySelected] = useState(false);
+  const [inputValue, setInputValue] = useState("");
+  const [isSelectedField, setIsSelectedField] = useState(false);
 
   const onSelectFile = (e) => {
     let companyId = document.querySelector("#companyId").value;
@@ -21,13 +24,13 @@ function FileUploadButton({ setData, toggleUpload }) {
 
   const getCompanies = (e) => {
     let companyName = e.target.value;
-
-    api
-      .get("?companyId=1")
-      .then((response) => setChart(response.data));
-
-    setCompanies(() => setCompanies(ceVine));
-  }
+    api.get(`companySearch?companyName=${companyName}`).then((response) =>
+      setCompanies(() => {
+        console.log(response.data);
+        setCompanies(response.data);
+      })
+    );
+  };
 
   // const sendFile = (content) => {
   //   const req = fetch("https://aibest.herokuapp.com/api/get-employees", {
@@ -101,14 +104,16 @@ function FileUploadButton({ setData, toggleUpload }) {
     ease-in-out
     m-0'
             id='file'
+            onChange={() => setIsFileUploaded(true)}
             type='file'
           />
 
           <div className='mt-8'>
             <button
-              className='p-2 mt-6 bg-primary rounded-lg text-white hover:brightness-125'
+              className='upload-button p-2 mt-6 bg-primary rounded-lg text-white hover:brightness-125 disabled:opacity-75 disabled:cursor-not-allowed disabled:brightness-100'
               onClick={onSelectFile}
               type='submit'
+              disabled={!(isCompanySelected && isFileUploaded)}
             >
               Upload Employees
             </button>
@@ -117,29 +122,44 @@ function FileUploadButton({ setData, toggleUpload }) {
 
         <div
           style={{ border: "1.6px solid #e3e6f0" }}
-          className='flex-auto col-start-2 col-end-4 rounded bg-white'
+          className='flex-auto col-start-2 col-end-4 rounded bg-white h-max'
         >
           <input
-            onKeyUp={getCompanies}
+            onChange={(e) => {
+              getCompanies(e);
+              setIsSelectedField(true);
+              setInputValue(e.target.value);
+            }}
             style={{ borderBottom: "1.6px solid #e3e6f0" }}
             className='shadow min-w-0 max-h-10 block w-full px-3 py-1.5 text-base font-normal bg-white bg-clip-padding  transition ease-in-out m-0 focus:outline-none mw768:mt-4'
             id='companyId'
             type='text'
             autoComplete='off'
             placeholder='Search for your company'
+            value={inputValue}
           />
-          <div className='py-3 px-2 max-h-44 overflow-hidden'>
-            <ul className='list-none search-box cursor-pointer'>
-              {companies.map(company => {
-                <li data-id={company.id}>{company.name}</li>
-              })}
-              {/* <li>lala</li>
-              <li>lala</li>
-              <li>lala</li>
-              <li>lala</li>
-              <li>lala</li> */}
-            </ul>
-          </div>
+          {isSelectedField && (
+            <div className='py-3 px-2 max-h-44 overflow-hidden'>
+              <ul className='list-none search-box cursor-pointer'>
+                {companies?.map((company, key) => {
+                  return (
+                    <li
+                      key={key}
+                      onClick={(e) => {
+                        console.log(e.target.innerHTML);
+                        console.log(e.parentElement);
+                        setInputValue(e.target.innerHTML);
+                        setIsCompanySelected(true);
+                        setIsSelectedField(false);
+                      }}
+                    >
+                      {company.deni}
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+          )}
         </div>
       </div>
     </div>
