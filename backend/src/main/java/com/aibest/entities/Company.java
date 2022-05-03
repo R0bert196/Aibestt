@@ -18,8 +18,9 @@ public class Company {
             strategy = GenerationType.SEQUENCE
     )
     private long id;
-
+    @Column(unique=true)
     private String deni;
+    @Column(unique=true)
     private int caen;
     private String codPostal;
 

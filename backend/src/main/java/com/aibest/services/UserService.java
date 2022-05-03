@@ -6,7 +6,6 @@ import com.aibest.models.RegistrationParams;
 import com.aibest.repositories.CompanyGroupRepository;
 import com.aibest.repositories.CompanyRepository;
 import com.aibest.repositories.UserRepository;
-import com.aibest.security.SecurityConfiguration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -37,41 +36,52 @@ public class UserService implements UserDetailsService {
         this.groupRepository = groupRepository;
     }
 
-    public String registerUser(RegistrationParams registrationParams){
+    public AppUser registerUser(RegistrationParams registrationParams){
         //todo verifications
-        //redo with builder pattern
-        CompanyGroup group = new CompanyGroup();
-        group.setName(registrationParams.getGroupName());
+        
+        if(isNotValid(registrationParams)){
+            throw new UsernameNotFoundException("Unable to create account");
+        }
+        
+        CompanyGroup group = CompanyGroup.builder().name(registrationParams.getGroup()).build();
         group = groupRepository.save(group);
 
-        Company company = new Company();
-        company.setCaen(registrationParams.getCaen());
-        company.setDeni(registrationParams.getDeni());
-        company.setCodPostal(registrationParams.getCodPostal());
-        company.setCompanyGroup(group);
+        Company company = Company.builder()
+                .caen(registrationParams.getCaen())
+                .deni(registrationParams.getDeni())
+                .codPostal(registrationParams.getCodPostal())
+                .companyGroup(group)
+                .build();
         company = companyRepository.save(company);
 
-        AppUser user = new AppUser();
-        user.setFirstName(registrationParams.getFirstName());
-        user.setLastName(registrationParams.getLastName());
-        user.setEmail(registrationParams.getEmail());
-        //todo encrypt password
-        user.setPassword(bCryptPasswordEncoder.encode(registrationParams.getPassword()));
-        //
-        user.setCompanyGroup(group);
-        user.setUserRole(UserRole.ADMIN);
-        userRepository.save(user);
-
-        return "implement a proper jwt token as a response if the user was properly added to the database";
+        AppUser user = AppUser
+                .builder()
+                .firstName(registrationParams.getFirstName())
+                .lastName(registrationParams.getLastName())
+                .email(registrationParams.getEmail())
+                .password(bCryptPasswordEncoder.encode(registrationParams.getPassword()))
+                .userRole(UserRole.ADMIN)
+                .companyGroup(group)
+                .build();
+        return userRepository.save(user);
     }
 
+    private boolean isNotValid(RegistrationParams registrationParams) {
+        System.out.println("here");
+        if(userRepository.findByEmail(registrationParams.getEmail()) != null ||
+//            companyRepository.findByCaen(registrationParams.getCaen()) != null ||
+//            companyRepository.findByDeni(registrationParams.getDeni()) != null ||
+            groupRepository.findByName(registrationParams.getGroup()) != null
+        ){
+            return true;
+        }
+
+        return false;
+    }
 
     @Override
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
-
         AppUser user = userRepository.findByEmail(userName);
-
         return new User(user.getEmail(),user.getPassword(),new ArrayList<>());
     }
-
 }

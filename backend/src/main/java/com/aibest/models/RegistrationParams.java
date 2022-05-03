@@ -17,5 +17,5 @@ public class RegistrationParams {
         private String deni;
         private int caen;
         private String codPostal;
-        private String groupName;
+        private String group;
 }
