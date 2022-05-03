@@ -12,9 +12,12 @@ import {
 import { Line } from 'react-chartjs-2';
 import { useEffect, useState } from "react";
 import api from "../utilities/Api";
+import state from "../state";
+import { useAtom } from "jotai";
     
 
 function EmployeeGraph() {
+  const [token, setToken] = useAtom(state.token);
     ChartJS.register(
                     CategoryScale,
                     LinearScale,
@@ -44,7 +47,7 @@ const labels = chartData?.map(x => x.name)
 
 useEffect(() => {
   const getData = async () => {
-    api.get("empGraph?companyId=1")
+    api.get("empGraph?companyId=1", { headers: {"Authorization" : `Bearer ${token}`} })
     .then(response => setChartData(response.data))
   }
   getData();

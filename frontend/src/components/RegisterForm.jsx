@@ -40,7 +40,7 @@ function RegisterForm() {
             console.log(data)
             toast.success("Registered Succesfully")
             // set it up later as an access token (data.accessToken)
-            setToken(data.data)
+            setToken(data.data.jwtToken)
             navigate("/")
           })
           .catch(error => toast.warn("Something went wrong..."))

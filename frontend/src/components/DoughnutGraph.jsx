@@ -3,6 +3,8 @@ import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
 import api from "../utilities/Api";
 import { useEffect, useState } from "react";
+import { useAtom } from "jotai";
+import state from "../state";
 
 
 
@@ -10,11 +12,14 @@ import { useEffect, useState } from "react";
 function DoughnutGraph() {
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-const [chart, setChart] = useState([])
+  const [chart, setChart] = useState([])
+  
+  const [token, setToken] = useAtom(state.token);
 
 useEffect(() => {
   const getData = async () => {
-    api.get("positions?companyId=1")
+    console.log(token)
+    api.get("positions?companyId=1", { headers: {"Authorization" : `Bearer ${token}`} })
     .then(response => setChart(response.data))
   }
   getData();
