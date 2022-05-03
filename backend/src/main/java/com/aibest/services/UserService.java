@@ -6,6 +6,7 @@ import com.aibest.models.RegistrationParams;
 import com.aibest.repositories.CompanyGroupRepository;
 import com.aibest.repositories.CompanyRepository;
 import com.aibest.repositories.UserRepository;
+import com.aibest.security.SecurityConfiguration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -23,6 +24,9 @@ public class UserService implements UserDetailsService {
     final CompanyRepository companyRepository;
     final CompanyGroupRepository groupRepository;
 
+
+    @Autowired
+    BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Autowired
     public UserService(UserRepository userRepository,
@@ -52,10 +56,11 @@ public class UserService implements UserDetailsService {
         user.setLastName(registrationParams.getLastName());
         user.setEmail(registrationParams.getEmail());
         //todo encrypt password
-        user.setPassword(registrationParams.getPassword());
+        user.setPassword(bCryptPasswordEncoder.encode(registrationParams.getPassword()));
         //
         user.setCompanyGroup(group);
         user.setUserRole(UserRole.ADMIN);
+        userRepository.save(user);
 
         return "implement a proper jwt token as a response if the user was properly added to the database";
     }
@@ -64,9 +69,9 @@ public class UserService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
 
-        //Logic to get the user form the Database
+        AppUser user = userRepository.findByEmail(userName);
 
-        return new User("admin","$2a$12$LnoEBGHmRGZ2lCdajCCN9elK45LmZgdYGdIZ.mjxT6Eflp52SLvBa",new ArrayList<>());
+        return new User(user.getEmail(),user.getPassword(),new ArrayList<>());
     }
 
 }
