@@ -6,6 +6,7 @@ import RegisterSchema from '../validations/RegisterSchema';
 import { Formik, Form, ErrorMessage } from 'formik';
 import TextField from './TextField';
 import Api from '../utilities/Api'
+import { toast } from 'react-toastify';
 
 
 function RegisterForm() {
@@ -37,10 +38,12 @@ function RegisterForm() {
                     "cui": values.cui})
           .then(data => {
             console.log(data)
+            toast.success("Registered Succesfully")
             // set it up later as an access token (data.accessToken)
             setToken(data.data)
             navigate("/")
           })
+          .catch(error => toast.warn("Something went wrong..."))
         }}
       >
         {formik => {

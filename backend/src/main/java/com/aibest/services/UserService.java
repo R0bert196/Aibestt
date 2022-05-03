@@ -6,16 +6,27 @@ import com.aibest.models.RegistrationParams;
 import com.aibest.repositories.CompanyGroupRepository;
 import com.aibest.repositories.CompanyRepository;
 import com.aibest.repositories.UserRepository;
+import com.aibest.security.SecurityConfiguration;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+
 @Service
-public class UserService {
+public class UserService implements UserDetailsService {
 
     final UserRepository userRepository;
     final CompanyRepository companyRepository;
     final CompanyGroupRepository groupRepository;
 
+
+    @Autowired
+    BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Autowired
     public UserService(UserRepository userRepository,
@@ -40,17 +51,27 @@ public class UserService {
         company.setCompanyGroup(group);
         company = companyRepository.save(company);
 
-        Users user = new Users();
+        AppUser user = new AppUser();
         user.setFirstName(registrationParams.getFirstName());
         user.setLastName(registrationParams.getLastName());
         user.setEmail(registrationParams.getEmail());
         //todo encrypt password
-        user.setPassword(registrationParams.getPassword());
+        user.setPassword(bCryptPasswordEncoder.encode(registrationParams.getPassword()));
         //
         user.setCompanyGroup(group);
         user.setUserRole(UserRole.ADMIN);
+        userRepository.save(user);
 
         return "implement a proper jwt token as a response if the user was properly added to the database";
+    }
+
+
+    @Override
+    public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
+
+        AppUser user = userRepository.findByEmail(userName);
+
+        return new User(user.getEmail(),user.getPassword(),new ArrayList<>());
     }
 
 }
