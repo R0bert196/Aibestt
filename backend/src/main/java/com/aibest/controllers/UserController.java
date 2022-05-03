@@ -1,5 +1,6 @@
 package com.aibest.controllers;
 
+import com.aibest.entities.AppUser;
 import com.aibest.models.JwtRequest;
 import com.aibest.models.JwtResponse;
 import com.aibest.models.RegistrationParams;
@@ -39,10 +40,19 @@ public class UserController {
 
     @PostMapping("/register")
 //    todo secure endpoint via https
-    public ResponseEntity<String> registerUser(@RequestBody RegistrationParams registrationParameters){
-        return ResponseEntity.ok(userService.registerUser(registrationParameters));
-    }
+    public JwtResponse registerUser(@RequestBody RegistrationParams registrationParameters){
+        AppUser user = userService.registerUser(registrationParameters);
 
+        if(user == null){
+            throw new BadCredentialsException("check params");
+        }
+
+        final UserDetails userDetails
+                = userService.loadUserByUsername(user.getEmail());
+        final String token =
+                jwtUtility.generateToken(userDetails);
+        return new JwtResponse(token);
+    }
 
     @PostMapping("/login")
     public JwtResponse authenticate(@RequestBody JwtRequest jwtRequest) throws Exception{
