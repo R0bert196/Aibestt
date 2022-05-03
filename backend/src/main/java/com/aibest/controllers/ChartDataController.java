@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.*;
 
-@CrossOrigin(origins="http://localhost:3000")
 @RestController
 public class ChartDataController {
 
