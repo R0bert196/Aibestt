@@ -67,7 +67,6 @@ public class UserService implements UserDetailsService {
     }
 
     private boolean isNotValid(RegistrationParams registrationParams) {
-        System.out.println("here");
         if(userRepository.findByEmail(registrationParams.getEmail()) != null ||
 //            companyRepository.findByCaen(registrationParams.getCaen()) != null ||
 //            companyRepository.findByDeni(registrationParams.getDeni()) != null ||
@@ -83,5 +82,9 @@ public class UserService implements UserDetailsService {
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
         AppUser user = userRepository.findByEmail(userName);
         return new User(user.getEmail(),user.getPassword(),new ArrayList<>());
+    }
+
+    public AppUser getUserByEmail(String email) {
+        return userRepository.findByEmail(email);
     }
 }

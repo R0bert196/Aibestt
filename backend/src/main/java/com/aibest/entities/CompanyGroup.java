@@ -5,6 +5,7 @@ import lombok.*;
 import org.springframework.data.annotation.Reference;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -22,5 +23,9 @@ public class CompanyGroup {
     private long id;
     @Column(unique=true)
     private String name;
+
+
+    @OneToMany(mappedBy = "companyGroup")
+    private List<AppUser> users;
 
 }

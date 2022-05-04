@@ -27,7 +27,7 @@ public class AppUser {
 
     @ManyToOne(
             cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY
+            fetch = FetchType.EAGER
     )
     @JoinColumn (
             name = "company_group_id",

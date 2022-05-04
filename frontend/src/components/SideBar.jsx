@@ -27,10 +27,7 @@ function SideBar({ isActive, setIsActive }) {
                   <Link to={'/employees'} className="hover:text-white">Table</Link>
               </li>
               <li className="py-4">
-                  <Link to={'/login'} className="hover:text-white">Login</Link>
-              </li>
-              <li className="py-4">
-                  <Link to={'/register'} className="hover:text-white">Register</Link>
+                  <Link to={'/companies'} className="hover:text-white">Companies</Link>
               </li>
               <li className="py-4">
                   <button

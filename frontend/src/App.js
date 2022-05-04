@@ -8,6 +8,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import DashOrHome from './pages/DashOrHome';
 import MainDashPage from './components/MainDashPage';
 import Footer from './components/Footer';
+import Companies from './components/Companies';
 
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
         <Route path='/' element={<DashOrHome component={<MainDashPage />} />} exact/>
         <Route path='/profile' element={<DashOrHome component={<Profile />}/>} exact/>
         <Route path='/employees' element={<DashOrHome component={<Employees />} />} exact/>
+        <Route path='/companies' element={<DashOrHome component={<Companies />} />} exact/>
         <Route path='/login' element={<Login />} />
         <Route path='/register' element={<Register />}/>
         <Route path='*' element={<ErrorPage />} />

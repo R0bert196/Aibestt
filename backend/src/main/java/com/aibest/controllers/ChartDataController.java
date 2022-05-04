@@ -1,17 +1,34 @@
 package com.aibest.controllers;
 
+import com.aibest.entities.AppUser;
 import com.aibest.entities.Company;
 import com.aibest.entities.CompanyGroup;
+import com.aibest.repositories.CompanyRepository;
+import com.aibest.security.JWTUtility;
+import com.aibest.services.CompanyService;
+import com.aibest.services.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
 
 @RestController
 public class ChartDataController {
+
+    private final
+    JWTUtility jwtUtility;
+    private final
+    CompanyService companyService;
+    private final
+    UserService userService;
+
+    @Autowired
+    public ChartDataController(JWTUtility jwtUtility, CompanyService companyService, UserService userService) {
+        this.jwtUtility = jwtUtility;
+        this.companyService = companyService;
+        this.userService = userService;
+    }
 
     @GetMapping("/companySearch")
     public ResponseEntity<List<Company>> companySearch(){
@@ -113,5 +130,13 @@ public class ChartDataController {
         data.add(val5);
 
         return data;
+    }
+
+    @GetMapping(value = "/getCompanies")
+    public List<Company> getCompanies(@RequestHeader(name="Authorization") String token) {
+        String email = jwtUtility.getUsernameFromToken(token.substring("Bearer ".length()));
+        AppUser user = userService.getUserByEmail(email);
+        List<Company> companies = companyService.getCompaniesForUser(user);
+        return companies;
     }
 }

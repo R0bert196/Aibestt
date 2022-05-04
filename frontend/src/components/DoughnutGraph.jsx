@@ -12,13 +12,12 @@ import state from "../state";
 function DoughnutGraph() {
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-  const [chart, setChart] = useState([])
+const [chart, setChart] = useState([])
   
-  const [token, setToken] = useAtom(state.token);
+const [token, setToken] = useAtom(state.token);
 
 useEffect(() => {
   const getData = async () => {
-    console.log(token)
     api.get("positions?companyId=1", { headers: {"Authorization" : `Bearer ${token}`} })
     .then(response => setChart(response.data))
   }

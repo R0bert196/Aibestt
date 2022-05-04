@@ -39,7 +39,6 @@ public class UserController {
 
 
     @PostMapping("/register")
-//    todo secure endpoint via https
     public JwtResponse registerUser(@RequestBody RegistrationParams registrationParameters){
         AppUser user = userService.registerUser(registrationParameters);
 
