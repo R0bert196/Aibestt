@@ -12,18 +12,19 @@ import com.aibest.security.JWTUtility;
 import com.aibest.services.RefreshTokenService;
 import com.aibest.services.UserService;
 import io.jsonwebtoken.ExpiredJwtException;
+import io.jsonwebtoken.impl.DefaultClaims;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Base64;
+import java.util.HashMap;
+import java.util.Map;
 
 @RestController
 @CrossOrigin(origins="http://localhost:3000")
@@ -84,46 +85,22 @@ public class UserController {
         final String token =
                 jwtUtility.generateToken(userDetails);
 
-//        RefreshToken refreshToken = refreshTokenService.createRefreshToken(userDetails.getUsername());
         return new JwtResponse(token);
     }
 
-    @PostMapping("/refresh")
-    public String refreshtoken(@RequestBody String request) {
-
-        String username = null;
-        String sentToken = request.substring(36, request.length() - 3);
-
-        //tries to see is the username exists, but the jwt is expired
-        try {
-            username = jwtUtility.getUsernameFromToken(sentToken);
-        // if the jwt is expired, it creates a new one
-        } catch (ExpiredJwtException e) {
-
-            String[] chunks = sentToken.split("\\.");
-
-            Base64.Decoder decoder = Base64.getUrlDecoder();
-
-            String header = new String(decoder.decode(chunks[0]));
-            String payload = new String(decoder.decode(chunks[1]));
-
-            String[] split = payload.split(("\""));
-            System.out.println(header);
-            System.out.println(split[3]);
-            username = split[3];
-        }
 
 
+    @GetMapping("/refreshtoken")
+    public ResponseEntity<?> refreshtoken(HttpServletRequest request) throws Exception {
+        // From the HttpRequest get the claims
+        DefaultClaims claims = (io.jsonwebtoken.impl.DefaultClaims) request.getAttribute("claims");
 
+        Map<String, Object> expectedMap = getMapFromIoJsonwebtokenClaims(claims);
+        String token = jwtUtility.doGenerateRefreshToken(expectedMap, expectedMap.get("sub").toString());
+        return ResponseEntity.ok(new JwtResponse(token));
+    }
 
-        final UserDetails userDetails
-                = userService.loadUserByUsername(username);
-
-
-        final String token =
-                jwtUtility.generateToken(userDetails);
-
-        return token;
-
+    public Map<String, Object> getMapFromIoJsonwebtokenClaims(DefaultClaims claims) {
+        return new HashMap<String, Object>(claims);
     }
 }
