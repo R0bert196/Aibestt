@@ -5,22 +5,38 @@ import api from "../utilities/Api";
 import { useEffect, useState } from "react";
 import { useAtom } from "jotai";
 import state from "../state";
+import useAxiosPrivate from "../hooks/useAxiosPrivate";
 
 
 
 
 function DoughnutGraph() {
-ChartJS.register(ArcElement, Tooltip, Legend);
+  ChartJS.register(ArcElement, Tooltip, Legend);
+  
+  const axiosPrivate = useAxiosPrivate();
 
   const [chart, setChart] = useState([])
   
   const [token, setToken] = useAtom(state.token);
 
-useEffect(() => {
+  
+  useEffect(() => {
+   const controller = new AbortController();
+  // const getData = async () => {
+  //   api.get("empGraph?companyId=1", { headers: {"Authorization" : `Bearer ${token}`} })
+  //   .then(response => setChartData(response.data))
+  // }
   const getData = async () => {
-    console.log(token)
-    api.get("positions?companyId=1", { headers: {"Authorization" : `Bearer ${token}`} })
-    .then(response => setChart(response.data))
+    try {
+      const response = await axiosPrivate.get("positions?companyId=1", {
+        signal: controller.signal
+      })
+    // .then(response => setChartData(response.data))
+    setChart(response.data);
+    } catch(err) {
+        console.error(err);
+    }
+    
   }
   getData();
 }, [])

@@ -2,6 +2,7 @@ package com.aibest.security;
 
 
 import com.aibest.services.UserService;
+import io.jsonwebtoken.ExpiredJwtException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -33,7 +34,12 @@ public class JwtFilter extends OncePerRequestFilter {
 
         if(null != authorization && authorization.startsWith("Bearer ")) {
             token = authorization.substring("Bearer ".length());
-            userName = jwtUtility.getUsernameFromToken(token);
+            try{
+                userName = jwtUtility.getUsernameFromToken(token);
+                // check if the jwt token is expired
+            } catch (ExpiredJwtException e) {
+                filterChain.doFilter(httpServletRequest, httpServletResponse);
+            }
         }
 
         if(null != userName && SecurityContextHolder.getContext().getAuthentication() == null) {

@@ -14,10 +14,13 @@ import { useEffect, useState } from "react";
 import api from "../utilities/Api";
 import state from "../state";
 import { useAtom } from "jotai";
+import useAxiosPrivate from "../hooks/useAxiosPrivate";
     
 
 function EmployeeGraph() {
   const [token, setToken] = useAtom(state.token);
+  const axiosPrivate = useAxiosPrivate();
+
     ChartJS.register(
                     CategoryScale,
                     LinearScale,
@@ -45,10 +48,23 @@ const [chartData, setChartData] = useState([])
 
 const labels = chartData?.map(x => x.name)
 
-useEffect(() => {
+  useEffect(() => {
+   const controller = new AbortController();
+  // const getData = async () => {
+  //   api.get("empGraph?companyId=1", { headers: {"Authorization" : `Bearer ${token}`} })
+  //   .then(response => setChartData(response.data))
+  // }
   const getData = async () => {
-    api.get("empGraph?companyId=1", { headers: {"Authorization" : `Bearer ${token}`} })
-    .then(response => setChartData(response.data))
+    try {
+      const response = await axiosPrivate.get("empGraph?companyId=1", {
+        signal: controller.signal
+      })
+    // .then(response => setChartData(response.data))
+    setChartData(response.data);
+    } catch(err) {
+        console.error(err);
+    }
+    
   }
   getData();
 }, [])
