@@ -8,12 +8,16 @@ import { ToastContainer, toast } from 'react-toastify';
 import DashOrHome from './pages/DashOrHome';
 import MainDashPage from './components/MainDashPage';
 import Footer from './components/Footer';
+import NavBar from './components/NavBar';
 
 
 function App() {
   return (
     <>
       <Router>
+      <div>
+        <NavBar />
+      </div>
       <Routes>       
         <Route path='/' element={<DashOrHome component={<MainDashPage />} />} exact/>
         <Route path='/profile' element={<DashOrHome component={<Profile />}/>} exact/>
