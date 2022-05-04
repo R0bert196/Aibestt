@@ -7,7 +7,7 @@ function Hero() {
       <div className='h-screen'>
           <div style={{ backgroundImage: `url(${landingImage})` }} className='h-4/6 clip-path text-secondary bg-no-repeat bg-cover'>
             <div className='mx-4 lg:mx-8 flex justify-between pt-4'>
-              <h1 className='text-3xl text-primary'> <Link to='/' className='brightness-125 hover:brightness-150'>AIBEST</Link></h1>
+              <h1 className='text-4xl font-bold text-accent'> <Link to='/' className='brightness-125 hover:brightness-150'>AIBEST</Link></h1>
               <ul className='flex gap-3'>
                 <li><Link style={{ border: '0.5px solid gray' }} className='py-2 px-2 bg-transparent w-28 inline-block hover:bg-primary rounded-br-xl text-center' to='/login'>Sign In</Link></li>
                 <li><Link className='py-2 px-2 bg-accent w-28 inline-block hover:brightness-200 rounded-br-xl text-center' to='/register'>Get Started</Link></li>
