@@ -6,6 +6,7 @@ import com.aibest.models.RegistrationParams;
 import com.aibest.repositories.CompanyGroupRepository;
 import com.aibest.repositories.CompanyRepository;
 import com.aibest.repositories.UserRepository;
+import com.aibest.security.JWTUtility;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -23,6 +24,8 @@ public class UserService implements UserDetailsService {
     final CompanyRepository companyRepository;
     final CompanyGroupRepository groupRepository;
 
+    final JWTUtility jwtUtility;
+
 
     @Autowired
     BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -30,10 +33,11 @@ public class UserService implements UserDetailsService {
     @Autowired
     public UserService(UserRepository userRepository,
                        CompanyRepository companyRepository,
-                       CompanyGroupRepository groupRepository) {
+                       CompanyGroupRepository groupRepository, JWTUtility jwtUtility) {
         this.userRepository = userRepository;
         this.companyRepository = companyRepository;
         this.groupRepository = groupRepository;
+        this.jwtUtility = jwtUtility;
     }
 
     public AppUser registerUser(RegistrationParams registrationParams){
@@ -83,5 +87,15 @@ public class UserService implements UserDetailsService {
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
         AppUser user = userRepository.findByEmail(userName);
         return new User(user.getEmail(),user.getPassword(),new ArrayList<>());
+    }
+
+    public String getUsernameByToken(String token) {
+         String username =  jwtUtility.getUsernameFromToken(token);
+         return userRepository.findByEmail(username).getFirstName();
+    }
+
+    public String getCompanyByToken(String token) {
+        String username =  jwtUtility.getUsernameFromToken(token);
+        return userRepository.findByEmail(username).getCompanyGroup().getName();
     }
 }
