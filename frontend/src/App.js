@@ -15,9 +15,6 @@ function App() {
   return (
     <>
       <Router>
-      <div>
-        <NavBar />
-      </div>
       <Routes>       
         <Route path='/' element={<DashOrHome component={<MainDashPage />} />} exact/>
         <Route path='/profile' element={<DashOrHome component={<Profile />}/>} exact/>
