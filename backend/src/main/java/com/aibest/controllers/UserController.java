@@ -6,6 +6,7 @@ import com.aibest.models.JwtResponse;
 import com.aibest.models.RegistrationParams;
 import com.aibest.security.JWTUtility;
 import com.aibest.services.UserService;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import io.jsonwebtoken.impl.DefaultClaims;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -40,7 +41,7 @@ public class UserController {
 
 
     @PostMapping("/register")
-    public JwtResponse registerUser(@RequestBody RegistrationParams registrationParameters){
+    public JwtResponse registerUser(@RequestBody RegistrationParams registrationParameters) throws JsonProcessingException {
         AppUser user = userService.registerUser(registrationParameters);
 
         if(user == null){

@@ -87,7 +87,8 @@ function FileUploadButton({ setData, toggleUpload }) {
       style={{
         opacity: toggleUpload ? "1000" : "0",
         position: "relative",
-        top: toggleUpload ? "0px" : "-5px",
+        display: toggleUpload ? "block" : 'none'
+        // top: toggleUpload ? "0px" : "-1000px",
       }}
     >
       <div className='md:grid grid-cols-3  gap-6'>

@@ -2,11 +2,14 @@ package com.aibest.services;
 
 
 import com.aibest.entities.*;
+import com.aibest.models.CompanyDetails;
 import com.aibest.models.RegistrationParams;
 import com.aibest.repositories.CompanyGroupRepository;
 import com.aibest.repositories.CompanyRepository;
 import com.aibest.repositories.UserRepository;
 import com.aibest.security.JWTUtility;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -31,6 +34,9 @@ public class UserService implements UserDetailsService {
     BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Autowired
+    RestGetService restGetService;
+
+    @Autowired
     public UserService(UserRepository userRepository,
                        CompanyRepository companyRepository,
                        CompanyGroupRepository groupRepository, JWTUtility jwtUtility) {
@@ -40,20 +46,25 @@ public class UserService implements UserDetailsService {
         this.jwtUtility = jwtUtility;
     }
 
-    public AppUser registerUser(RegistrationParams registrationParams){
+    public AppUser registerUser(RegistrationParams registrationParams) throws JsonProcessingException {
         //todo verifications
         
         if(isNotValid(registrationParams)){
             throw new UsernameNotFoundException("Unable to create account");
         }
-        
+
+        String companyDetailsString = restGetService.getCompanyDetails("https://webservicesp.anaf.ro/bilant?an=2020&cui=" + registrationParams.getCui());
+
+
+        CompanyDetails companyDetails = new ObjectMapper().readValue(companyDetailsString, CompanyDetails.class);
+
         CompanyGroup group = CompanyGroup.builder().name(registrationParams.getGroup()).build();
         group = groupRepository.save(group);
 
         Company company = Company.builder()
-                .caen(registrationParams.getCaen())
-                .deni(registrationParams.getDeni())
                 .cui(registrationParams.getCui())
+                .caen(Integer.parseInt(companyDetails.getCaen()))
+                .deni(companyDetails.getDeni())
                 .codPostal(registrationParams.getCodPostal())
                 .companyGroup(group)
                 .build();
