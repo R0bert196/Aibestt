@@ -99,9 +99,9 @@ public class UserService implements UserDetailsService {
          return userRepository.findByEmail(username).getFirstName();
     }
 
-    public String getCompanyByToken(String token) {
+    public CompanyGroup getCompanyByToken(String token) {
         String username =  jwtUtility.getUsernameFromToken(token);
-        return userRepository.findByEmail(username).getCompanyGroup().getName();
+        return userRepository.findByEmail(username).getCompanyGroup();
 
     }
 }
