@@ -1,17 +1,11 @@
 package com.aibest.controllers;
 
 import com.aibest.entities.AppUser;
-import com.aibest.entities.RefreshToken;
-import com.aibest.exceptions.TokenRefreshException;
-import com.aibest.models.TokenRefreshRequest;
-import com.aibest.models.TokenRefreshResponse;
 import com.aibest.models.JwtRequest;
 import com.aibest.models.JwtResponse;
 import com.aibest.models.RegistrationParams;
 import com.aibest.security.JWTUtility;
-import com.aibest.services.RefreshTokenService;
 import com.aibest.services.UserService;
-import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.impl.DefaultClaims;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -22,7 +16,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Base64;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -44,9 +37,6 @@ public class UserController {
     public UserController(UserService userService) {
         this.userService = userService;
     }
-
-    @Autowired
-    RefreshTokenService refreshTokenService;
 
 
 
@@ -100,7 +90,7 @@ public class UserController {
     }
 
     public Map<String, Object> getMapFromIoJsonwebtokenClaims(DefaultClaims claims) {
-        return new HashMap<String, Object>(claims);
+        return new HashMap<>(claims);
     }
 
     @GetMapping("/getUsername")
