@@ -20,12 +20,8 @@ public class CompanyGroup {
     @GeneratedValue (
             strategy = GenerationType.SEQUENCE
     )
+    @Access(AccessType.PROPERTY)
     private long id;
     @Column(unique=true)
     private String name;
-
-
-    @OneToMany(mappedBy = "companyGroup")
-    private List<AppUser> users;
-
 }

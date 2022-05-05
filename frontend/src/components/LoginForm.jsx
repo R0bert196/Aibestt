@@ -29,7 +29,6 @@ function LoginForm() {
 
             })
                 .then(data => {
-                    //todo change data.data to data.accessToken
                     setToken(data.data.jwtToken)
                     console.log(data.data.jwtToken)
                     toast.success("You are now logged in!")

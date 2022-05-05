@@ -84,7 +84,7 @@ public class UserService implements UserDetailsService {
 
     private boolean isNotValid(RegistrationParams registrationParams) {
         if(userRepository.findByEmail(registrationParams.getEmail()) != null ||
-//            companyRepository.findByCaen(registrationParams.getCaen()) != null ||
+//            companyRepository.findByCui(registrationParams.getCui()) != null ||
 //            companyRepository.findByDeni(registrationParams.getDeni()) != null ||
             groupRepository.findByName(registrationParams.getGroup()) != null
         ){

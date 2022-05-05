@@ -4,6 +4,7 @@ import Api from "../utilities/Api";
 import { useAtom } from "jotai";
 import state from "../state";
 import axios from "axios";
+import AddNewCompany from "./AddNewCompany";
 import useAxiosPrivate from "../hooks/useAxiosPrivate";
 
 
@@ -11,9 +12,10 @@ import useAxiosPrivate from "../hooks/useAxiosPrivate";
 
 function CompanyTable() {
 
-const [products, setProducts] = useState([]);
+const [companies, setCompanies] = useState([]);
   const [token, setToken] = useAtom(state.token);
   const axiosPrivate = useAxiosPrivate();
+  const [toggleUpload, setToggleUpload] = useState(false)
 
 
   useEffect(() => {
@@ -23,7 +25,7 @@ const [products, setProducts] = useState([]);
       const response = await axiosPrivate.get("getCompanies", {
         signal: controller.signal
       })
-      setProducts(response.data);
+      setCompanies(response.data);
     } catch(err) {
         console.error(err);
     }
@@ -39,6 +41,7 @@ const [products, setProducts] = useState([]);
         id: 1,
         deni: "comp1",
         caen: 109.95,
+        cui: 109765,
         codPostal:
           "12345"
       },
@@ -46,6 +49,7 @@ const [products, setProducts] = useState([]);
         id: 1,
         deni: "comp2",
         caen: 109.95,
+        cui: 109935,
         codPostal:
           "12345"
       },         
@@ -63,6 +67,10 @@ const [products, setProducts] = useState([]);
         Header: "Caen",
         accessor: "caen",
       },
+            {
+        Header: "Cui",
+        accessor: "cui",
+      },
       {
         Header: "Deni",
         accessor: "deni",
@@ -75,21 +83,22 @@ const [products, setProducts] = useState([]);
     []
   );
 
-  const productsData = useMemo(() => [...products], [products]);
+  const productsData = useMemo(() => [...companies], [companies]);
 
   const productsColumns = useMemo(
     () =>
-      products[0]
-        ? Object.keys(products[0])
+      companies[0]
+        ? Object.keys(companies[0])
             .filter((key) => key !== "companyGroup")
             .map( (key) =>{
+
                 return {
                   Header: key,
                   accessor: key,
                 }
               })          
         : [],
-    [products]
+    [companies]
   );
 
   const tableInstance = useTable(
@@ -112,16 +121,29 @@ const [products, setProducts] = useState([]);
   // }, []);
 
   return (
-<table {...getTableProps()}>
-
-     <thead>
-
+    <div>
+      <div style={{ border: "1px solid #e3e6f0", height: toggleUpload ? '20rem': '5rem' }} className='rounded-t-md p-4 transition-all duration-300'>
+        <div>
+          <button
+            className='px-4 py-3 bg-primary text-white hover:brightness-125 w-full rounded-lg'
+            onClick={() =>
+              setToggleUpload((prevToggleUpload) => !prevToggleUpload)
+            }
+          >
+            Add new company
+          </button>
+        </div>
+        { <AddNewCompany toggleUpload={toggleUpload}/> }
+      </div>
+<div>
+<table className="w-full" {...getTableProps()}>
+       <thead>
        {
        headerGroups.map(headerGroup => (
-         <tr {...headerGroup.getHeaderGroupProps()}>
+         <tr className="grid grid-cols-5 content-center text-center"  {...headerGroup.getHeaderGroupProps()}>
            {
            headerGroup.headers.map(column => (
-             <th {...column.getHeaderProps()}>               
+             <th className="grid content-center" {...column.getHeaderProps()}>               
              {
                column.render('Header')}
              </th>
@@ -134,11 +156,11 @@ const [products, setProducts] = useState([]);
        rows.map(row => {
          prepareRow(row)
          return (
-           <tr {...row.getRowProps()}>
+           <tr className="grid grid-cols-5" {...row.getRowProps()}>
              {
              row.cells.map(cell => {
                return (
-                 <td {...cell.getCellProps()}>
+                 <td className="grid content-center text-center" {...cell.getCellProps()}>
                    {
                    cell.render('Cell')}
                  </td>
@@ -149,6 +171,8 @@ const [products, setProducts] = useState([]);
        })}
      </tbody>
    </table>
+   </div>
+  </div>
         );  
 }
 

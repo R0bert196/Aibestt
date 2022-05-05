@@ -21,7 +21,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController
-@CrossOrigin(origins="http://localhost:3000")
 public class UserController {
 
     final
@@ -100,10 +99,5 @@ public class UserController {
         return userService.getUsernameByToken(token.substring(7));
     }
 
-    @GetMapping("/getCompany")
-    public String getCompany(@RequestHeader (name="Authorization") String token) {
-        System.out.println(token.substring(7));
-        return userService.getCompanyByToken(token.substring(7));
-    }
 
 }

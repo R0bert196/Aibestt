@@ -17,16 +17,19 @@ public class Company {
     @GeneratedValue (
             strategy = GenerationType.SEQUENCE
     )
+    @Access(AccessType.PROPERTY)
     private long id;
-    @Column(unique=true)
+
+//    @Column(unique=true)
     private String deni;
-    @Column(unique=true)
     private int caen;
+//    @Column(unique=true)
+    private int cui;
     private String codPostal;
-    private String cui;
 
     @ManyToOne(
-            fetch = FetchType.LAZY
+            fetch = FetchType.LAZY,
+            optional = false
     )
     @JoinColumn(
             name = "company_group_id",
