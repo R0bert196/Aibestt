@@ -48,8 +48,6 @@ public class CompanyController {
     @PostMapping("/addCompany")
     public ResponseEntity<Boolean> addCompany(@RequestHeader(name="Authorization") String token,
                                               @RequestBody CompanyRegParams params){
-        System.out.println("here");
-
         CompanyGroup group = userService.getCompanyByToken(token.substring(7));
         companyService.addCompany(group, params);
         return ResponseEntity.ok(Boolean.TRUE);

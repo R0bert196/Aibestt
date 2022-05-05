@@ -20,7 +20,7 @@ function App() {
         <Route path='/' element={<DashOrHome component={<Companies />} />} exact/>
         <Route path='/profile' element={<DashOrHome component={<Profile />}/>} exact/>
         <Route path='/employees' element={<DashOrHome component={<Employees />} />} exact/>
-        <Route path='/companies' element={<DashOrHome component={< MainDashPage/>} />} exact/>
+        <Route path='/companies/:id' element={<DashOrHome component={< MainDashPage/>} />} exact/>
         <Route path='/login' element={<Login />} />
         <Route path='/register' element={<Register />}/>
         <Route path='*' element={<ErrorPage />} />

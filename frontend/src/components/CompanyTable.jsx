@@ -6,6 +6,7 @@ import state from "../state";
 import axios from "axios";
 import AddNewCompany from "./AddNewCompany";
 import useAxiosPrivate from "../hooks/useAxiosPrivate";
+import { Link } from "react-router-dom";
 
 
 
@@ -38,7 +39,7 @@ const [companies, setCompanies] = useState([]);
   const data = useMemo(
     () => [
       {
-        id: 1,
+        id: 2,
         deni: "comp1",
         caen: 109.95,
         cui: 109765,
@@ -46,7 +47,7 @@ const [companies, setCompanies] = useState([]);
           "12345"
       },
       {
-        id: 1,
+        id:1,
         deni: "comp2",
         caen: 109.95,
         cui: 109935,
@@ -60,8 +61,9 @@ const [companies, setCompanies] = useState([]);
   const columns = useMemo(
     () => [
       {
-        Header: "Id",
-        accessor: "id",
+      Header: 'id',
+      accessor: "id",
+      Cell: ({ row }) => (<Link to={{pathname:`/companies/ ${row.id}` } }>{row.name}</Link>),
       },
       {
         Header: "Caen",
@@ -90,12 +92,13 @@ const [companies, setCompanies] = useState([]);
       companies[0]
         ? Object.keys(companies[0])
             .filter((key) => key !== "companyGroup")
-            .map( (key) =>{
+            .map( (key) => {
 
                 return {
                   Header: key,
                   accessor: key,
                 }
+                            
               })          
         : [],
     [companies]
