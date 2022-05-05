@@ -5,6 +5,7 @@ import { useAtom } from "jotai";
 import state from "../state";
 import axios from "axios";
 import AddNewCompany from "./AddNewCompany";
+import useAxiosPrivate from "../hooks/useAxiosPrivate";
 
 
 
@@ -13,18 +14,26 @@ function CompanyTable() {
 
 const [companies, setCompanies] = useState([]);
   const [token, setToken] = useAtom(state.token);
-
+  const axiosPrivate = useAxiosPrivate();
   const [toggleUpload, setToggleUpload] = useState(false)
 
-  const fetchCompanies = async () => {
-    const response = await Api.get("getCompanies", { headers: {"Authorization" : `Bearer ${token}`} })
-      .catch((err) => console.log(err));
 
-    if (response) {
-      const companies = response.data;
-      setCompanies(companies);
+  useEffect(() => {
+   const controller = new AbortController();
+  const getProducts = async () => {
+    try {
+      const response = await axiosPrivate.get("getCompanies", {
+        signal: controller.signal
+      })
+      setCompanies(response.data);
+    } catch(err) {
+        console.error(err);
     }
-  };
+    
+  }
+  getProducts();
+}, [])
+
 
   const data = useMemo(
     () => [
@@ -101,9 +110,9 @@ const [companies, setCompanies] = useState([]);
     prepareRow,
   } = tableInstance;
 
-  useEffect(() => {
-    fetchCompanies();
-  }, []);
+  // useEffect(() => {
+  //   getProducts();
+  // }, []);
 
   return (
     <div>
