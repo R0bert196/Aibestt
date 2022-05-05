@@ -116,7 +116,7 @@ const [companies, setCompanies] = useState([]);
 
   return (
     <div>
-      <div style={{ border: "1px solid #e3e6f0", height: toggleUpload ? '15rem': '5rem' }} className='rounded-t-md p-4 transition-all duration-300'>
+      <div style={{ border: "1px solid #e3e6f0", height: toggleUpload ? '20rem': '5rem' }} className='rounded-t-md p-4 transition-all duration-300'>
         <div>
           <button
             className='px-4 py-3 bg-primary text-white hover:brightness-125 w-full rounded-lg'
@@ -129,7 +129,7 @@ const [companies, setCompanies] = useState([]);
         </div>
         { <AddNewCompany toggleUpload={toggleUpload}/> }
       </div>
-
+<div>
 <table className="w-full" {...getTableProps()}>
        <thead>
        {
@@ -165,6 +165,7 @@ const [companies, setCompanies] = useState([]);
        })}
      </tbody>
    </table>
+   </div>
   </div>
         );  
 }

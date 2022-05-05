@@ -104,5 +104,4 @@ public class UserController {
         System.out.println(token.substring(7));
         return userService.getCompanyByToken(token.substring(7));
     }
-
 }
