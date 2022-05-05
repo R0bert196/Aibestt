@@ -136,7 +136,6 @@ public class ChartDataController {
     public List<Company> getCompanies(@RequestHeader(name="Authorization") String token) {
         String email = jwtUtility.getUsernameFromToken(token.substring("Bearer ".length()));
         AppUser user = userService.getUserByEmail(email);
-        List<Company> companies = companyService.getCompaniesForUser(user);
-        return companies;
+        return companyService.getCompaniesForUser(user);
     }
 }

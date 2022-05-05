@@ -17,6 +17,7 @@ public class AppUser {
     @GeneratedValue(
             strategy = GenerationType.SEQUENCE
     )
+    @Access(AccessType.PROPERTY)
     private long id;
     private String firstName;
     private String lastName;
@@ -27,7 +28,8 @@ public class AppUser {
 
     @ManyToOne(
             cascade = CascadeType.ALL,
-            fetch = FetchType.EAGER
+            fetch = FetchType.EAGER,
+            optional = false
     )
     @JoinColumn (
             name = "company_group_id",
