@@ -41,6 +41,7 @@ const [companies, setCompanies] = useState([]);
         id: 1,
         deni: "comp1",
         caen: 109.95,
+        cui: 109765,
         codPostal:
           "12345"
       },
@@ -48,6 +49,7 @@ const [companies, setCompanies] = useState([]);
         id: 1,
         deni: "comp2",
         caen: 109.95,
+        cui: 109935,
         codPostal:
           "12345"
       },         
@@ -64,6 +66,10 @@ const [companies, setCompanies] = useState([]);
       {
         Header: "Caen",
         accessor: "caen",
+      },
+            {
+        Header: "Cui",
+        accessor: "cui",
       },
       {
         Header: "Deni",
@@ -134,7 +140,7 @@ const [companies, setCompanies] = useState([]);
        <thead>
        {
        headerGroups.map(headerGroup => (
-         <tr className="grid grid-cols-4 content-center text-center"  {...headerGroup.getHeaderGroupProps()}>
+         <tr className="grid grid-cols-5 content-center text-center"  {...headerGroup.getHeaderGroupProps()}>
            {
            headerGroup.headers.map(column => (
              <th className="grid content-center" {...column.getHeaderProps()}>               
@@ -150,7 +156,7 @@ const [companies, setCompanies] = useState([]);
        rows.map(row => {
          prepareRow(row)
          return (
-           <tr className="grid grid-cols-4" {...row.getRowProps()}>
+           <tr className="grid grid-cols-5" {...row.getRowProps()}>
              {
              row.cells.map(cell => {
                return (
