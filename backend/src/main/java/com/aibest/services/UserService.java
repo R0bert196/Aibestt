@@ -53,6 +53,7 @@ public class UserService implements UserDetailsService {
         Company company = Company.builder()
                 .caen(registrationParams.getCaen())
                 .deni(registrationParams.getDeni())
+                .cui(registrationParams.getCui())
                 .codPostal(registrationParams.getCodPostal())
                 .companyGroup(group)
                 .build();
@@ -72,7 +73,7 @@ public class UserService implements UserDetailsService {
 
     private boolean isNotValid(RegistrationParams registrationParams) {
         if(userRepository.findByEmail(registrationParams.getEmail()) != null ||
-//            companyRepository.findByCaen(registrationParams.getCaen()) != null ||
+//            companyRepository.findByCui(registrationParams.getCui()) != null ||
 //            companyRepository.findByDeni(registrationParams.getDeni()) != null ||
             groupRepository.findByName(registrationParams.getGroup()) != null
         ){
