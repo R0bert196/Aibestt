@@ -9,11 +9,12 @@ import DashOrHome from './pages/DashOrHome';
 import MainDashPage from './components/MainDashPage';
 import Footer from './components/Footer';
 import Companies from './components/Companies';
+import NavBar from './components/NavBar';
 
 
 function App() {
   return (
-    <>
+    <div className='font-nunito'>
       <Router>
       <Routes>       
         <Route path='/' element={<DashOrHome component={<Companies />} />} exact/>
@@ -27,7 +28,7 @@ function App() {
     </Router>
       <ToastContainer />
       <Footer />
-     </>
+     </div>
     
   );
 }

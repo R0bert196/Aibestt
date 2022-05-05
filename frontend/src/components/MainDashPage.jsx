@@ -6,12 +6,13 @@ import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { faUsers } from '@fortawesome/free-solid-svg-icons';
 import { faEuroSign } from '@fortawesome/free-solid-svg-icons';
 import { faTrophy } from '@fortawesome/free-solid-svg-icons';
+import NavBar from './NavBar';
 
 function MainDashPage() {
   return (
     <>
-        <div style={{}} className="container mx-auto px-4 overflow-hidden  transition-all duration-300 ">
-            <div className="text-gray-900 text-3xl mt-12">
+      <div style={{}} className="container mx-auto px-4 overflow-hidden  transition-all duration-300 ">
+            <div className="text-gray-900 text-3xl mt-16">
                 <h1>Dashboard</h1>
             </div>
               <div className="flex flex-wrap justify-center gap-4">

@@ -3,7 +3,7 @@ import avatar from '../images/avatar.png'
 
 function Profile() {
   return (
-    <div className='w-full'>
+    <div className='w-full mt-16'>
         <h1 className='mt-3 text-xl'>My profile</h1>
           <div className="grid grid-cols-8 mt-3 ml-5 gap-3">        
            <div style={{ border: "1px solid #e3e6f0" }} 
