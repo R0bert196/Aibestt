@@ -23,6 +23,7 @@ public class Company {
     @Column(unique=true)
     private int caen;
     private String codPostal;
+    private String cui;
 
     @ManyToOne(
             fetch = FetchType.LAZY

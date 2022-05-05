@@ -16,6 +16,7 @@ public class RegistrationParams {
         private String password;
         private String deni;
         private int caen;
+        private String cui;
         private String codPostal;
         private String group;
 }
