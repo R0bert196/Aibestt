@@ -15,5 +15,6 @@ public class CompanyRegParams {
     private int cui;
     private int caen;
     private String deni;
+    private String codPostal;
 
 }

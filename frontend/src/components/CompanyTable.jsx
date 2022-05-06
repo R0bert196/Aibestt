@@ -6,6 +6,7 @@ import state from "../state";
 import axios from "axios";
 import AddNewCompany from "./AddNewCompany";
 import useAxiosPrivate from "../hooks/useAxiosPrivate";
+import { Link } from "react-router-dom";
 
 
 
@@ -20,7 +21,7 @@ const [companies, setCompanies] = useState([]);
 
   useEffect(() => {
    const controller = new AbortController();
-  const getProducts = async () => {
+  const getCompanies = async () => {
     try {
       const response = await axiosPrivate.get("getCompanies", {
         signal: controller.signal
@@ -31,14 +32,14 @@ const [companies, setCompanies] = useState([]);
     }
     
   }
-  getProducts();
-}, [])
+  getCompanies();
+}, [companies])
 
 
   const data = useMemo(
     () => [
       {
-        id: 1,
+        id: 2,
         deni: "comp1",
         caen: 109.95,
         cui: 109765,
@@ -46,7 +47,7 @@ const [companies, setCompanies] = useState([]);
           "12345"
       },
       {
-        id: 1,
+        id:1,
         deni: "comp2",
         caen: 109.95,
         cui: 109935,
@@ -60,8 +61,9 @@ const [companies, setCompanies] = useState([]);
   const columns = useMemo(
     () => [
       {
-        Header: "Id",
-        accessor: "id",
+      Header: 'id',
+      accessor: "id",
+      Cell: ({ row }) => (<Link to={{pathname:`/companies/ ${row.id}` } }>{row.name}</Link>),
       },
       {
         Header: "Caen",
@@ -90,12 +92,13 @@ const [companies, setCompanies] = useState([]);
       companies[0]
         ? Object.keys(companies[0])
             .filter((key) => key !== "companyGroup")
-            .map( (key) =>{
+            .map( (key) => {
 
                 return {
                   Header: key,
                   accessor: key,
                 }
+                            
               })          
         : [],
     [companies]
@@ -116,13 +119,9 @@ const [companies, setCompanies] = useState([]);
     prepareRow,
   } = tableInstance;
 
-  // useEffect(() => {
-  //   getProducts();
-  // }, []);
-
   return (
     <div>
-      <div style={{ border: "1px solid #e3e6f0", height: toggleUpload ? '20rem': '5rem' }} className='rounded-t-md p-4 transition-all duration-300'>
+      <div style={{ border: "1px solid #e3e6f0", height: toggleUpload ? '25rem': '5rem' }} className='rounded-t-md p-4 transition-all duration-300'>
         <div>
           <button
             className='px-4 py-3 bg-primary text-white hover:brightness-125 w-full rounded-lg'

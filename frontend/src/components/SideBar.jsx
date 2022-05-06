@@ -24,6 +24,10 @@ function SideBar({ isActive, setIsActive }) {
               <Link to={'/'} className="hover:text-white">AIBEST</Link>
           </div>
           <ul style={{ color: 'rgba(255,255,255,.8)', left: '-50px' }} className="relative">
+                <li className="py-4">
+                  <FontAwesomeIcon icon={faUser} className='mr-1'/>
+                  <Link to={'/companies/1'} className="hover:text-white">Dashboard</Link>
+              </li>
               <li className="py-4">
                   <FontAwesomeIcon icon={faUser} className='mr-1'/>
                   <Link to={'/profile'} className="hover:text-white">Profile</Link>
