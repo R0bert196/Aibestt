@@ -20,10 +20,10 @@ public class Company {
     @Access(AccessType.PROPERTY)
     private long id;
 
-//    @Column(unique=true)
+    @Column(unique=true)
     private String deni;
     private int caen;
-//    @Column(unique=true)
+    @Column(unique=true)
     private int cui;
     private String codPostal;
 

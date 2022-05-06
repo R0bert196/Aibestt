@@ -27,41 +27,7 @@ public class JwtFilter extends OncePerRequestFilter {
     @Autowired
     private UserService userService;
 
-//    @Override
-//    protected void doFilterInternal(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, FilterChain filterChain) throws ServletException, IOException, ServletException, IOException {
-//        String authorization = httpServletRequest.getHeader("Authorization");
-//        String token = null;
-//        String userName = null;
-//
-//        if(null != authorization && authorization.startsWith("Bearer ")) {
-//            token = authorization.substring("Bearer ".length());
-//            try{
-//                userName = jwtUtility.getUsernameFromToken(token);
-//                // check if the jwt token is expired
-//            } catch (ExpiredJwtException e) {
-//                filterChain.doFilter(httpServletRequest, httpServletResponse);
-//            }
-//        }
-//
-//        if(null != userName && SecurityContextHolder.getContext().getAuthentication() == null) {
-//            UserDetails userDetails
-//                    = userService.loadUserByUsername(userName);
-//
-//            if(jwtUtility.validateToken(token,userDetails)) {
-//                UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken
-//                        = new UsernamePasswordAuthenticationToken(userDetails,
-//                        null, userDetails.getAuthorities());
-//
-//                usernamePasswordAuthenticationToken.setDetails(
-//                        new WebAuthenticationDetailsSource().buildDetails(httpServletRequest)
-//                );
-//
-//                SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
-//            }
-//
-//        }
-//        filterChain.doFilter(httpServletRequest, httpServletResponse);
-//    }
+
 
     @Override
     protected void doFilterInternal(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, FilterChain filterChain) throws ServletException, IOException, ServletException, IOException {
