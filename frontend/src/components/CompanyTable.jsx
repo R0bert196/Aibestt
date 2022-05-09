@@ -93,12 +93,19 @@ const [companies, setCompanies] = useState([]);
         ? Object.keys(companies[0])
             .filter((key) => key !== "companyGroup")
             .map( (key) => {
-
-                return {
-                  Header: key,
-                  accessor: key,
-                }
-                            
+                  if(key === "id"){
+                     return {
+                        Header: key,
+                        accessor: key,
+                        Cell: ({ key }) => (<Link to={{pathname: `/companies/${key}`}}> key </Link>)
+                     }    
+                  }              
+                  else{
+                     return {
+                        Header: key,
+                        accessor: key,
+                     }                  
+                }                            
               })          
         : [],
     [companies]

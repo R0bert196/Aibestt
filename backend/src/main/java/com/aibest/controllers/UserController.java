@@ -39,12 +39,11 @@ public class UserController {
     }
 
 
-
     @PostMapping("/register")
     public JwtResponse registerUser(@RequestBody RegistrationParams registrationParameters) throws JsonProcessingException {
         AppUser user = userService.registerUser(registrationParameters);
 
-        if(user == null){
+        if (user == null) {
             throw new BadCredentialsException("check params");
         }
 
@@ -56,7 +55,7 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public JwtResponse authenticate(@RequestBody JwtRequest jwtRequest) throws Exception{
+    public JwtResponse authenticate(@RequestBody JwtRequest jwtRequest) throws Exception {
         try {
             authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(
@@ -78,7 +77,6 @@ public class UserController {
     }
 
 
-
     @GetMapping("/refreshtoken")
     public ResponseEntity<?> refreshtoken(HttpServletRequest request) throws Exception {
         // From the HttpRequest get the claims
@@ -94,10 +92,8 @@ public class UserController {
     }
 
     @GetMapping("/getUsername")
-    public String getUsername(@RequestHeader (name="Authorization") String token) {
+    public String getUsername(@RequestHeader(name = "Authorization") String token) {
         System.out.println(token.substring(7));
         return userService.getUsernameByToken(token.substring(7));
     }
-
-
 }
