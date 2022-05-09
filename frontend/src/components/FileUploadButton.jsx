@@ -95,12 +95,40 @@ function FileUploadButton({ setData, toggleUpload }) {
         display: toggleUpload ? "block" : 'none'
         // top: toggleUpload ? "0px" : "-1000px",
       }}
-    >
+    > 
       <div className='md:grid grid-cols-3  gap-6'>
-        <div>
+        <div
+          style={{ border: "1.6px solid #e3e6f0" }}
+          className='shadow flex-auto col-start-1 col-end-3 rounded bg-white h-max'
+        >
+          <input
+            onChange={(e) => {
+              getCompanies(e);
+              setIsSelectedField(true);
+              setInputValue(e.target.value);
+            }}
+            // style={{ borderBottom: "1.6px solid #e3e6f0" }}
+            className='shadow min-w-0 max-h-10 block w-full px-3 py-1.5 text-base font-normal bg-white bg-clip-padding  transition ease-in-out m-0 focus:outline-none'
+            id='companyId'
+            type='text'
+            autoComplete='off'
+            placeholder='Search for your company'
+            value={inputValue}
+          />
+          {isSelectedField && (
+            <AutoCompleteBox
+              setIsSelectedField={setIsSelectedField}
+              setIsCompanySelected={setIsCompanySelected}
+              setInputValue={setInputValue}
+              setCompanyId={setCompanyId}
+              companies={companies}
+            />
+          )}
+        </div>
+        <div className="mw768:mt-8 col-start-3 col-end-4">
           <input
             style={{ border: "1.6px solid #e3e6f0" }}
-            className='shadow block w-full max-h-10 text-xl font-normal text-gray-700 bg-white bg-clip-padding rounded transition col-start-1 col-end-2 ease-in-out m-0'
+            className='shadow block w-full max-h-10 text-xl font-normal text-gray-700 bg-white bg-clip-padding rounded transition ease-in-out m-0'
             id='file'
             onChange={() => setIsFileUploaded(true)}
             type='file'
@@ -118,34 +146,7 @@ function FileUploadButton({ setData, toggleUpload }) {
           </div>
         </div>
 
-        <div
-          style={{ border: "1.6px solid #e3e6f0" }}
-          className='mw768:mt-8 flex-auto col-start-2 col-end-4 rounded bg-white h-max'
-        >
-          <input
-            onChange={(e) => {
-              getCompanies(e);
-              setIsSelectedField(true);
-              setInputValue(e.target.value);
-            }}
-            style={{ borderBottom: "1.6px solid #e3e6f0" }}
-            className='shadow min-w-0 max-h-10 block w-full px-3 py-1.5 text-base font-normal bg-white bg-clip-padding  transition ease-in-out m-0 focus:outline-none mw768:mt-4'
-            id='companyId'
-            type='text'
-            autoComplete='off'
-            placeholder='Search for your company'
-            value={inputValue}
-          />
-          {isSelectedField && (
-            <AutoCompleteBox
-              setIsSelectedField={setIsSelectedField}
-              setIsCompanySelected={setIsCompanySelected}
-              setInputValue={setInputValue}
-              setCompanyId={setCompanyId}
-              companies={companies}
-            />
-          )}
-        </div>
+        
       </div>
     </div>
   );
