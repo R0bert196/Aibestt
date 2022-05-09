@@ -3,6 +3,7 @@ package com.aibest.security;
 
 import com.aibest.services.UserService;
 import io.jsonwebtoken.ExpiredJwtException;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -19,6 +20,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @Component
+@Slf4j
 public class JwtFilter extends OncePerRequestFilter {
 
     @Autowired
@@ -59,7 +61,7 @@ public class JwtFilter extends OncePerRequestFilter {
 
             }
         } catch (ExpiredJwtException ex) {
-            ;
+
             String requestURL = httpServletRequest.getRequestURL().toString();
             // allow for Refresh Token creation if following conditions are true.
             if (requestURL.contains("refreshtoken")) {
@@ -70,7 +72,8 @@ public class JwtFilter extends OncePerRequestFilter {
         } catch (BadCredentialsException ex) {
             httpServletRequest.setAttribute("exception", ex);
         } catch (Exception ex) {
-            System.out.println(ex);
+//            System.out.println(ex);
+            log.warn(ex.getMessage());
         }
         filterChain.doFilter(httpServletRequest, httpServletResponse);
     }
