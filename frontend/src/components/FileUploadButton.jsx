@@ -17,7 +17,7 @@ function FileUploadButton({ setData, toggleUpload }) {
   const [isCompanySelected, setIsCompanySelected] = useState(false);
 
   // const [inputValue, setInputValue] = useState("");
-  const [inputValue, setInputValue] = useAtom(state.companyNameSearched);
+  const [inputValue, setInputValue] = useState("");
 
   const [isSelectedField, setIsSelectedField] = useState(false);
 
