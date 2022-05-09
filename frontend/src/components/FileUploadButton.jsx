@@ -4,9 +4,14 @@ import api from "../utilities/Api";
 import { useAtom } from "jotai";
 import state from "../state";
 import AutoCompleteBox from "./AutoCompleteBox";
+import useAxiosPrivate from "../hooks/useAxiosPrivate";
 
 function FileUploadButton({ setData, toggleUpload }) {
   const [companies, setCompanies] = useState();
+
+  const [companyId, setCompanyId] = useState();
+
+  const axiosPrivate = useAxiosPrivate();
 
   const [isFileUploaded, setIsFileUploaded] = useState(false);
   const [isCompanySelected, setIsCompanySelected] = useState(false);
@@ -17,9 +22,9 @@ function FileUploadButton({ setData, toggleUpload }) {
   const [isSelectedField, setIsSelectedField] = useState(false);
 
   const onSelectFile = (e) => {
-    let companyId = document.querySelector("#companyId").value;
-    let file = document.querySelector("#file").files[0];
+    console.log("company id: ")
     console.log(companyId);
+    let file = document.querySelector("#file").files[0];
     console.log(file);
     let toSend = {
       companyId,
@@ -30,7 +35,7 @@ function FileUploadButton({ setData, toggleUpload }) {
 
   const getCompanies = (e) => {
     let companyName = e.target.value;
-    api.get(`companySearch?companyName=${companyName}`).then((response) =>
+    axiosPrivate.get(`companySearch?companyName=${companyName}`).then((response) =>
       setCompanies(() => {
         console.log(response.data);
         setCompanies(response.data);
@@ -115,7 +120,7 @@ function FileUploadButton({ setData, toggleUpload }) {
 
         <div
           style={{ border: "1.6px solid #e3e6f0" }}
-          className='flex-auto col-start-2 col-end-4 rounded bg-white h-max'
+          className='mw768:mt-8 flex-auto col-start-2 col-end-4 rounded bg-white h-max'
         >
           <input
             onChange={(e) => {
@@ -136,6 +141,7 @@ function FileUploadButton({ setData, toggleUpload }) {
               setIsSelectedField={setIsSelectedField}
               setIsCompanySelected={setIsCompanySelected}
               setInputValue={setInputValue}
+              setCompanyId={setCompanyId}
               companies={companies}
             />
           )}
