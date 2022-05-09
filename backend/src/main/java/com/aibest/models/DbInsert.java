@@ -1,28 +1,18 @@
-package com.aibest.entities;
+package com.aibest.models;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import java.time.LocalDate;
 
-@Entity
-@Getter
-@Setter
-@NoArgsConstructor
+@Data
 @AllArgsConstructor
+@NoArgsConstructor
 @Builder
-public class Employees {
+public class DbInsert {
 
-    @Id
-    @GeneratedValue(
-            strategy = GenerationType.SEQUENCE
-    )
-    private long id;
-
-    private LocalDate uplaodDate;
     private String company;
     private int year;
     private int month;
@@ -38,17 +28,11 @@ public class Employees {
     private LocalDate contractDate;
     private LocalDate contractStartDate;
     private LocalDate contractEndDate;
-    // contractTimeType = nedeterminata / determinata
     private String contractTimeType;
-    // normType = norma intreaga / partiala
     private String normType;
-    // norm =  NormaIntreaga840,  NormaIntreaga630
     private String norm;
-    //shiftDuration = 8, 7, 6 ore de lucru
     private int shiftDuration;
-    //shiftType = orePeZi / orePeNoapte;
     private String shiftType;
-    //allocationType = oreDeZi / oreDeNoapte
     private String allocationType;
     private String contractType;
     private int salary;
@@ -59,4 +43,5 @@ public class Employees {
     private String legalSuspensionGrounds;
     private LocalDate suspensionStopDate;
     private String currentCondition;
+
 }
