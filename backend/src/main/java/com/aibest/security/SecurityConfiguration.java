@@ -50,7 +50,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/login", "/register", "/refreshtoken").permitAll()
+                .antMatchers("/login", "/register", "/refreshtoken", "/api/add-employees").permitAll()
                 .anyRequest().authenticated()
                 .and().cors()
                 .and()
