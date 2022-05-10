@@ -36,6 +36,12 @@ public class ReportDataReceiverController {
     @Autowired
     CompanyService companyService;
 
+    @PostMapping
+    public ResponseEntity<?> getCompanyEmployees(@RequestParam("companyId") long companyId){
+        List<Employee> latestReportEmployees = companyService.getEmployeesForCompany(companyId);
+        return ResponseEntity.ok(latestReportEmployees);
+    }
+
 
     @PostMapping("/api/add-employees")
     public ResponseEntity<?> insertData(@RequestParam("file") MultipartFile uploadedFile, @RequestParam("companyId") long companyID, @RequestParam("reportDate") String reportDate) throws IOException, JAXBException {

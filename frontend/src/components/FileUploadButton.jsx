@@ -22,10 +22,7 @@ function FileUploadButton({ setData, toggleUpload }) {
   const [isSelectedField, setIsSelectedField] = useState(false);
 
   const onSelectFile = (e) => {
-    console.log("company id: ")
-    console.log(companyId);
     let file = document.querySelector("#file").files[0];
-    console.log(file);
     let toSend = {
       companyId,
       file,
@@ -37,7 +34,6 @@ function FileUploadButton({ setData, toggleUpload }) {
     let companyName = e.target.value;
     axiosPrivate.get(`companySearch?companyName=${companyName}`).then((response) =>
       setCompanies(() => {
-        console.log(response.data);
         setCompanies(response.data);
       })
     );
@@ -51,46 +47,17 @@ function FileUploadButton({ setData, toggleUpload }) {
     bodyFormData.append("companyId", content.companyId);
     bodyFormData.append("reportDate", new Date().toLocaleDateString('en-CA'));
 
-    const req = fetch("http://localhost:8080/api/add-employees", {
-      method: "POST",
-      
-      body: bodyFormData,
-    })
-      .then( response => response.json())
-      .then(succes => {
-        console.log("robert aici")
+    let headers = {
+      'Content-Type': 'multipart/form-data'
+    }
+
+      axiosPrivate.post("api/add-employees", bodyFormData, headers)
+      .then(success => {
         toast.success("Employees updates successfully")
-        console.log(succes);
-        setData(succes)
+        console.log(success)
+        setData(success.data)
       })
   }
-
-  const upload = (file) => {
-    console.log(file);
-    fetch("https://aibest.herokuapp.com/api/get-employees", {
-      // Your POST endpoint
-      method: "POST",
-      headers: {
-        // Content-Type may need to be completely **omitted**
-        // or you may need something
-        // remove conent type is it doesen't work
-        // "Content-Type": "multipart/form-data; boundary=—-WebKitFormBoundaryfgtsKTYLsT7PNUVD"
-      },
-      body: file, // This is your file object
-    })
-      .then(
-        (response) => response.json() // if the response is a JSON object
-      )
-      .then(
-        (success) => {
-          console.log(success);
-          setData(success);
-        } // Handle the success response object
-      )
-      .catch(
-        (error) => console.log(error) // Handle the error response object
-      );
-  };
 
   return (
     <div

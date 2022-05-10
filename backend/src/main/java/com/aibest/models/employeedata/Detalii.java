@@ -15,13 +15,13 @@ import javax.xml.bind.annotation.XmlAccessorType;
 public class Detalii {
 	public DomeniuActivitate DomeniuActivitate;
 	public String Nume;
-	public int Cui;
-	public CuiParinte CuiParinte;
+	public String Cui;
+	public String CuiParinte;
 	public String FormaJuridicaPJ;
 	public String FormaOrganizarePJ;
 	public String FormaProprietate;
 	public String NivelInfiintare;
-	public NumeParinte NumeParinte;
+	public String NumeParinte;
 	public String type;
 	public String text;
 	public boolean nil;

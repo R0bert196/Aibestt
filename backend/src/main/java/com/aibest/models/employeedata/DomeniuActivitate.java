@@ -13,6 +13,6 @@ import javax.xml.bind.annotation.XmlAccessorType;
 @AllArgsConstructor
 @XmlAccessorType(XmlAccessType.FIELD)
 public class DomeniuActivitate {
-	public int Cod;
-	public int Versiune;
+	public String Cod;
+	public String Versiune;
 }

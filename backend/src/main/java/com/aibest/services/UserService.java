@@ -39,7 +39,8 @@ public class UserService implements UserDetailsService {
     @Autowired
     public UserService(UserRepository userRepository,
                        CompanyRepository companyRepository,
-                       CompanyGroupRepository groupRepository, JWTUtility jwtUtility) {
+                       CompanyGroupRepository groupRepository,
+                       JWTUtility jwtUtility) {
         this.userRepository = userRepository;
         this.companyRepository = companyRepository;
         this.groupRepository = groupRepository;

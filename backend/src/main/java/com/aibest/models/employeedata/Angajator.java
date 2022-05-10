@@ -14,7 +14,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Angajator {
 	public String Adresa;
-	public AuditEntries AuditEntries;
+	public String AuditEntries;
 	public Contact Contact;
 	public Detalii Detalii;
 	public Localitate Localitate;
