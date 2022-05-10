@@ -30,7 +30,7 @@ function FileUploadButton({ setData, toggleUpload }) {
       companyId,
       file,
     };
-    upload(toSend);
+    sendFile(toSend);
   };
 
   const getCompanies = (e) => {
@@ -43,21 +43,26 @@ function FileUploadButton({ setData, toggleUpload }) {
     );
   };
 
-  // const sendFile = (content) => {
-  //   const req = fetch("https://aibest.herokuapp.com/api/get-employees", {
-  //     method: "POST",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //     body: content,
-  //   })
-  //     .then( response => response.json())
-  //     .then(succes => {
-  //       console.log("robert aici")
-  //       toast.success("Employees updates successfully")
-  //       console.log(succes);
-  //     })
-  // }
+
+
+  const sendFile = (content) => {
+    let bodyFormData = new FormData();
+    bodyFormData.append("file", content.file);
+    bodyFormData.append("companyId", content.companyId);
+    bodyFormData.append("reportDate", new Date().toLocaleDateString('en-CA'));
+
+    const req = fetch("http://localhost:8080/api/add-employees", {
+      method: "POST",
+      
+      body: bodyFormData,
+    })
+      .then( response => response.json())
+      .then(succes => {
+        console.log("robert aici")
+        toast.success("Employees updates successfully")
+        console.log(succes);
+      })
+  }
 
   const upload = (file) => {
     console.log(file);
