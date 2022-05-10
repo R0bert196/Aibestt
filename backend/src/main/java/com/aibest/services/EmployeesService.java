@@ -1,7 +1,6 @@
 package com.aibest.services;
 
-import com.aibest.entities.Employees;
-import com.aibest.models.DbInsert;
+import com.aibest.entities.Employee;
 import com.aibest.repositories.EmployeesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,7 +13,7 @@ public class EmployeesService {
     @Autowired
     EmployeesRepository employeesRepository;
 
-    public void insertEmployees(List<Employees> dbInsertList) {
+    public void insertEmployees(List<Employee> dbInsertList) {
         employeesRepository.saveAll(dbInsertList);
     }
 

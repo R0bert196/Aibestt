@@ -7,9 +7,8 @@ import com.aibest.repositories.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 
 @Service
 public class EmployeeService {
@@ -24,16 +23,16 @@ public class EmployeeService {
         this.companyRepository = companyRepository;
     }
 
-    public boolean addReport(FileUploadModel fileUploadModel) {
-        Company c = companyRepository.findById(fileUploadModel.getCompanyId()).get();
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
-        LocalDate now = LocalDate.from(LocalDateTime.now());
-        fileUploadModel.getEmployees().forEach(employee -> {
-            employee.setCompany(c);
-            employee.setReportDate((now));
-            employeeRepository.save(employee);
-        });
-        // TODO add real validation
-        return true;
-    }
+//    public boolean addReport(FileUploadModel fileUploadModel) {
+//        Company c = companyRepository.findById(fileUploadModel.getCompanyId()).get();
+//        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+//        Date now = new Date();
+//        fileUploadModel.getEmployees().forEach(employee -> {
+//            employee.setCompany(c);
+//            employee.setUploadDate(now);
+//            employeeRepository.save(employee);
+//        });
+//        // TODO add real validation
+//        return true;
+//    }
 }

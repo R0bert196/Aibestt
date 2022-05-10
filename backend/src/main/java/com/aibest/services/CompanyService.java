@@ -36,4 +36,9 @@ public class CompanyService {
     public List<Company> getCompaniesForUser(long companyGroupIp, String searchedCompanyName) {
         return companyRepository.findCompaniesBySearchedNameAndUser(searchedCompanyName, companyGroupIp);
     }
+
+    public Company getCompaniesById(long id) {
+        return companyRepository.findById(id).get();
+    }
+
 }
