@@ -61,6 +61,7 @@ function FileUploadButton({ setData, toggleUpload }) {
         console.log("robert aici")
         toast.success("Employees updates successfully")
         console.log(succes);
+        setData(succes)
       })
   }
 

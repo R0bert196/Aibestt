@@ -1,6 +1,5 @@
 import React from 'react'
 import EmployeeTable from './EmployeeTable'
-import FileUploadButton from './FileUploadButton'
 import NavBar from './NavBar'
 
 function Employees() {
