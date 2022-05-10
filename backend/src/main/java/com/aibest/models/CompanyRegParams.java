@@ -12,8 +12,8 @@ import lombok.NoArgsConstructor;
 @Builder
 public class CompanyRegParams {
 
-    private int cui;
-    private int caen;
+    private String cui;
+    private String caen;
     private String deni;
     private String codPostal;
 

@@ -36,8 +36,9 @@ public class ReportDataReceiverController {
     @Autowired
     CompanyService companyService;
 
-    @PostMapping
+    @GetMapping("/api/getEmployees")
     public ResponseEntity<?> getCompanyEmployees(@RequestParam("companyId") long companyId){
+        System.out.println(companyId);
         List<Employee> latestReportEmployees = companyService.getEmployeesForCompany(companyId);
         return ResponseEntity.ok(latestReportEmployees);
     }
@@ -59,7 +60,6 @@ public class ReportDataReceiverController {
             XmlReport value = xmlMapper.readValue(xml, XmlReport.class);
             dbInsert = mapToDb(value.getSalariati().getSalariat(), companyID, reportDate);
             employeeService.insertEmployees(dbInsert);
-            System.out.println(value);
         }
         catch (Exception e){
             e.printStackTrace();
@@ -71,11 +71,8 @@ public class ReportDataReceiverController {
     }
 
     private List<Employee> mapToDb(List<Salariat> salariati, long companyId, String reportDate) throws ParseException {
-        System.out.println(reportDate);
         Company company = companyService.getCompaniesById(companyId);
         List<Employee> dbInsertList = new ArrayList<>();
-        System.out.println("AICI E");
-        System.out.println(LocalDate.parse("2018-05-05"));
         for (Salariat salariat : salariati) {
             Employee dbInsert = Employee
                     .builder()

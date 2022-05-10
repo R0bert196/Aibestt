@@ -64,7 +64,7 @@ public class UserService implements UserDetailsService {
 
         Company company = Company.builder()
                 .cui(registrationParams.getCui())
-                .caen(Integer.parseInt(companyDetails.getCaen()))
+                .caen(companyDetails.getCaen())
                 .deni(companyDetails.getDeni())
                 .codPostal(registrationParams.getCodPostal())
                 .companyGroup(group)

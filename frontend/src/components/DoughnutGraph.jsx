@@ -1,7 +1,6 @@
 import GraphHeader from "./GraphHeader"
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
-import api from "../utilities/Api";
 import { useEffect, useState } from "react";
 import { useAtom } from "jotai";
 import state from "../state";

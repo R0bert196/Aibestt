@@ -17,7 +17,6 @@ public class EmployeeService {
         for (int i = 0; i < dbInsertList.size(); i++) {
             dbInsertList.set(i, employeeRepository.save(dbInsertList.get(i)));
         }
-//        employeeRepository.saveAll(dbInsertList);
     }
 
 }

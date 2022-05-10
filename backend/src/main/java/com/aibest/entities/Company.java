@@ -22,9 +22,9 @@ public class Company {
 
 //    @Column(unique=true)
     private String deni;
-    private int caen;
+    private String caen;
 //    @Column(unique=true)
-    private int cui;
+    private String cui;
     private String codPostal;
 
     @ManyToOne(
