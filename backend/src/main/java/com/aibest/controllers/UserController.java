@@ -1,12 +1,15 @@
 package com.aibest.controllers;
 
 import com.aibest.entities.AppUser;
+import com.aibest.models.CompanyDetails;
 import com.aibest.models.JwtRequest;
 import com.aibest.models.JwtResponse;
 import com.aibest.models.RegistrationParams;
 import com.aibest.security.JWTUtility;
+import com.aibest.services.RestGetService;
 import com.aibest.services.UserService;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import io.jsonwebtoken.impl.DefaultClaims;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -32,6 +35,9 @@ public class UserController {
     @Autowired
     private AuthenticationManager authenticationManager;
 
+    @Autowired
+    RestGetService restGetService;
+
 
     @Autowired
     public UserController(UserService userService) {
@@ -41,7 +47,19 @@ public class UserController {
 
     @PostMapping("/register")
     public JwtResponse registerUser(@RequestBody RegistrationParams registrationParameters) throws JsonProcessingException {
+
+        String companyDetailsString = restGetService.getCompanyDetails("https://webservicesp.anaf.ro/bilant?an=2020&cui=" + registrationParameters.getCui());
+
+        CompanyDetails companyDetails = new ObjectMapper().readValue(companyDetailsString, CompanyDetails.class);
+
+        if (companyDetails.getDeni().length() < 1) {
+            throw new IllegalArgumentException();
+        }
+
         AppUser user = userService.registerUser(registrationParameters);
+
+
+
 
         if (user == null) {
             throw new BadCredentialsException("check params");
