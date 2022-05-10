@@ -7,7 +7,6 @@ import com.aibest.models.employeedata.Salariat;
 import com.aibest.models.employeedata.XmlReport;
 import com.aibest.services.CompanyService;
 import com.aibest.services.EmployeeService;
-import com.aibest.services.EmployeesService;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,10 +17,8 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.xml.bind.JAXBException;
 import java.io.*;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -35,8 +32,6 @@ public class ReportDataReceiverController {
     }
 
 
-    @Autowired
-    EmployeesService employeesService;
 
     @Autowired
     CompanyService companyService;
@@ -53,10 +48,11 @@ public class ReportDataReceiverController {
         XmlMapper xmlMapper = new XmlMapper();
         String xml = inputStreamToString(new FileInputStream(file));
         xmlMapper.setDefaultUseWrapper(false);
+        List<Employee> dbInsert = null;
         try {
             XmlReport value = xmlMapper.readValue(xml, XmlReport.class);
-            List<Employee> dbInsert = mapToDb(value.getSalariati().getSalariat(), companyID, reportDate);
-            employeesService.insertEmployees(dbInsert);
+            dbInsert = mapToDb(value.getSalariati().getSalariat(), companyID, reportDate);
+            employeeService.insertEmployees(dbInsert);
             System.out.println(value);
         }
         catch (Exception e){
@@ -64,7 +60,8 @@ public class ReportDataReceiverController {
         }
 
         file.delete();
-        return new ResponseEntity<>("The File " + uploadedFile.getOriginalFilename() + " was uploaded Successfully", HttpStatus.OK);
+        if (dbInsert == null) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        return ResponseEntity.ok(dbInsert);
     }
 
     private List<Employee> mapToDb(List<Salariat> salariati, long companyId, String reportDate) throws ParseException {
