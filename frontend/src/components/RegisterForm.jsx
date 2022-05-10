@@ -30,6 +30,7 @@ function RegisterForm() {
         validationSchema={RegisterSchema}
         onSubmit={values => {
           Api.post("register", 
+            
                     {"firstName": values.firstName, 
                     "lastName":values.lastName, 
                     "email":values.email, 
@@ -43,7 +44,15 @@ function RegisterForm() {
             setToken(data.data.jwtToken)
             navigate("/")
           })
-          .catch(error => toast.warn("Something went wrong..."))
+            .catch(error => {
+              console.log(error.response.status)
+              if (error.response.status == 500) {
+                toast.error("invalid cui");
+              }
+              else {
+                toast.error("Invalid Credentials")
+              }
+            })
         }}
       >
         {formik => {

@@ -8,7 +8,7 @@ const RegisterSchema = yup.object().shape({
     confirmPassword: yup.string()
         .oneOf([yup.ref('password'), null], 'Passwords must match'),
     group: yup.string().required("Group is required"),
-    cui: yup.string().required("Please enter your CUI").matches("^[0-9]{6}$", "Invalid CUI"),
+    cui: yup.string().required("Please enter your CUI"),
 });
 
 
