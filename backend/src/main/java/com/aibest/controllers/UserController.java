@@ -12,6 +12,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.jsonwebtoken.impl.DefaultClaims;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -19,7 +20,9 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
+import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
+import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -46,7 +49,7 @@ public class UserController {
 
 
     @PostMapping("/register")
-    public JwtResponse registerUser(@RequestBody RegistrationParams registrationParameters) throws JsonProcessingException {
+    public JwtResponse registerUser(@RequestBody RegistrationParams registrationParameters, HttpServletRequest request) throws JsonProcessingException, MessagingException, UnsupportedEncodingException {
 
         String companyDetailsString = restGetService.getCompanyDetails("https://webservicesp.anaf.ro/bilant?an=2020&cui=" + registrationParameters.getCui());
 
@@ -56,7 +59,7 @@ public class UserController {
             throw new IllegalArgumentException();
         }
 
-        AppUser user = userService.registerUser(registrationParameters);
+        AppUser user = userService.registerUser(registrationParameters, getSiteURL(request));
 
 
 
@@ -70,6 +73,20 @@ public class UserController {
         final String token =
                 jwtUtility.generateToken(userDetails);
         return new JwtResponse(token);
+    }
+
+//    @GetMapping("/verify")
+//    public String verifyUser(@Param("code") String code) {
+//        if (userService.verify(code)) {
+//            return "Verification successful";
+//        } else {
+//            return "Verification failed";
+//        }
+//    }
+
+    private String getSiteURL(HttpServletRequest request) {
+        String siteURL = request.getRequestURL().toString();
+        return siteURL.replace(request.getServletPath(), "");
     }
 
     @PostMapping("/login")

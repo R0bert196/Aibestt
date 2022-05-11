@@ -1,6 +1,7 @@
 package com.aibest.services;
 
 
+import com.aibest.config.ExtraConfig;
 import com.aibest.entities.*;
 import com.aibest.models.CompanyDetails;
 import com.aibest.models.RegistrationParams;
@@ -10,7 +11,13 @@ import com.aibest.repositories.UserRepository;
 import com.aibest.security.JWTUtility;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import net.bytebuddy.utility.RandomString;
 import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.mail.SimpleMailMessage;
+//import org.springframework.mail.javamail.JavaMailSender;
+//import org.springframework.mail.javamail.JavaMailSenderImpl;
+//import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -18,6 +25,9 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 
 @Service
@@ -37,6 +47,12 @@ public class UserService implements UserDetailsService {
     RestGetService restGetService;
 
     @Autowired
+    private JavaMailSender mailSender;
+
+
+
+
+    @Autowired
     public UserService(UserRepository userRepository,
                        CompanyRepository companyRepository,
                        CompanyGroupRepository groupRepository,
@@ -47,7 +63,7 @@ public class UserService implements UserDetailsService {
         this.jwtUtility = jwtUtility;
     }
 
-    public AppUser registerUser(RegistrationParams registrationParams) throws JsonProcessingException {
+    public AppUser registerUser(RegistrationParams registrationParams, String siteURL) throws JsonProcessingException, MessagingException, UnsupportedEncodingException {
         //todo verifications
         
         if(isNotValid(registrationParams)){
@@ -71,8 +87,13 @@ public class UserService implements UserDetailsService {
                 .build();
         company = companyRepository.save(company);
 
+        String randomCode = RandomString.make(64);
+
         AppUser user = AppUser
                 .builder()
+                .verificationCode(randomCode)
+                .enabled(false)
+
                 .firstName(registrationParams.getFirstName())
                 .lastName(registrationParams.getLastName())
                 .email(registrationParams.getEmail())
@@ -80,7 +101,57 @@ public class UserService implements UserDetailsService {
                 .userRole(UserRole.ADMIN)
                 .companyGroup(group)
                 .build();
+        sendVerificationEmail(user, siteURL);
         return userRepository.save(user);
+    }
+
+    private void sendVerificationEmail(AppUser user, String siteURL) throws MessagingException, UnsupportedEncodingException {
+        String toAddress = user.getEmail();
+        String fromAddress = "Your email address";
+        String senderName = "Your company name";
+        String subject = "Please verify your registration";
+        String content = "Dear [[name]],<br>"
+                + "Please click the link below to verify your registration:<br>"
+                + "<h3><a href=\"[[URL]]\" target=\"_self\">VERIFY</a></h3>"
+                + "Thank you,<br>"
+                + "Your company name.";
+
+//        JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
+//        SimpleMailMessage message = new SimpleMailMessage();
+//
+////        MimeMessage message = mailSender.createMimeMessage();
+////        MimeMessageHelper helper = new MimeMessageHelper(message);
+//
+//        message.setFrom("sabiuta123@gmail.com");
+//        message.setTo(toAddress);
+//        message.setSubject(subject);
+
+
+        content = content.replace("[[name]]", user.getFirstName());
+        String verifyURL = siteURL + "/verify?code=" + user.getVerificationCode();
+
+        content = content.replace("[[URL]]", verifyURL);
+
+//        helper.setText(content, true);
+//        message.setText(content);
+
+//        mailSender.send(message);
+        System.out.println("Mail sent!");
+    }
+
+    public boolean verify(String verificationCode) {
+        AppUser user = userRepository.findByVerificationCode(verificationCode);
+
+        if (user == null || user.isEnabled()) {
+            return false;
+        } else {
+            user.setVerificationCode(null);
+            user.setEnabled(true);
+            userRepository.save(user);
+
+            return true;
+        }
+
     }
 
     private boolean isNotValid(RegistrationParams registrationParams) {
