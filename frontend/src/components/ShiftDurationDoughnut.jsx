@@ -29,8 +29,6 @@ const [token, setToken] = useAtom(state.token);
           signal: controller.signal,
         }
       );
-
-      console.log(response)
     setChart(response.data);
     } catch(err) {
         console.error(err);
@@ -66,10 +64,6 @@ const [token, setToken] = useAtom(state.token);
           },
         ],
       };
-
-
-
-
 
     return (
       <div className=" mx-4 shadow-md rounded-b-md"> 
