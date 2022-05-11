@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class EmployeeService {
@@ -17,7 +18,17 @@ public class EmployeeService {
         for (int i = 0; i < dbInsertList.size(); i++) {
             dbInsertList.set(i, employeeRepository.save(dbInsertList.get(i)));
         }
-//        employeeRepository.saveAll(dbInsertList);
     }
 
+    public List<?>  getGlobalEmployeeSalaries() {
+        return employeeRepository.calculateGlobalEmployeeSalaries();
+    }
+
+    public List<?> getCompanyEmployeeSalaries(long companyId) {
+        return employeeRepository.calculateEmployeeSalaryForCompany(companyId);
+    }
+
+    public List<Map<String, String>> getEmployeeCountByShiftDuration(long companyId){
+        return employeeRepository.calculateEmployeesByShiftDuration(companyId);
+    }
 }

@@ -59,4 +59,5 @@ public class Employee {
     private String legalSuspensionGrounds;
     private LocalDate suspensionStopDate;
     private String currentCondition;
+
 }

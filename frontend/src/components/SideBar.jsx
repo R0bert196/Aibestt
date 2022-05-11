@@ -34,7 +34,7 @@ function SideBar( ) {
           <ul style={{ color: 'rgba(255,255,255,.8)', left: '-50px' }} className="relative md:hidden">
               <li className="py-4 flex">
                   <FontAwesomeIcon icon={faUser} className='mr-1'/>
-                  <Link to={'/companies/1'} className="hover:text-white">Dashboard</Link>
+                  <Link to={'/'} className="hover:text-white">Dashboard</Link>
               </li>
               <li className="py-4 flex">
                   <FontAwesomeIcon icon={faUser} className='mr-1'/>

@@ -20,6 +20,7 @@ import java.text.ParseException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 public class ReportDataReceiverController {
@@ -31,17 +32,15 @@ public class ReportDataReceiverController {
         this.employeeService = employeeService;
     }
 
-
-
     @Autowired
     CompanyService companyService;
 
-    @PostMapping
+    @GetMapping("/api/getEmployees")
     public ResponseEntity<?> getCompanyEmployees(@RequestParam("companyId") long companyId){
+        System.out.println(companyId);
         List<Employee> latestReportEmployees = companyService.getEmployeesForCompany(companyId);
         return ResponseEntity.ok(latestReportEmployees);
     }
-
 
     @PostMapping("/api/add-employees")
     public ResponseEntity<?> insertData(@RequestParam("file") MultipartFile uploadedFile, @RequestParam("companyId") long companyID, @RequestParam("reportDate") String reportDate) throws IOException, JAXBException {
@@ -59,7 +58,6 @@ public class ReportDataReceiverController {
             XmlReport value = xmlMapper.readValue(xml, XmlReport.class);
             dbInsert = mapToDb(value.getSalariati().getSalariat(), companyID, reportDate);
             employeeService.insertEmployees(dbInsert);
-            System.out.println(value);
         }
         catch (Exception e){
             e.printStackTrace();
@@ -70,12 +68,24 @@ public class ReportDataReceiverController {
         return ResponseEntity.ok(dbInsert);
     }
 
+    @GetMapping("/api/globalEmployeeSalary")
+    public List<?> getGlobalEmployeeSalaryData(){
+
+        List<?> globalSalaryData = employeeService.getGlobalEmployeeSalaries();
+
+        return globalSalaryData;
+    }
+
+    @GetMapping(value = "/empGraph")
+    public List<?> sendEmpData(@RequestParam("companyId") long companyId) {
+        List<?> l = employeeService.getCompanyEmployeeSalaries(companyId);
+        System.out.println(companyId);
+        return l;
+    }
+
     private List<Employee> mapToDb(List<Salariat> salariati, long companyId, String reportDate) throws ParseException {
-        System.out.println(reportDate);
         Company company = companyService.getCompaniesById(companyId);
         List<Employee> dbInsertList = new ArrayList<>();
-        System.out.println("AICI E");
-        System.out.println(LocalDate.parse("2018-05-05"));
         for (Salariat salariat : salariati) {
             Employee dbInsert = Employee
                     .builder()
@@ -97,5 +107,10 @@ public class ReportDataReceiverController {
         }
         br.close();
         return sb.toString();
+    }
+
+    @GetMapping("/getEmployeesByShiftCount")
+    public ResponseEntity<?> getEmployeeByShiftDuration(@RequestParam("companyId") long companyId){
+        return ResponseEntity.ok(employeeService.getEmployeeCountByShiftDuration(companyId));
     }
 }

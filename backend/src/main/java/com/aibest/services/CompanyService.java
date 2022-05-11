@@ -47,7 +47,6 @@ public class CompanyService {
     }
 
     public List<Employee> getEmployeesForCompany(long companyId) {
-//        return employeeRepository.getLatestEmployees(companyId);
-        return new ArrayList<>();
+        return employeeRepository.getLatestEmployees(companyId);
     }
 }
