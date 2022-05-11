@@ -1,7 +1,6 @@
 package com.aibest.services;
 
 
-import com.aibest.config.ExtraConfig;
 import com.aibest.entities.*;
 import com.aibest.models.CompanyDetails;
 import com.aibest.models.RegistrationParams;
@@ -17,7 +16,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.mail.javamail.JavaMailSender;
 //import org.springframework.mail.javamail.JavaMailSenderImpl;
 //import org.springframework.mail.javamail.MimeMessageHelper;
-import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -46,8 +44,8 @@ public class UserService implements UserDetailsService {
     @Autowired
     RestGetService restGetService;
 
-    @Autowired
-    private JavaMailSender mailSender;
+//    @Autowired
+//    private JavaMailSender mailSender;
 
 
 

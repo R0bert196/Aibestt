@@ -1,14 +1,27 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserCircle } from "@fortawesome/free-solid-svg-icons";
+import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { useState, useEffect } from "react";
 import useAxiosPrivate from "../hooks/useAxiosPrivate";
 import { Link } from "react-router-dom";
 import ToggleSidebarButton from "./ToggleSidebarButton";
+import { useNavigate } from "react-router-dom";
+import { useAtom } from "jotai";
+import state from "../state";
+import { faArrowRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 
 function NavBar() {
   const [username, setUsername] = useState("");
   const [company, setCompany] = useState("");
   const [activeSidebar, setActiveSidebar] = useState(false);
+  const navigate = useNavigate();
+  const [dropDown, setDropdown] = useState(false);
+
+  const setLogout = () => {
+    setToken("");
+  };
+
+const [token, setToken] = useAtom(state.token);
 
   const axiosPrivate = useAxiosPrivate();
 
@@ -106,12 +119,56 @@ function NavBar() {
           <li className='mr-4'>
             <h3 className='text-xl'>{username}</h3>
           </li>
-          <li>
+          <li className='relative'>
             <FontAwesomeIcon
               // style={{ color: "#dddfeb" }}
               icon={faUserCircle}
-              className='text-3xl'
+              className='text-3xl cursor-pointer hover:text-gray'
+              onClick={() => setDropdown((oldDropdown) => !oldDropdown)}
             />
+            {dropDown && (
+              <div className='absolute -left-24 top-16 py-2 shadow bg-white rounded-md'>
+                <ul className=''>
+                  <li className='px-4 hover:bg-secondary'>
+                    <FontAwesomeIcon
+                      style={{ color: "#d1d3e2" }}
+                      icon={faUser}
+                      className='mr-2'
+                    />
+                    <Link
+                      to={"/profile"}
+                      style={{ color: "#3a3b45" }}
+                      className='hover:brightness-150'
+                    >
+                      Profile
+                    </Link>
+                  </li>
+                  <li>
+                    <div
+                      className='my-4'
+                      style={{ borderTop: "1px solid #e3e6f0" }}
+                    ></div>
+                  </li>
+                  <li className='px-4 hover:bg-secondary'>
+                    <FontAwesomeIcon
+                      style={{ color: "#d1d3e2" }}
+                      icon={faArrowRightFromBracket}
+                      className='mr-2'
+                    />
+                    <button
+                      className='hover:text-accent'
+                      onClick={() => {
+                        setLogout();
+                        navigate("/");
+                        navigate(0);
+                      }}
+                    >
+                      Logout
+                    </button>
+                  </li>
+                </ul>
+              </div>
+            )}
           </li>
         </ul>
       </nav>
