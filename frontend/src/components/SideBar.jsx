@@ -24,8 +24,8 @@ function SideBar( ) {
     //TODO SA TRIMIT ISACTIVE PRIN SIDEBARBUTTON CARE SA II DEA TOGGLE
 
   return (
-      <nav style={{ left: activeSidebar ? '0' : '-100%'}} className="px-16 bg-primary text-white relative transition-all duration-300 z-10">
-          <div className="font-bold py-6 px-4 align-center text-center text-xl">
+      <nav style={{ display: activeSidebar ? 'block' : 'none'}} className="mw768:w-28 px-16 bg-primary text-white relative transition-all duration-300 z-10">
+          <div className="mw768:-left-14 mw768:relative font-bold py-6 px-4 align-center text-center text-xl">
               <Link to={'/'} className="hover:text-white">AIBEST</Link>
           </div>
 
