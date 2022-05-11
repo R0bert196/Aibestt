@@ -1,14 +1,19 @@
 package com.aibest.controllers;
 
 import com.aibest.entities.AppUser;
+import com.aibest.models.CompanyDetails;
 import com.aibest.models.JwtRequest;
 import com.aibest.models.JwtResponse;
 import com.aibest.models.RegistrationParams;
 import com.aibest.security.JWTUtility;
+import com.aibest.services.EmailSenderService;
+import com.aibest.services.RestGetService;
 import com.aibest.services.UserService;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import io.jsonwebtoken.impl.DefaultClaims;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -16,7 +21,9 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
+import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
+import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -32,6 +39,12 @@ public class UserController {
     @Autowired
     private AuthenticationManager authenticationManager;
 
+    @Autowired
+    RestGetService restGetService;
+
+    @Autowired
+    EmailSenderService emailSenderService;
+
 
     @Autowired
     public UserController(UserService userService) {
@@ -39,12 +52,23 @@ public class UserController {
     }
 
 
-
     @PostMapping("/register")
-    public JwtResponse registerUser(@RequestBody RegistrationParams registrationParameters) throws JsonProcessingException {
-        AppUser user = userService.registerUser(registrationParameters);
+    public JwtResponse registerUser(@RequestBody RegistrationParams registrationParameters, HttpServletRequest request) throws JsonProcessingException, MessagingException, UnsupportedEncodingException {
 
-        if(user == null){
+        String companyDetailsString = restGetService.getCompanyDetails("https://webservicesp.anaf.ro/bilant?an=2020&cui=" + registrationParameters.getCui());
+
+        CompanyDetails companyDetails = new ObjectMapper().readValue(companyDetailsString, CompanyDetails.class);
+
+        if (companyDetails.getDeni().length() < 1) {
+            throw new IllegalArgumentException();
+        }
+
+        AppUser user = userService.registerUser(registrationParameters, getSiteURL(request));
+
+
+
+
+        if (user == null) {
             throw new BadCredentialsException("check params");
         }
 
@@ -55,8 +79,22 @@ public class UserController {
         return new JwtResponse(token);
     }
 
+    @GetMapping("/verify")
+    public String verifyUser(@Param("code") String code) {
+        if (emailSenderService.verify(code)) {
+            return "Verification successful";
+        } else {
+            return "Verification failed";
+        }
+    }
+
+    private String getSiteURL(HttpServletRequest request) {
+        String siteURL = request.getRequestURL().toString();
+        return siteURL.replace(request.getServletPath(), "");
+    }
+
     @PostMapping("/login")
-    public JwtResponse authenticate(@RequestBody JwtRequest jwtRequest) throws Exception{
+    public JwtResponse authenticate(@RequestBody JwtRequest jwtRequest) throws Exception {
         try {
             authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(
@@ -78,7 +116,6 @@ public class UserController {
     }
 
 
-
     @GetMapping("/refreshtoken")
     public ResponseEntity<?> refreshtoken(HttpServletRequest request) throws Exception {
         // From the HttpRequest get the claims
@@ -94,10 +131,8 @@ public class UserController {
     }
 
     @GetMapping("/getUsername")
-    public String getUsername(@RequestHeader (name="Authorization") String token) {
+    public String getUsername(@RequestHeader(name = "Authorization") String token) {
         System.out.println(token.substring(7));
         return userService.getUsernameByToken(token.substring(7));
     }
-
-
 }

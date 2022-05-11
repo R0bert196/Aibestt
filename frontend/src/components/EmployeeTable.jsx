@@ -1,39 +1,61 @@
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { useTable } from "react-table";
 import FileUploadButton from "./FileUploadButton";
+import useAxiosPrivate from "../hooks/useAxiosPrivate";
 
 function BasicTable() {
-  const [tableData, setTableData] = useState({
-    employees: [
-      {
-        id: "",
-        name: "",
-        start_date: "",
-        salary: "",
-      },
-    ],
-  });
+  // const [tableData, setTableData] = useState({
+  //   employees: [
+  //     {
+  //       id: "",
+  //       salary: "",
+  //     },
+  //   ],
+  // });
+  const [tableData, setTableData] = useState([]);
 
-  const data = useMemo(() => tableData?.employees, [tableData]);
+  const data = useMemo(() => tableData, [tableData]);
+
+  const axiosPrivate = useAxiosPrivate();
+
+  const getTableData = async () => {
+  try {
+    console.log("here")
+    const controller = new AbortController();
+    const response = await axiosPrivate.get("/api/getEmployees?companyId=2", {
+      signal: controller.signal
+    })
+  // .then(response => setChartData(response.data))
+    setTableData(response.data);
+  } catch(err) {
+      console.error(err);
+  }
+    
+  }
+  
+
+  useEffect(()=> {
+      getTableData()
+  }, [])
 
   const columns = useMemo(
     () => [
       {
         Header: "Funtie",
-        accessor: "function",
+        accessor: "id",
       },
       {
         Header: "Salariu",
         accessor: "salary",
       },
-      {
-        Header: "Data Start",
-        accessor: "startDate",
-      },
-      {
-        Header: "Data Stop",
-        accessor: "endDate",
-      },
+      // {
+      //   Header: "Data Start",
+      //   accessor: "startDate",
+      // },
+      // {
+      //   Header: "Data Stop",
+      //   accessor: "endDate",
+      // },
     ],
     []
   );
@@ -46,7 +68,7 @@ function BasicTable() {
   return (
     <div className='bg-white shadow-md'>
       {/* Header */}
-      <div style={{ border: "1px solid #e3e6f0", height: toggleUpload ? '15rem': '5rem' }} className='rounded-t-md p-4'>
+      <div style={{ border: "1px solid #e3e6f0"}} className='rounded-t-md p-4'>
         <div>
           <button
             className='px-4 py-3 bg-primary text-white hover:brightness-125 w-full rounded-lg'

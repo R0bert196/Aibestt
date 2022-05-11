@@ -9,15 +9,18 @@ import {
   Tooltip,
   Legend,
 } from 'chart.js';
-import { Line } from 'react-chartjs-2';
+import { getDatasetAtEvent, Line } from 'react-chartjs-2';
 import { useEffect, useState } from "react";
 import api from "../utilities/Api";
 import state from "../state";
 import { useAtom } from "jotai";
 import useAxiosPrivate from "../hooks/useAxiosPrivate";
+import { useParams } from "react-router-dom";
     
 
 function EmployeeGraph() {
+  let { id } = useParams()
+
   const [token, setToken] = useAtom(state.token);
   const axiosPrivate = useAxiosPrivate();
 
@@ -44,30 +47,60 @@ function EmployeeGraph() {
                         },
                     };
 
+
+
 const [chartData, setChartData] = useState([])
 
 const labels = chartData?.map(x => x.name)
-
-  useEffect(() => {
-   const controller = new AbortController();
-  // const getData = async () => {
-  //   api.get("empGraph?companyId=1", { headers: {"Authorization" : `Bearer ${token}`} })
-  //   .then(response => setChartData(response.data))
-  // }
+  const controller = new AbortController();
   const getData = async () => {
-    try {
-      const response = await axiosPrivate.get("empGraph?companyId=1", {
+  const[globalData, companyData] = await Promise.all([
+    
+    axiosPrivate.get("api/globalEmployeeSalary", {
+        signal: controller.signal
+      }),
+    axiosPrivate.get(`empGraph?companyId=${id}`, {
         signal: controller.signal
       })
-    // .then(response => setChartData(response.data))
-    setChartData(response.data);
-    } catch(err) {
-        console.error(err);
-    }
-    
+    ])
+    .then(data => {
+      const tableData = []
+      
+      data[0].data.forEach(element => {
+        let row = {}
+        row["name"] = element[0] + " " + element[1]
+        row["dataset1"] = element[2]
+        row["dataset2"] = 0
+        tableData.push(row)    
+      });
+
+
+      data[1].data.forEach(element => {
+        let needToAdd = true;
+        for(let elem of tableData){            
+            if(elem.name === element[0] + " " + element[1]){
+              elem["dataset2"] = element[2]
+              needToAdd = false;
+              break;            
+            } 
+        }
+        if (needToAdd) {
+          let row = {};
+          row["name"] = element[0] + " " + element[1];
+          row["dataset1"] = 0;
+          row["dataset2"] = element[2];
+          tableData.push(row);
+        }
+      })       
+      setChartData(tableData);
+         
+      });    
+
   }
-  getData();
-}, [])
+
+  useEffect(() => {getData()}, [])
+  
+
 
 const data = {
   labels,

@@ -2,6 +2,7 @@ import React from 'react'
 import DoughnutGraph from "../components/DoughnutGraph";
 import EmployeeGraph from "../components/EmployeeGraph";
 import IndiactorCard from "../components/IndicatorCard";
+import ShiftDurationDoughnut from "../components/ShiftDurationDoughnut"
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { faUsers } from '@fortawesome/free-solid-svg-icons';
 import { faEuroSign } from '@fortawesome/free-solid-svg-icons';
@@ -23,7 +24,7 @@ function MainDashPage() {
               </div>
             <div className="flex mx-auto justify-center gap-4 flex-wrap">
                 <DoughnutGraph />
-                <DoughnutGraph />
+                <ShiftDurationDoughnut />
             </div>
             <div className="my-8">
                 <EmployeeGraph />

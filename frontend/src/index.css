@@ -12,6 +12,10 @@
     margin: 0;
 }
 
+html,body {
+    height: 100%;
+}
+
 @layer utilities {
     .clip-path {
         -webkit-clip-path: polygon(0 0,

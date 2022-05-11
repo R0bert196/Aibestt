@@ -1,33 +1,35 @@
 import { useNavigate } from "react-router-dom";
-import { useAtom } from "jotai";
-import SideBar from '../components/SideBar';
-import state from "../state";
+import SideBar from "../components/SideBar";
 import { useState } from "react";
 import NavBar from "../components/NavBar";
-
 import ToggleSidebarButton from "../components/ToggleSidebarButton";
+import { useAtom } from "jotai";
+import state from "../state";
 
-function Dashbord({component}) {
-    const [token, setToken] = useAtom(state.token);
+function Dashbord({ component }) {
+  const [token, setToken] = useAtom(state.token);
 
-    const [activeSidebar, setActiveSidebar] = useState(false);
+  // const [activeSidebar, setActiveSidebar] = useState(false);
 
-    const navigate = useNavigate();
+  const navigate = useNavigate();
+  const [activeSidebar, setActiveSidebar] = useAtom(state.activeSidebar);
 
-    const setLogout = () => {
-        setToken("");
-    };
+  const setLogout = () => {
+    setToken("");
+  };
 
-
-    return (
-        
-        <div className='container mx-auto flex min-h-[92vh]'>
-            <NavBar />
-            <SideBar isActive={activeSidebar} setIsActive={setActiveSidebar} />
-            <ToggleSidebarButton activeSidebar={activeSidebar} setActiveSidebar={setActiveSidebar}/>
-           {component}
+  return (
+    <>
+      <div className='mx-auto min-h-[92vh]'>
+        <NavBar />
+        <div className='container flex h-full min-h-[92vh]'>
+          <SideBar />
+          {/* <ToggleSidebarButton activeSidebar={activeSidebar} setActiveSidebar={setActiveSidebar}/> */}
+          {component}
         </div>
-    );
+      </div>
+    </>
+  );
 }
 
 export default Dashbord;

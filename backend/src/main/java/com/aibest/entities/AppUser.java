@@ -38,4 +38,9 @@ public class AppUser {
     @JsonIgnore
     private CompanyGroup companyGroup;
     private UserRole userRole;
+
+    @Column(name = "verification_code", length = 64)
+    private String verificationCode;
+
+    private boolean enabled;
 }

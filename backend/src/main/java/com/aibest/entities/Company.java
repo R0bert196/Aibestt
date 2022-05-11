@@ -22,13 +22,14 @@ public class Company {
 
     @Column(unique=true)
     private String deni;
-    private int caen;
-    @Column(unique=true)
-    private int cui;
+
+    private String caen;
+//    @Column(unique=true)
+    private String cui;
     private String codPostal;
 
     @ManyToOne(
-            fetch = FetchType.LAZY,
+            fetch = FetchType.EAGER,
             optional = false
     )
     @JoinColumn(
