@@ -20,6 +20,7 @@ import java.text.ParseException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 public class ReportDataReceiverController {
@@ -31,8 +32,6 @@ public class ReportDataReceiverController {
         this.employeeService = employeeService;
     }
 
-
-
     @Autowired
     CompanyService companyService;
 
@@ -42,7 +41,6 @@ public class ReportDataReceiverController {
         List<Employee> latestReportEmployees = companyService.getEmployeesForCompany(companyId);
         return ResponseEntity.ok(latestReportEmployees);
     }
-
 
     @PostMapping("/api/add-employees")
     public ResponseEntity<?> insertData(@RequestParam("file") MultipartFile uploadedFile, @RequestParam("companyId") long companyID, @RequestParam("reportDate") String reportDate) throws IOException, JAXBException {
@@ -68,6 +66,21 @@ public class ReportDataReceiverController {
         file.delete();
         if (dbInsert == null) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         return ResponseEntity.ok(dbInsert);
+    }
+
+    @GetMapping("/api/globalEmployeeSalary")
+    public List<?> getGlobalEmployeeSalaryData(){
+
+        List<?> globalSalaryData = employeeService.getGlobalEmployeeSalaries();
+
+        return globalSalaryData;
+    }
+
+    @GetMapping(value = "/empGraph")
+    public List<?> sendEmpData(@RequestParam("companyId") long companyId) {
+        List<?> l = employeeService.getCompanyEmployeeSalaries(companyId);
+        System.out.println(companyId);
+        return l;
     }
 
     private List<Employee> mapToDb(List<Salariat> salariati, long companyId, String reportDate) throws ParseException {

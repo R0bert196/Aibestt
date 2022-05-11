@@ -16,12 +16,12 @@ import java.util.Date;
 public class StareCurenta {
 	public Date DataIncetare;
 	public Date DataSfarsit;
-	public Explicatie Explicatie;
+	public String Explicatie;
 	public String TemeiLegal;
 	public String type;
 	public String text;
-	public DataIncetareDetasare DataIncetareDetasare;
+	public String DataIncetareDetasare;
 	public Date DataIncetareSuspendare;
-	public StarePrecedenta StarePrecedenta;
+	public String StarePrecedenta;
 	public Date DataInceput;
 }

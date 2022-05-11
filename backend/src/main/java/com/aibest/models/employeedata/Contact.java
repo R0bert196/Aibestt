@@ -14,7 +14,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Contact {
 	public String Email;
-	public Fax Fax;
+	public String Fax;
 	public String ReprezentantLegal;
-	public Telefon Telefon;
+	public String Telefon;
 }

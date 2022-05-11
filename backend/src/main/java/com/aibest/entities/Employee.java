@@ -59,4 +59,42 @@ public class Employee {
     private String legalSuspensionGrounds;
     private LocalDate suspensionStopDate;
     private String currentCondition;
+
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "id=" + id +
+                ", uploadDate=" + uploadDate +
+                ", company=" + company +
+                ", year=" + year +
+                ", month=" + month +
+                ", anonymised_employee_id=" + anonymised_employee_id +
+                ", employee_id=" + employee_id +
+                ", birthDate=" + birthDate +
+                ", sex=" + sex +
+                ", cor=" + cor +
+                ", corVersion=" + corVersion +
+                ", consignmentDate=" + consignmentDate +
+                ", contractNumber='" + contractNumber + '\'' +
+                ", previousContractNumber='" + previousContractNumber + '\'' +
+                ", contractDate=" + contractDate +
+                ", contractStartDate=" + contractStartDate +
+                ", contractEndDate=" + contractEndDate +
+                ", contractTimeType='" + contractTimeType + '\'' +
+                ", normType='" + normType + '\'' +
+                ", norm='" + norm + '\'' +
+                ", shiftDuration=" + shiftDuration +
+                ", shiftType='" + shiftType + '\'' +
+                ", allocationType='" + allocationType + '\'' +
+                ", contractType='" + contractType + '\'' +
+                ", salary=" + salary +
+                ", endDate=" + endDate +
+                ", legalTerminationGrounds='" + legalTerminationGrounds + '\'' +
+                ", suspensionStartDate=" + suspensionStartDate +
+                ", suspensionEndDate=" + suspensionEndDate +
+                ", legalSuspensionGrounds='" + legalSuspensionGrounds + '\'' +
+                ", suspensionStopDate=" + suspensionStopDate +
+                ", currentCondition='" + currentCondition + '\'' +
+                '}';
+    }
 }

@@ -18,8 +18,8 @@ import javax.xml.bind.annotation.XmlAccessorType;
 public class Salariat {
 
 	public String Adresa;
-	public Apatrid Apatrid;
-	public AuditEntries AuditEntries;
+	public String Apatrid;
+	public String AuditEntries;
 	public String Cnp;
 	public String CnpVechi;
 	public Contracte Contracte;

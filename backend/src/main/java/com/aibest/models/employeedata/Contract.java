@@ -14,7 +14,7 @@ import java.util.Date;
 @AllArgsConstructor
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Contract {
-	public AuditEntries AuditEntries;
+	public String AuditEntries;
 	public Cor Cor;
 	public Date DataConsemnare;
 	public Date DataContract;
@@ -22,8 +22,8 @@ public class Contract {
 	public Date DataSfarsitContract;
 	public Date DateContractVechi;
 	public Detalii Detalii;
-	public DetaliiMutare DetaliiMutare;
-	public ExceptieDataSfarsit ExceptieDataSfarsit;
+	public String DetaliiMutare;
+	public String ExceptieDataSfarsit;
 	public String NumarContract;
 	public String NumereContractVechi;
 	public boolean Radiat;

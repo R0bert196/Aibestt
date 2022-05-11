@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class EmployeeService {
@@ -19,4 +20,11 @@ public class EmployeeService {
         }
     }
 
+    public List<?>  getGlobalEmployeeSalaries() {
+        return employeeRepository.calculateGlobalEmployeeSalaries();
+    }
+
+    public List<?> getCompanyEmployeeSalaries(long companyId) {
+        return employeeRepository.calculateEmployeeSalaryForCompany(companyId);
+    }
 }
