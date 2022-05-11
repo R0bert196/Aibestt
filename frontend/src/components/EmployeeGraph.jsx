@@ -71,9 +71,7 @@ const labels = chartData?.map(x => x.name)
         row["name"] = element[0] + " " + element[1]
         row["dataset1"] = element[2]
         row["dataset2"] = 0
-        console.log(row)
-        tableData.push(row)
-        console.log(tableData)        
+        tableData.push(row)    
       });
 
 

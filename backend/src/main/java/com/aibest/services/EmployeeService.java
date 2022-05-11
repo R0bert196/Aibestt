@@ -27,4 +27,8 @@ public class EmployeeService {
     public List<?> getCompanyEmployeeSalaries(long companyId) {
         return employeeRepository.calculateEmployeeSalaryForCompany(companyId);
     }
+
+    public List<Map<String, String>> getEmployeeCountByShiftDuration(long companyId){
+        return employeeRepository.calculateEmployeesByShiftDuration(companyId);
+    }
 }

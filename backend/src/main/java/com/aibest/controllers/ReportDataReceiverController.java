@@ -108,4 +108,9 @@ public class ReportDataReceiverController {
         br.close();
         return sb.toString();
     }
+
+    @GetMapping("/getEmployeesByShiftCount")
+    public ResponseEntity<?> getEmployeeByShiftDuration(@RequestParam("companyId") long companyId){
+        return ResponseEntity.ok(employeeService.getEmployeeCountByShiftDuration(companyId));
+    }
 }
