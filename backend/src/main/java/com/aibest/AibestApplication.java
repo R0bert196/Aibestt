@@ -26,10 +26,7 @@ public class AibestApplication {
 		return new BCryptPasswordEncoder();
 	}
 
-	@EventListener(ApplicationReadyEvent.class)
-	public void sendMail(){
-		senderService.sendEmail("avram.gligor@gmail.com", "test", "test body");
-	}
+
 
 
 }

@@ -6,6 +6,7 @@ import com.aibest.models.JwtRequest;
 import com.aibest.models.JwtResponse;
 import com.aibest.models.RegistrationParams;
 import com.aibest.security.JWTUtility;
+import com.aibest.services.EmailSenderService;
 import com.aibest.services.RestGetService;
 import com.aibest.services.UserService;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -41,6 +42,9 @@ public class UserController {
     @Autowired
     RestGetService restGetService;
 
+    @Autowired
+    EmailSenderService emailSenderService;
+
 
     @Autowired
     public UserController(UserService userService) {
@@ -75,14 +79,14 @@ public class UserController {
         return new JwtResponse(token);
     }
 
-//    @GetMapping("/verify")
-//    public String verifyUser(@Param("code") String code) {
-//        if (userService.verify(code)) {
-//            return "Verification successful";
-//        } else {
-//            return "Verification failed";
-//        }
-//    }
+    @GetMapping("/verify")
+    public String verifyUser(@Param("code") String code) {
+        if (emailSenderService.verify(code)) {
+            return "Verification successful";
+        } else {
+            return "Verification failed";
+        }
+    }
 
     private String getSiteURL(HttpServletRequest request) {
         String siteURL = request.getRequestURL().toString();

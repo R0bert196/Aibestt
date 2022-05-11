@@ -47,6 +47,9 @@ public class UserService implements UserDetailsService {
 //    @Autowired
 //    private JavaMailSender mailSender;
 
+    @Autowired
+    EmailSenderService emailSenderService;
+
 
 
 
@@ -89,6 +92,7 @@ public class UserService implements UserDetailsService {
 
         AppUser user = AppUser
                 .builder()
+
                 .verificationCode(randomCode)
                 .enabled(false)
 
@@ -99,58 +103,58 @@ public class UserService implements UserDetailsService {
                 .userRole(UserRole.ADMIN)
                 .companyGroup(group)
                 .build();
-        sendVerificationEmail(user, siteURL);
+        emailSenderService.sendVerificationEmail(user, siteURL);
         return userRepository.save(user);
     }
 
-    private void sendVerificationEmail(AppUser user, String siteURL) throws MessagingException, UnsupportedEncodingException {
-        String toAddress = user.getEmail();
-        String fromAddress = "Your email address";
-        String senderName = "Your company name";
-        String subject = "Please verify your registration";
-        String content = "Dear [[name]],<br>"
-                + "Please click the link below to verify your registration:<br>"
-                + "<h3><a href=\"[[URL]]\" target=\"_self\">VERIFY</a></h3>"
-                + "Thank you,<br>"
-                + "Your company name.";
-
-//        JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
-//        SimpleMailMessage message = new SimpleMailMessage();
+//    private void sendVerificationEmail(AppUser user, String siteURL) throws MessagingException, UnsupportedEncodingException {
+//        String toAddress = user.getEmail();
+//        String fromAddress = "Your email address";
+//        String senderName = "Your company name";
+//        String subject = "Please verify your registration";
+//        String content = "Dear [[name]],<br>"
+//                + "Please click the link below to verify your registration:<br>"
+//                + "<h3><a href=\"[[URL]]\" target=\"_self\">VERIFY</a></h3>"
+//                + "Thank you,<br>"
+//                + "Your company name.";
 //
-////        MimeMessage message = mailSender.createMimeMessage();
-////        MimeMessageHelper helper = new MimeMessageHelper(message);
+////        JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
+////        SimpleMailMessage message = new SimpleMailMessage();
+////
+//////        MimeMessage message = mailSender.createMimeMessage();
+//////        MimeMessageHelper helper = new MimeMessageHelper(message);
+////
+////        message.setFrom("sabiuta123@gmail.com");
+////        message.setTo(toAddress);
+////        message.setSubject(subject);
 //
-//        message.setFrom("sabiuta123@gmail.com");
-//        message.setTo(toAddress);
-//        message.setSubject(subject);
+//
+//        content = content.replace("[[name]]", user.getFirstName());
+//        String verifyURL = siteURL + "/verify?code=" + user.getVerificationCode();
+//
+//        content = content.replace("[[URL]]", verifyURL);
+//
+////        helper.setText(content, true);
+////        message.setText(content);
+//
+////        mailSender.send(message);
+//        System.out.println("Mail sent!");
+//    }
 
-
-        content = content.replace("[[name]]", user.getFirstName());
-        String verifyURL = siteURL + "/verify?code=" + user.getVerificationCode();
-
-        content = content.replace("[[URL]]", verifyURL);
-
-//        helper.setText(content, true);
-//        message.setText(content);
-
-//        mailSender.send(message);
-        System.out.println("Mail sent!");
-    }
-
-    public boolean verify(String verificationCode) {
-        AppUser user = userRepository.findByVerificationCode(verificationCode);
-
-        if (user == null || user.isEnabled()) {
-            return false;
-        } else {
-            user.setVerificationCode(null);
-            user.setEnabled(true);
-            userRepository.save(user);
-
-            return true;
-        }
-
-    }
+//    public boolean verify(String verificationCode) {
+//        AppUser user = userRepository.findByVerificationCode(verificationCode);
+//
+//        if (user == null || user.isEnabled()) {
+//            return false;
+//        } else {
+//            user.setVerificationCode(null);
+//            user.setEnabled(true);
+//            userRepository.save(user);
+//
+//            return true;
+//        }
+//
+//    }
 
     private boolean isNotValid(RegistrationParams registrationParams) {
         if(userRepository.findByEmail(registrationParams.getEmail()) != null ||
