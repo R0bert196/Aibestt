@@ -62,7 +62,7 @@ function AddNewCompany({toggleUpload}) {
 
         {formik => {
             return <Form
-                    className="ml-12 grid grid-cols-7 center-center border-b border-solid w-screen gap-4">
+                    className="ml-12 grid grid-cols-7  border-b border-solid gap-4">
                     <div className='col-span-3'>
                         <TextField label='DENI' name='deni' type='text' />
                     </div>

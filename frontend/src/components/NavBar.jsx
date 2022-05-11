@@ -2,10 +2,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserCircle } from "@fortawesome/free-solid-svg-icons";
 import { useState, useEffect } from "react";
 import useAxiosPrivate from "../hooks/useAxiosPrivate";
+import { Link } from "react-router-dom";
+import ToggleSidebarButton from "./ToggleSidebarButton";
 
 function NavBar() {
   const [username, setUsername] = useState("");
   const [company, setCompany] = useState("");
+  const [activeSidebar, setActiveSidebar] = useState(false);
 
   const axiosPrivate = useAxiosPrivate();
 
@@ -37,11 +40,59 @@ function NavBar() {
   }, []);
 
   return (
-    <section className='absolute py-3 bg-white shadow inset-x-0'>
-      <nav className='flex justify-end container'>
-        <ul className='flex gap-2 mr-4'>
+    <section className=' py-3 bg-white shadow inset-x-0'>
+      <nav className='flex justify-between container px-2'>
+        <div className='flex items-center'>
+          <ToggleSidebarButton
+            activeSidebar={activeSidebar}
+            setActiveSidebar={setActiveSidebar}
+          />
+          <div
+            style={{
+              borderRight: "1px solid #e3e6f0",
+              height: "calc(4.375rem - 2rem)",
+            }}
+            className=' my-auto mx-4'
+          ></div>
+          <ul className='flex gap-2 items-center mw768:hidden'>
+            <li className='py-4'>
+              <Link
+                to={"/"}
+                className='font-bold hover:border-b-2 border-primary'
+              >
+                HOME
+              </Link>
+            </li>
+            <li>
+              <Link
+                to={"/companies/1"}
+                className='font-bold hover:border-b-2 border-primary'
+              >
+                DASHBOARD
+              </Link>
+            </li>
+            <li className='py-4'>
+              <Link
+                to={"/profile"}
+                className='font-bold hover:border-b-2 border-primary'
+              >
+                PROFILE
+              </Link>
+            </li>
+            <li className='py-4'>
+              <Link
+                to={"/employees"}
+                className='font-bold hover:border-b-2 border-primary'
+              >
+                TABLE
+              </Link>
+            </li>
+          </ul>
+        </div>
+
+        <ul className='flex gap-2 items-center'>
           <li>
-            <h3 className="text-xl">{company}</h3>
+            <h3 className='text-xl'>{company}</h3>
           </li>
           <li>
             <div
@@ -52,8 +103,8 @@ function NavBar() {
               className=' my-auto mx-4'
             ></div>
           </li>
-          <li className="mr-4">
-            <h3 className="text-xl">{username}</h3>
+          <li className='mr-4'>
+            <h3 className='text-xl'>{username}</h3>
           </li>
           <li>
             <FontAwesomeIcon

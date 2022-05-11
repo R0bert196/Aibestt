@@ -142,7 +142,7 @@ const [companies, setCompanies] = useState([]);
         { <AddNewCompany toggleUpload={toggleUpload}/> }
       </div>
 <div>
-<table className="w-full" {...getTableProps()}>
+<table className="" {...getTableProps()}>
        <thead>
        {
        headerGroups.map(headerGroup => (

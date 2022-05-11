@@ -1,11 +1,18 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons'
 import { faChevronRight } from '@fortawesome/free-solid-svg-icons'
+import { faBars } from '@fortawesome/free-solid-svg-icons'
+import state from "../state";
+import { useAtom } from "jotai";
 
-function ToggleSidebarButton({ activeSidebar, setActiveSidebar}) {
+function ToggleSidebarButton() {
+  
+  // const [activeSidebar, setActiveSidebar] = useState(false);
+  const [activeSidebar, setActiveSidebar] = useAtom(state.activeSidebar);
+
   return (
       <div className="text-center">
-          <button style={{ backgroundColor: activeSidebar ? 'rgba(255,255,255,.2)' : '#4e73df', position: activeSidebar? 'fixed': 'absolute', left: '0px', top: '-18px', paddingTop: '20px', paddingBottom: '20px' }} className=" px-5 mt-4 z-10 hover:brightness-125 transition-all duration-300" onClick={() => setActiveSidebar(prevActiveSidebar => !prevActiveSidebar)}>{activeSidebar ? <FontAwesomeIcon icon={faChevronLeft} /> : <FontAwesomeIcon icon={faChevronRight} />}</button>
+          <button className="hover:brightness-125 transition-all duration-200" onClick={() => setActiveSidebar(prevActiveSidebar => !prevActiveSidebar)}>{activeSidebar ? <FontAwesomeIcon className='text-primary text-3xl' icon={faBars} /> : <FontAwesomeIcon className='text-primary text-3xl' icon={faBars} />}</button>
       </div>
   )
 }
