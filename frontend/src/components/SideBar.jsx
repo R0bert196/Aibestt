@@ -42,7 +42,7 @@ function SideBar( ) {
               </li>
               <li className="py-4 flex">
                   <FontAwesomeIcon icon={faTable} className='mr-1'/>
-                  <Link to={'/employees'} className="hover:text-white">Table</Link>
+                  <Link to={'/employees'} className="hover:text-white">UPLOAD</Link>
               </li>
               {/* <li className="py-4">
                   <Link to={'/login'} className="hover:text-white">Login</Link>

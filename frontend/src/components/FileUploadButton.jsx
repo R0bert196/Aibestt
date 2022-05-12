@@ -40,7 +40,6 @@ function FileUploadButton({ setData, toggleUpload }) {
   };
 
 
-
   const sendFile = (content) => {
     let bodyFormData = new FormData();
     bodyFormData.append("file", content.file);

@@ -22,7 +22,7 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long> {
     List<Map<String, String>> calculateEmployeeSalaryForCompany(@Param("comp_id") long companyId);
 
 
-    @Query(value = "SELECT COUNT(shift_duration) as name, shift_duration as value FROM employee WHERE company_id =:comp_id group by shift_duration;", nativeQuery = true)
+    @Query(value = "SELECT COUNT(shift_duration) as value, shift_duration as name FROM employee WHERE company_id =:comp_id group by shift_duration;", nativeQuery = true)
     List<Map<String, String>> calculateEmployeesByShiftDuration(@Param("comp_id") long companyId);
 
 //    @Query("SELECT AVG(e.salary) FROM Employee e where Company.id = :companyId")
@@ -31,4 +31,7 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long> {
 
     @Query("SELECT count(e) FROM Employee e where e.company.id = :companyId")
     int getCompanyEmployeesCount(@Param("companyId") long companyId);
+
+    @Query(value = "select total_income / avg(e.id) as turnoverEmployee From company INNER JOIN employee e on company.id = e.company_id WHERE e.company_id = :companyId group by total_income", nativeQuery = true)
+    long getCompanyTurnoverEmployee(long companyId);
 }

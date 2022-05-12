@@ -45,4 +45,8 @@ public class EmployeeService {
     public int getCompanyEmployeesCount(long companyId) {
         return employeeRepository.getCompanyEmployeesCount(companyId);
     }
+
+    public long getCompanyTurnoverEmployee(long companyId) {
+        return employeeRepository.getCompanyTurnoverEmployee(companyId);
+    }
 }

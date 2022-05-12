@@ -14,11 +14,6 @@ Chart.register(...registerables);
 function GraphLine({ title, yourUrl, averageUrl }) {
   ChartJS.register(ArcElement, Tooltip, Legend);
 
-    //haeder: Angajati per durata schimb
-  // const [chart, setChart] = useState([])
-  // label: '# of Votes',
-  // url  `getEmployeesByShiftCount?companyId=${id}`,
-
 
   const axiosPrivate = useAxiosPrivate();
   let { id } = useParams();
