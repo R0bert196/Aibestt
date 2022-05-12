@@ -93,7 +93,7 @@ const [token, setToken] = useAtom(state.token);
                 to={"/employees"}
                 className='font-bold hover:border-b-2 border-primary'
               >
-                TABLE
+                UPLOAD
               </Link>
             </li>
           </ul>

@@ -103,4 +103,10 @@ public class ChartDataController {
         return employeeService.getEmployeeCountByShiftDuration(companyId);
     }
 
+    @GetMapping("/getTurnoverEmployee")
+    public long getCompanyTurnoverEmployee(@RequestParam("companyId") long companyId){
+        return employeeService.getCompanyTurnoverEmployee(companyId);
+    }
+
+
 }
