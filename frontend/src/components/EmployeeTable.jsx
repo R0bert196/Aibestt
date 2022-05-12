@@ -49,7 +49,7 @@ function BasicTable() {
         accessor: "salary",
       },
       {
-        Header: "Cnp",
+        Header: "Employee Id",
         accessor: "anonymised_employee_id",
       },
       {
@@ -61,9 +61,14 @@ function BasicTable() {
         accessor: "sex",
       },
       {
-        Header: "ContractNumber",
+        Header: "Contract Number",
         accessor: "contractNumber",
       },
+      {
+        Header: "Shift Duration",
+        accessor: "shiftDuration",
+      },
+      
 
       // {
       //   Header: "Data Start",

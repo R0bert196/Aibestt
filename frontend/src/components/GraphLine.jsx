@@ -11,7 +11,7 @@ import { Chart, registerables } from 'chart.js';
 
 Chart.register(...registerables);
 
-function LineGraph({ title, yourUrl, averageUrl }) {
+function GraphLine({ title, yourUrl, averageUrl }) {
   ChartJS.register(ArcElement, Tooltip, Legend);
 
     //haeder: Angajati per durata schimb
@@ -99,4 +99,4 @@ function LineGraph({ title, yourUrl, averageUrl }) {
   );
 }
 
-export default LineGraph;
+export default GraphLine;

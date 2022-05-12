@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import LineGraph from "./LineGraph";
+import GraphLine from "./GraphLine";
 // import EmployeeGraph from "../components/EmployeeGraph";
 import IndiactorCard from "../components/IndicatorCard";
-import ShiftDurationDoughnut from "../components/ShiftDurationDoughnut"
+import ShiftDurationDoughnut from "./GraphDoughnut"
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { faUsers } from '@fortawesome/free-solid-svg-icons';
 import { faEuroSign } from '@fortawesome/free-solid-svg-icons';
@@ -59,11 +59,11 @@ const getData = async () => {
             <div className="flex mx-auto justify-center gap-4 flex-wrap">
           {/* <LineGraph title="Employees Salaries"  averageUrl={"api/globalEmployeeSalary"} yourUrl={"empGraph"} /> */}
           {/* <DoughnutGraph title="Employees Average Salaries" label="# of Votes" url={"average-salaries"}/> */}
-                <ShiftDurationDoughnut />
+          <ShiftDurationDoughnut url={'getEmployeesByShiftCount'} title={'Angajati per durata schimb'} hoverValue=" ore" />
             </div>
             <div className="my-8">
           {/* <EmployeeGraph /> */}
-          <LineGraph title="Employees Salaries"  averageUrl={"api/globalEmployeeSalary"} yourUrl={"empGraph"} />
+          <GraphLine title="Employees Salaries"  averageUrl={"api/globalEmployeeSalary"} yourUrl={"empGraph"} />
             </div>
 
         </div>
