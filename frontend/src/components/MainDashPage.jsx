@@ -1,13 +1,12 @@
 import React from 'react'
-import DoughnutGraph from "../components/DoughnutGraph";
-import EmployeeGraph from "../components/EmployeeGraph";
+import LineGraph from "./LineGraph";
+// import EmployeeGraph from "../components/EmployeeGraph";
 import IndiactorCard from "../components/IndicatorCard";
 import ShiftDurationDoughnut from "../components/ShiftDurationDoughnut"
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { faUsers } from '@fortawesome/free-solid-svg-icons';
 import { faEuroSign } from '@fortawesome/free-solid-svg-icons';
 import { faTrophy } from '@fortawesome/free-solid-svg-icons';
-import NavBar from './NavBar';
 
 function MainDashPage() {
   return (
@@ -23,12 +22,13 @@ function MainDashPage() {
                   <IndiactorCard text='AIB COMPANY RANKING TM' number='2' height='7rem' icon={faTrophy} color='gold'/>
               </div>
             <div className="flex mx-auto justify-center gap-4 flex-wrap">
-          <DoughnutGraph title="Employees Salaries" label="# of Votes" url={"positions"} />
+          {/* <LineGraph title="Employees Salaries"  averageUrl={"api/globalEmployeeSalary"} yourUrl={"empGraph"} /> */}
           {/* <DoughnutGraph title="Employees Average Salaries" label="# of Votes" url={"average-salaries"}/> */}
                 <ShiftDurationDoughnut />
             </div>
             <div className="my-8">
-                <EmployeeGraph />
+          {/* <EmployeeGraph /> */}
+          <LineGraph title="Employees Salaries"  averageUrl={"api/globalEmployeeSalary"} yourUrl={"empGraph"} />
             </div>
 
         </div>

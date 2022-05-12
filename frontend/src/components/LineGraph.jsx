@@ -8,7 +8,7 @@ import state from "../state";
 import useAxiosPrivate from "../hooks/useAxiosPrivate";
 import { useParams } from "react-router-dom";
 
-function DoughnutGraph({ title, label, url }) {
+function LineGraph({ title, yourUrl, averageUrl }) {
   ChartJS.register(ArcElement, Tooltip, Legend);
 
     //haeder: Angajati per durata schimb
@@ -27,10 +27,10 @@ function DoughnutGraph({ title, label, url }) {
     try {
       await Promise.all([
     
-    axiosPrivate.get("api/globalEmployeeSalary", {
+    axiosPrivate.get(`${averageUrl}`, {
         signal: controller.signal
       }),
-    axiosPrivate.get(`empGraph?companyId=${id}`, {
+    axiosPrivate.get(`${yourUrl}?companyId=${id}`, {
         signal: controller.signal
       })
       ]).then((response) => {
@@ -96,4 +96,4 @@ function DoughnutGraph({ title, label, url }) {
   );
 }
 
-export default DoughnutGraph;
+export default LineGraph;
