@@ -17,7 +17,7 @@ function AutoCompleteBox({setInputValue, setIsCompanySelected, setIsSelectedFiel
                 setIsCompanySelected(true);
                 setIsSelectedField(false);
               }}
-              
+               
             >
               {company.deni}
             </li>

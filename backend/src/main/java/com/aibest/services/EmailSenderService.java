@@ -69,7 +69,7 @@ public class EmailSenderService {
     public boolean verify(String verificationCode) {
         AppUser user = userRepository.findByVerificationCode(verificationCode);
 
-        if (user == null || user.isEnabled()) {
+        if (user == null || user.getEnabled()) {
             return false;
         } else {
             user.setVerificationCode(null);
