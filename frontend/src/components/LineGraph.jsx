@@ -7,6 +7,9 @@ import { useAtom } from "jotai";
 import state from "../state";
 import useAxiosPrivate from "../hooks/useAxiosPrivate";
 import { useParams } from "react-router-dom";
+import { Chart, registerables } from 'chart.js';
+
+Chart.register(...registerables);
 
 function LineGraph({ title, yourUrl, averageUrl }) {
   ChartJS.register(ArcElement, Tooltip, Legend);
