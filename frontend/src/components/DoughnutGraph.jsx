@@ -1,6 +1,6 @@
 import GraphHeader from "./GraphHeader";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
-import { Doughnut } from "react-chartjs-2";
+import { Doughnut, Line } from "react-chartjs-2";
 import api from "../utilities/Api";
 import { useEffect, useState } from "react";
 import { useAtom } from "jotai";
@@ -19,16 +19,24 @@ function DoughnutGraph({ title, label, url }) {
 
   const axiosPrivate = useAxiosPrivate();
   let { id } = useParams();
-  const [chart, setChart] = useState([]);
-
+  const [yourchart, setYourChart] = useState();
+  const [averageChart, setAverageChart] = useState();
   
   const getData = async () => {
     const controller = new AbortController();
     try {
-      const response = await axiosPrivate.get(`${url}?companyId=${id}`, {
-        signal: controller.signal,
-      });
-      setChart(response.data);
+      await Promise.all([
+    
+    axiosPrivate.get("api/globalEmployeeSalary", {
+        signal: controller.signal
+      }),
+    axiosPrivate.get(`empGraph?companyId=${id}`, {
+        signal: controller.signal
+      })
+      ]).then((response) => {
+      setYourChart(response[1]);
+      setAverageChart(response[0]);
+    })
     } catch (err) {
       console.error(err);
     }
@@ -38,37 +46,48 @@ function DoughnutGraph({ title, label, url }) {
     getData();
   }, []);
 
+  function toMonthName(monthNumber) {
+  const date = new Date();
+  date.setMonth(monthNumber - 1);
+
+  return date.toLocaleString('en-US', {
+    month: 'long',
+  });
+}
+
   let nutData = {
-    labels: chart?.map((x) => x.name),
+    labels: averageChart?.data.map((x) => toMonthName(x.month)),
     datasets: [
       {
-        label: {label},
-        data: chart?.map((x) => x.employees),
+        label: "Your Company",
+        data: yourchart?.data.map((x) => x.value),
         backgroundColor: [
-          "rgba(255, 99, 132, 0.2)",
-          "rgba(54, 162, 235, 0.2)",
-          "rgba(255, 206, 86, 0.2)",
-          "rgba(75, 192, 192, 0.2)",
-          "rgba(153, 102, 255, 0.2)",
-          "rgba(255, 159, 64, 0.2)",
+          "rgba(255, 206, 85, 1)"
         ],
         borderColor: [
-          "rgba(255, 99, 132, 1)",
-          "rgba(54, 162, 235, 1)",
           "rgba(255, 206, 86, 1)",
-          "rgba(75, 192, 192, 1)",
-          "rgba(153, 102, 255, 1)",
-          "rgba(255, 159, 64, 1)",
         ],
         borderWidth: 1,
       },
+      {
+        label: "Industry Average",
+        data: averageChart?.data.map((x) => x.value),
+        backgroundColor: [
+          "rgba(255, 99, 132, 1)",
+        ],
+        borderColor: [
+          "rgba(255, 99, 132, 1)",
+        ],
+        borderWidth: 1,
+      },
+      
     ],
   };
 
   return (
     <div className=' mx-4 shadow-md rounded-b-md'>
       <GraphHeader title={title} />
-      <Doughnut
+      <Line
         style={{ backgroundColor: "#f8f9fc", border: "1px solid #e3e6f0" }}
         data={nutData}
         className='p-2 rounded-b-md outline-2 text-primary font-bold '

@@ -23,7 +23,8 @@ function MainDashPage() {
                   <IndiactorCard text='AIB COMPANY RANKING TM' number='2' height='7rem' icon={faTrophy} color='gold'/>
               </div>
             <div className="flex mx-auto justify-center gap-4 flex-wrap">
-                <DoughnutGraph title={"Employees Distribution"} label={"# of Votes"} url={"positions"}/>
+          <DoughnutGraph title="Employees Salaries" label="# of Votes" url={"positions"} />
+          {/* <DoughnutGraph title="Employees Average Salaries" label="# of Votes" url={"average-salaries"}/> */}
                 <ShiftDurationDoughnut />
             </div>
             <div className="my-8">

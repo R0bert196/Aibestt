@@ -15,11 +15,11 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long> {
     @Query(value = "SELECT * FROM employee WHERE company_id=:comp_id AND upload_date = ( SELECT MAX(upload_date) FROM employee)", nativeQuery = true)
     List<Employee> getLatestEmployees(@Param("comp_id") long companyId);
 
-    @Query(value = "SELECT EXTRACT(YEAR FROM upload_date) AS year , EXTRACT(MONTH FROM upload_date) AS month, AVG(salary) FROM employee GROUP BY EXTRACT (MONTH FROM upload_date), EXTRACT(YEAR FROM upload_date) ORDER BY EXTRACT(YEAR FROM upload_date), EXTRACT (MONTH FROM upload_date);", nativeQuery = true)
-    List<?> calculateGlobalEmployeeSalaries();
+    @Query(value = "SELECT EXTRACT(YEAR FROM upload_date) AS year , EXTRACT(MONTH FROM upload_date) AS month, AVG(salary) as value FROM employee GROUP BY EXTRACT (MONTH FROM upload_date), EXTRACT(YEAR FROM upload_date) ORDER BY EXTRACT(YEAR FROM upload_date), EXTRACT (MONTH FROM upload_date);", nativeQuery = true)
+    List<Map<String, String>> calculateGlobalEmployeeSalaries();
 
-    @Query(value = "SELECT EXTRACT(YEAR FROM upload_date) AS year, EXTRACT(MONTH FROM upload_date) AS month, AVG(salary) FROM employee WHERE company_id=:comp_id GROUP BY EXTRACT (MONTH FROM upload_date), EXTRACT(YEAR FROM upload_date) ORDER BY EXTRACT(YEAR FROM upload_date), EXTRACT (MONTH FROM upload_date);", nativeQuery = true)
-    List<?> calculateEmployeeSalaryForCompany(@Param("comp_id") long companyId);
+    @Query(value = "SELECT EXTRACT(YEAR FROM upload_date) AS year, EXTRACT(MONTH FROM upload_date) AS month, AVG(salary)as value FROM employee WHERE company_id=:comp_id GROUP BY EXTRACT (MONTH FROM upload_date), EXTRACT(YEAR FROM upload_date) ORDER BY EXTRACT(YEAR FROM upload_date), EXTRACT (MONTH FROM upload_date);", nativeQuery = true)
+    List<Map<String, String>> calculateEmployeeSalaryForCompany(@Param("comp_id") long companyId);
 
 
     @Query(value = "SELECT COUNT(shift_duration) as employee_number, shift_duration as duration FROM employee WHERE company_id =:comp_id group by shift_duration;", nativeQuery = true)
