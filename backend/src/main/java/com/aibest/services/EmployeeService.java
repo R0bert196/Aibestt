@@ -42,4 +42,7 @@ public class EmployeeService {
         return employeeRepository.getAllAverageSalariesByCompany(companyId);
     }
 
+    public int getCompanyEmployeesCount(long companyId) {
+        return employeeRepository.getCompanyEmployeesCount(companyId);
+    }
 }

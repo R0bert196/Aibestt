@@ -92,4 +92,10 @@ public class ChartDataController {
     public int getAverageSalariesForCompany(@RequestParam("companyId") long companyId) {
         return employeeService.getCompanyAverageSalaries(companyId);
     }
+
+    @GetMapping(value = "/getEmployeesCount")
+    public int getEmployeesCount(@RequestParam("companyId") long companyId) {
+        return employeeService.getCompanyEmployeesCount(companyId);
+    }
+
 }

@@ -26,7 +26,9 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long> {
     List<Map<String, String>> calculateEmployeesByShiftDuration(@Param("comp_id") long companyId);
 
 //    @Query("SELECT AVG(e.salary) FROM Employee e where Company.id = :companyId")
-    @Query(value = "select AVG(salary) FROM employee inner join company c on c.id = employee.company_id where company_id = :companyId" ,nativeQuery = true)
+    @Query(value = "select AVG(salary) FROM employee where company_id = :companyId" ,nativeQuery = true)
     int getAllAverageSalariesByCompany(@Param("companyId") long companyId);
 
+    @Query("SELECT count(e) FROM Employee e where e.company.id = :companyId")
+    int getCompanyEmployeesCount(@Param("companyId") long companyId);
 }
