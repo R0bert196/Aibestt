@@ -22,7 +22,7 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long> {
     List<Map<String, String>> calculateEmployeeSalaryForCompany(@Param("comp_id") long companyId);
 
 
-    @Query(value = "SELECT COUNT(shift_duration) as employee_number, shift_duration as duration FROM employee WHERE company_id =:comp_id group by shift_duration;", nativeQuery = true)
+    @Query(value = "SELECT COUNT(shift_duration) as name, shift_duration as value FROM employee WHERE company_id =:comp_id group by shift_duration;", nativeQuery = true)
     List<Map<String, String>> calculateEmployeesByShiftDuration(@Param("comp_id") long companyId);
 
 //    @Query("SELECT AVG(e.salary) FROM Employee e where Company.id = :companyId")

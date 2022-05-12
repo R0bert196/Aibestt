@@ -98,4 +98,9 @@ public class ChartDataController {
         return employeeService.getCompanyEmployeesCount(companyId);
     }
 
+    @GetMapping("/getEmployeesByShiftCount")
+    public List<Map<String, String>> getEmployeeByShiftDuration(@RequestParam("companyId") long companyId){
+        return employeeService.getEmployeeCountByShiftDuration(companyId);
+    }
+
 }
