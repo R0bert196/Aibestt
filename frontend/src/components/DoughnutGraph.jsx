@@ -6,21 +6,28 @@ import { useEffect, useState } from "react";
 import { useAtom } from "jotai";
 import state from "../state";
 import useAxiosPrivate from "../hooks/useAxiosPrivate";
+import { useParams } from "react-router-dom";
 
-function DoughnutGraph() {
+function DoughnutGraph({ title, label, url }) {
   ChartJS.register(ArcElement, Tooltip, Legend);
 
-  const axiosPrivate = useAxiosPrivate();
+    //haeder: Angajati per durata schimb
+  // const [chart, setChart] = useState([])
+  // label: '# of Votes',
+  // url  `getEmployeesByShiftCount?companyId=${id}`,
 
+
+  const axiosPrivate = useAxiosPrivate();
+  let { id } = useParams();
   const [chart, setChart] = useState([]);
 
+  
   const getData = async () => {
     const controller = new AbortController();
     try {
-      const response = await axiosPrivate.get("positions?companyId=1", {
+      const response = await axiosPrivate.get(`${url}?companyId=${id}`, {
         signal: controller.signal,
       });
-      // .then(response => setChartData(response.data))
       setChart(response.data);
     } catch (err) {
       console.error(err);
@@ -35,7 +42,7 @@ function DoughnutGraph() {
     labels: chart?.map((x) => x.name),
     datasets: [
       {
-        label: "# of Votes",
+        label: {label},
         data: chart?.map((x) => x.employees),
         backgroundColor: [
           "rgba(255, 99, 132, 0.2)",
@@ -60,7 +67,7 @@ function DoughnutGraph() {
 
   return (
     <div className=' mx-4 shadow-md rounded-b-md'>
-      <GraphHeader title={"Employees Distribution"} />
+      <GraphHeader title={title} />
       <Doughnut
         style={{ backgroundColor: "#f8f9fc", border: "1px solid #e3e6f0" }}
         data={nutData}

@@ -2,8 +2,6 @@ import GraphHeader from "./GraphHeader"
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
 import { useEffect, useState } from "react";
-import { useAtom } from "jotai";
-import state from "../state";
 import useAxiosPrivate from "../hooks/useAxiosPrivate";
 import { useParams } from "react-router-dom";
 
@@ -16,7 +14,6 @@ function DoughnutGraph() {
 let { id } = useParams();
 const [chart, setChart] = useState([])
   
-const [token, setToken] = useAtom(state.token);
 
   
   useEffect(() => {
@@ -65,6 +62,11 @@ const [token, setToken] = useAtom(state.token);
         ],
       };
 
+  //haeder: Angajati per durata schimb
+  // const [chart, setChart] = useState([])
+  // label: '# of Votes',
+  // url  `getEmployeesByShiftCount?companyId=${id}`,
+  
     return (
       <div className=" mx-4 shadow-md rounded-b-md"> 
         <GraphHeader title={'Angajati per durata schimb'} />
