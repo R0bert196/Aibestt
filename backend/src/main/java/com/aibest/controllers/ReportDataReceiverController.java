@@ -18,6 +18,7 @@ import javax.xml.bind.JAXBException;
 import java.io.*;
 import java.text.ParseException;
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -91,6 +92,11 @@ public class ReportDataReceiverController {
                     .builder()
                     .uploadDate(LocalDate.parse("2018-05-05"))
                     .company(company)
+                    .anonymised_employee_id((int) (Math.random()*1000000000))
+                    .sex(salariat.getCnp().charAt(0)=='1'? 1: 2)
+                    .contractNumber(salariat.getContracte().getContract().get(salariat.getContracte().getContract().size() - 1).getNumarContract())
+                    .contractStartDate(salariat.getContracte().getContract().get(salariat.getContracte().getContract().size() - 1).getDataInceputContract().toInstant().atZone(ZoneId.systemDefault()).toLocalDate())
+                    .cor(salariat.getContracte().getContract().get(salariat.getContracte().getContract().size() - 1).getCor().getCod())
                     .salary(salariat.getContracte().getContract().get(salariat.getContracte().getContract().size() - 1).getSalariu())
                     .build();
             dbInsertList.add(dbInsert);

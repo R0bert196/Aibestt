@@ -62,10 +62,6 @@ const [chart, setChart] = useState([])
         ],
       };
 
-  //haeder: Angajati per durata schimb
-  // const [chart, setChart] = useState([])
-  // label: '# of Votes',
-  // url  `getEmployeesByShiftCount?companyId=${id}`,
   
     return (
       <div className=" mx-4 shadow-md rounded-b-md"> 

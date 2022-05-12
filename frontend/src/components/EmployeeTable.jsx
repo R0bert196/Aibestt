@@ -41,13 +41,30 @@ function BasicTable() {
   const columns = useMemo(
     () => [
       {
-        Header: "Funtie",
+        Header: "Id",
         accessor: "id",
       },
       {
         Header: "Salariu",
         accessor: "salary",
       },
+      {
+        Header: "Cnp",
+        accessor: "anonymised_employee_id",
+      },
+      {
+        Header: "Cor",
+        accessor: "cor",
+      },
+      {
+        Header: "Sex",
+        accessor: "sex",
+      },
+      {
+        Header: "ContractNumber",
+        accessor: "contractNumber",
+      },
+
       // {
       //   Header: "Data Start",
       //   accessor: "startDate",
