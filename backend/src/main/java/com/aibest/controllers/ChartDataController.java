@@ -87,4 +87,9 @@ public class ChartDataController {
         AppUser user = userService.getUserByEmail(email);
         return companyService.getCompaniesForUser(user);
     }
+
+    @GetMapping(value = "/getAverageSalaries")
+    public int getAverageSalariesForCompany(@RequestParam("companyId") long companyId) {
+        return employeeService.getCompanyAverageSalaries(companyId);
+    }
 }

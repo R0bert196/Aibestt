@@ -37,4 +37,9 @@ public class EmployeeService {
         System.out.println(objects);
         return objects;
     }
+
+    public int getCompanyAverageSalaries(long companyId) {
+        return employeeRepository.getAllAverageSalariesByCompany(companyId);
+    }
+
 }
