@@ -14,20 +14,21 @@ function CompanyTable() {
   const axiosPrivate = useAxiosPrivate();
   const [toggleUpload, setToggleUpload] = useState(false);
 
+  const controller = new AbortController();
+  const getCompanies = async () => {
+    try {
+      const response = await axiosPrivate.get("getCompanies", {
+        signal: controller.signal,
+      });
+      setCompanies(response.data);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   useEffect(() => {
-    const controller = new AbortController();
-    const getCompanies = async () => {
-      try {
-        const response = await axiosPrivate.get("getCompanies", {
-          signal: controller.signal,
-        });
-        setCompanies(response.data);
-      } catch (err) {
-        console.error(err);
-      }
-    };
     getCompanies();
-  }, [companies]);
+  }, []); //TODO figure out a workaround to update teh companies if the user adds one
 
   const data = useMemo(
     () => [
@@ -87,21 +88,31 @@ function CompanyTable() {
         ? Object.keys(companies[0])
             .filter((key) => key !== "companyGroup")
             .map((key) => {
-              if (key === "id") {
-                return { Header: "", accessor: "null" };
-              } else if (key === "deni") {
+              // if (key === "id") {
+                // return { Header: "", accessor: "null" };
+              // } else 
+              if (key === "deni") {
                 return {
                   Header: key,
                   accessor: key,
-                  Cell: () =>
+                  Cell: (row, x) => 
+                  // console.log(row.data)
                     !key ? null : (
+                    //   companies.map(company => {
+  
+                    //     return <Link
+                    //     to={{ pathname: `/companies/${company.id}` }}
+                    //   >
+                    //     <div>{ company.deni}</div>
+                    //   </Link>
+                    //   })
                       <Link
                         to={{ pathname: `/companies/${companies[0]["id"]}` }}
                       >
-                        {companies[0][key]}
+                        <div>{ companies[0][key]}</div>
                       </Link>
                     ),
-                };
+              };
               } else {
                 return {
                   Header: key,
@@ -182,47 +193,7 @@ function CompanyTable() {
           </tbody>
         </table>
       </div>
-      <div>
-        <table className='' {...getTableProps()}>
-          <thead>
-            {headerGroups.map((headerGroup) => (
-              <tr
-                className='grid grid-cols-5 content-center text-center'
-                {...headerGroup.getHeaderGroupProps()}
-              >
-                {headerGroup.headers.map((column) => (
-                  <th
-                    className='grid content-center'
-                    {...column.getHeaderProps()}
-                  >
-                    {column.render("Header")}
-                  </th>
-                ))}
-              </tr>
-            ))}
-          </thead>
-          <tbody {...getTableBodyProps()}>
-            {rows.map((row) => {
-              prepareRow(row);
-              return (
-                <tr className='grid grid-cols-5' {...row.getRowProps()}>
-                  {row.cells.map((cell) => {
-                    return (
-                      <td
-                        className='grid content-center text-center'
-                        {...cell.getCellProps()}
-                      >
-                        {cell.render("Cell")}
-                      </td>
-                    );
-                  })}
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
-      </div>
-    </div>
+     </div>
   );
 }
 

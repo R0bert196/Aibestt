@@ -64,10 +64,6 @@ public class UserController {
         }
 
         AppUser user = userService.registerUser(registrationParameters, getSiteURL(request));
-
-
-
-
         if (user == null) {
             throw new BadCredentialsException("check params");
         }

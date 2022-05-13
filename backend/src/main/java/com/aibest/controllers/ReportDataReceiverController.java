@@ -87,13 +87,16 @@ public class ReportDataReceiverController {
         Company company = companyService.getCompaniesById(companyId);
         List<Employee> dbInsertList = new ArrayList<>();
         for (Salariat salariat : salariati) {
-            Employee dbInsert = Employee
-                    .builder()
-                    .uploadDate(LocalDate.parse("2018-05-05"))
-                    .company(company)
-                    .salary(salariat.getContracte().getContract().get(salariat.getContracte().getContract().size() - 1).getSalariu())
-                    .build();
-            dbInsertList.add(dbInsert);
+            Employee e = new Employee();
+            e.setCompany(company);
+            dbInsertList.add(e);
+//            Employee dbInsert = Employee
+//                    .builder()
+//                    .uploadDate(LocalDate.parse("2018-05-05"))
+//                    .company(company)
+//                    .salary(salariat.getContracte().getContract().get(salariat.getContracte().getContract().size() - 1).getSalariu())
+//                    .build();
+//            dbInsertList.add(dbInsert);
         }
         return dbInsertList;
     }

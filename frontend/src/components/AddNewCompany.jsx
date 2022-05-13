@@ -24,7 +24,7 @@ function AddNewCompany({toggleUpload}) {
             top: toggleUpload ? "0px" : "-1000px",
         }}
         >
-        <div className='md:grid grid-cols-3 gap-6'>        
+        <div className='md:grid'>        
         
 
 <Formik
@@ -37,44 +37,35 @@ function AddNewCompany({toggleUpload}) {
 
         validationSchema={CompanyRegistrationSchema}
         onSubmit={values => {
-           axiosPrivate.post("addCompany", 
-           {
-                "deni": values.deni,
-                "cui": values.cui,
-                "codPostal": values.cui,
-                "caen": values.caen
-            },
-           {
-                signal: controller.signal
-            })
-               
-                .then(data => {
-                    toast.success("Company added")
-                    
-                })
-                .catch(err => {
-                    if (err) {
-                        toast.error("Please check the information provided")
-                    }
-                })
+            console.log(values)
+           axiosPrivate
+             .post(
+               "addCompany",
+                {
+                 cui: values.cui
+               },
+               {
+                 signal: controller.signal,
+               }
+             )
+
+             .then((data) => {
+               toast.success("Company added");
+             })
+             .catch((err) => {
+               if (err) {
+                 toast.error("Please check the information provided");
+               }
+             });
         }}
     >
 
         {formik => {
             return <Form
-                    className="ml-12 grid grid-cols-7  border-b border-solid gap-4">
-                    <div className='col-span-3'>
-                        <TextField label='DENI' name='deni' type='text' />
-                    </div>
-                    <div className='col-span-3'>
-                        <TextField label='CUI' name='cui' type='number' />
-                    </div>
-                    <div className='col-span-3'>
-                        <TextField label='CAEN' name='caen' type='number' />
-                    </div>
-                    <div className='col-span-3'>
-                        <TextField label='Cod Postal' name='codPostal' type='number' />
-                    </div>
+                    className="ml-12 grid grid-cols-7 border-b border-solid gap-4">
+                    <div className='col-span-7'>
+                        <TextField label='CUI' name='cui' type='text' />
+                    </div>                   
                     <div className='col-start-3 col-span-2'>
                         <button
                             className="py-4 bg-primary text-white hover:brightness-125 w-full px-4 my-4 rounded-3xl"
@@ -85,10 +76,6 @@ function AddNewCompany({toggleUpload}) {
                 </Form>      
         }}
     </Formik>
-
-
-
-
       </div>
     </div>
   )
