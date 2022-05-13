@@ -31,4 +31,22 @@ public class EmployeeService {
     public List<Map<String, String>> getEmployeeCountByShiftDuration(long companyId){
         return employeeRepository.calculateEmployeesByShiftDuration(companyId);
     }
+
+    public List<Map<String, String>> getEmployeesAverageSalaries(long companyId) {
+        List<Map<String, String>> objects = employeeRepository.calculateEmployeeSalaryForCompany(companyId);
+        System.out.println(objects);
+        return objects;
+    }
+
+    public int getCompanyAverageSalaries(long companyId) {
+        return employeeRepository.getAllAverageSalariesByCompany(companyId);
+    }
+
+    public int getCompanyEmployeesCount(long companyId) {
+        return employeeRepository.getCompanyEmployeesCount(companyId);
+    }
+
+    public long getCompanyTurnoverEmployee(long companyId) {
+        return employeeRepository.getCompanyTurnoverEmployee(companyId);
+    }
 }

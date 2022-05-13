@@ -1,17 +1,14 @@
 package com.aibest.models;
 
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 
-import java.util.List;
-
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class CompanyDetails {
+public class i {
 
-    private String deni;
-    private String caen;
-    private List<i> i;
+    private String indicator;
+    private long val_indicator;
+    private String val_den_indicator;
 
 }

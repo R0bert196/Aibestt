@@ -27,6 +27,7 @@ public class Company {
 //    @Column(unique=true)
     private String cui;
     private String codPostal;
+    private long totalIncome;
 
     @ManyToOne(
             fetch = FetchType.EAGER,
@@ -37,4 +38,6 @@ public class Company {
             referencedColumnName = "id"
     )
     private CompanyGroup companyGroup;
+
+
 }

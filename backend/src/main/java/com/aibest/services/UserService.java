@@ -4,6 +4,7 @@ package com.aibest.services;
 import com.aibest.entities.*;
 import com.aibest.models.CompanyDetails;
 import com.aibest.models.RegistrationParams;
+import com.aibest.models.i;
 import com.aibest.repositories.CompanyGroupRepository;
 import com.aibest.repositories.CompanyRepository;
 import com.aibest.repositories.UserRepository;
@@ -27,6 +28,7 @@ import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.Objects;
 
 @Service
 public class UserService implements UserDetailsService {
@@ -79,10 +81,18 @@ public class UserService implements UserDetailsService {
         CompanyGroup group = CompanyGroup.builder().name(registrationParams.getGroup()).build();
         group = groupRepository.save(group);
 
+        long totalIncome = 0;
+        for (i i : companyDetails.getI()) {
+            if (Objects.equals(i.getIndicator(), "I14")) {
+                totalIncome = i.getVal_indicator();
+            }
+        }
+
         Company company = Company.builder()
                 .cui(registrationParams.getCui())
                 .caen(companyDetails.getCaen())
                 .deni(companyDetails.getDeni())
+                .totalIncome(totalIncome)
                 .codPostal(registrationParams.getCodPostal())
                 .companyGroup(group)
                 .build();

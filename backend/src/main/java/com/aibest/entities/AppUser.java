@@ -42,5 +42,6 @@ public class AppUser {
     @Column(name = "verification_code", length = 64)
     private String verificationCode;
 
-    private Boolean enabled = true;
+    private Boolean enabled =  false;
+
 }

@@ -52,6 +52,7 @@ function EmployeeGraph() {
 const [chartData, setChartData] = useState([])
 
 const labels = chartData?.map(x => x.name)
+
   const controller = new AbortController();
   const getData = async () => {
   const[globalData, companyData] = await Promise.all([

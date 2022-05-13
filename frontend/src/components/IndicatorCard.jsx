@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-function IndicatorCard({ text, number, icon, height, color }) {
+function IndicatorCard({ text, inidcatorValue, icon, height, color }) {
   return (
     <div
       style={{ border: "1px solid #e3e6f0", height: height }}
@@ -11,7 +11,7 @@ function IndicatorCard({ text, number, icon, height, color }) {
           <span style={{ color: `${color}` }}>{text}</span>
         </div>
         <div className='font-bold text-lg'>
-          <span>{number}</span>
+          <span>{inidcatorValue}</span>
         </div>
       </div>
       <div className='mt-6'>
