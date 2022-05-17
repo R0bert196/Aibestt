@@ -6,11 +6,11 @@ services:
     build: ./backend
     container_name: server
     ports:
-      - 3002:3002
+      - 8080:8080
     depends_on:
-      - db3
+      - db4
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/${DB}
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db4:5432/${DB}
       - SPRING_DATASOURCE_USERNAME=${USERNAME}
       - SPRING_DATASOURCE_PASSWORD=${PASSWORD}
       - SPRING_JPA_HIBERNATE_DDL_AUTO=update
@@ -27,17 +27,17 @@ services:
       - server
     command: npm start
           
-  db3:
+  db4:
     image: 'postgres:13-alpine'
-    container_name: aibest3
+    container_name: aibest4
     ports:
       - 5432:5432
     environment:
       - POSTGRES_USER=${USERNAME}
       - POSTGRES_PASSWORD=${PASSWORD}
-      - POSTGRES_DB=aibest3
+      - POSTGRES_DB=aibest4
 
   admin:    
     image: adminer    
     ports:      
-      - "8080:8080"
+      - "8085:8080"
