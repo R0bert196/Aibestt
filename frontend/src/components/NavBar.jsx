@@ -72,14 +72,6 @@ const [token, setToken] = useAtom(state.token);
                 HOME
               </Link>
             </li>
-            <li>
-              <Link
-                to={"/companies/1"}
-                className='font-bold hover:border-b-2 border-primary'
-              >
-                DASHBOARD
-              </Link>
-            </li>
             <li className='py-4'>
               <Link
                 to={"/profile"}

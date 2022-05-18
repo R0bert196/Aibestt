@@ -10,8 +10,6 @@ function AutoCompleteBox({setInputValue, setIsCompanySelected, setIsSelectedFiel
               data-companyid={company.id}
               key={key}
               onClick={(e) => {
-                console.log(e.target.innerHTML);
-                console.log(e.parentElement);
                 setInputValue(e.target.innerHTML);
                 setCompanyId(e.target.dataset.companyid)
                 setIsCompanySelected(true);
