@@ -3,8 +3,10 @@ import avatar from '../images/avatar.png'
 
 function Profile() {
   return (
-    <div className='w-full mt-16'>
-        <h1 className='mt-3 text-xl'>My profile</h1>
+    <div className='container mx-4 my-14 px-5 w-full mt-16 overflow-hidden'>
+      <div className='mb-4 text-3xl'>
+        <h1>My profile</h1>
+      </div>
           <div className="grid grid-cols-8 mt-3 ml-5 gap-3">        
            <div style={{ border: "1px solid #e3e6f0" }} 
                   className='flex flex-col items-center col-start-1 col-end-5 bg-white px-2 rounded'>

@@ -133,17 +133,17 @@ function CompanyTable() {
     tableInstance;
 
   return (
-    <div>
+    <div className="container mx-auto px-4 overflow-hidden">
       <div
         style={{
           border: "1px solid #e3e6f0",
-          height: toggleUpload ? "25rem" : "5rem",
+          height: toggleUpload ? "18rem" : "5rem",
         }}
         className='rounded-t-md p-4 transition-all duration-300'
       >
         <div>
           <button
-            className='px-4 py-3 bg-primary text-white hover:brightness-125 w-full rounded-lg'
+            className='py-3 w-full bg-primary text-white hover:brightness-125 rounded-lg text-center'
             onClick={() =>
               setToggleUpload((prevToggleUpload) => !prevToggleUpload)
             }
@@ -153,7 +153,9 @@ function CompanyTable() {
         </div>
         {<AddNewCompany toggleUpload={toggleUpload} />}
       </div>
-      <div>
+      <div style={{
+          borderBottom: "1px solid #e3e6f0", borderLeft: "1px solid #e3e6f0", borderRight: "1px solid #e3e6f0"
+        }} className='rounded-b-md'>
         <table className='w-full' {...getTableProps()}>
           <thead>
             {headerGroups.map((headerGroup) => (
