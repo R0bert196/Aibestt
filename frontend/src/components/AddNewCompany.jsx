@@ -50,7 +50,7 @@ function AddNewCompany({toggleUpload, setAddedCompany}) {
              )
 
              .then((data) => {
-               setAddedCompany(data)
+               navigate("/");
                toast.success("Company added");
              })
              .catch((err) => {
