@@ -10,6 +10,7 @@ import MainDashPage from './components/MainDashPage';
 import Footer from './components/common/Footer';
 import Companies from './components/Companies';
 import NavBar from './components/common/NavBar';
+import GroupProfile from './components/GroupProfile';
 
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
         <Route path='/profile' element={<DashOrHome component={<Profile />}/>} exact/>
         <Route path='/employees' element={<DashOrHome component={<Employees />} />} exact/>
         <Route path='/companies/:id' element={<DashOrHome component={< MainDashPage/>} />} exact/>
+        <Route path='/group' element={<DashOrHome component={<GroupProfile />} />} exact/>
         <Route path='/login' element={<Login />} />
         <Route path='/register' element={<Register />}/>
         <Route path='*' element={<ErrorPage />} />
