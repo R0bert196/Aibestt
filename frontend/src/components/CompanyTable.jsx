@@ -3,6 +3,7 @@ import { useAtom } from "jotai";
 import state from "../state";
 import useAxiosPrivate from "../hooks/useAxiosPrivate";
 import { Link } from "react-router-dom"
+import AddNewCompany from "./AddNewCompany"
 
 function CompanyTable() {
   const [companies, setCompanies] = useState([]);
@@ -30,6 +31,25 @@ function CompanyTable() {
  
   return (
     <div> 
+      <div
+        style={{
+          border: "1px solid #e3e6f0",
+          height: toggleUpload ? "25rem" : "5rem",
+        }}
+        className='rounded-t-md p-4 transition-all duration-300'
+      >
+        <div>
+          <button
+            className='px-4 py-3 bg-primary text-white hover:brightness-125 w-full rounded-lg'
+            onClick={() =>
+              setToggleUpload((prevToggleUpload) => !prevToggleUpload)
+            }
+          >
+            Add new company
+          </button>
+        </div>
+        {<AddNewCompany toggleUpload={toggleUpload} />}
+      </div>
       {companies.length > 0 && (
         <table>
             <thead>
