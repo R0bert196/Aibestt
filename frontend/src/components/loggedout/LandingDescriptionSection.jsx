@@ -1,4 +1,4 @@
-import photo from '../images/mailPhoto.png'
+import photo from '../../images/mailPhoto.png'
 
 
 function LandingDescriptionSection() {

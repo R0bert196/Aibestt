@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
-import Hero from '../components/Hero';
-import LandingDescriptionSection from '../components/LandingDescriptionSection';
-import LandingStatsCard from '../components/LandingStatsCard';
+import Hero from '../components/loggedout/Hero';
+import LandingDescriptionSection from '../components/loggedout/LandingDescriptionSection';
+import LandingStatsCard from '../components/loggedout/LandingStatsCard';
 
 function HomePage() {
   return (

@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
-import api from "../utilities/Api";
+import api from "../../utilities/Api";
 import { useAtom } from "jotai";
-import state from "../state";
+import state from "../../state";
 import AutoCompleteBox from "./AutoCompleteBox";
-import useAxiosPrivate from "../hooks/useAxiosPrivate";
+import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 
 function FileUploadButton({ setData, toggleUpload }) {
   const [companies, setCompanies] = useState();

@@ -1,6 +1,6 @@
 import React from 'react'
 import EmployeeTable from './EmployeeTable'
-import NavBar from './NavBar'
+import NavBar from './common/NavBar'
 
 function Employees() {
   return (

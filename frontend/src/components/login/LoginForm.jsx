@@ -1,13 +1,13 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAtom } from "jotai";
-import state from "../state";
-import LoginSchema from "../validations/LoginSchema";
+import state from "../../state";
+import LoginSchema from "../../validations/LoginSchema";
 import { Formik, Form, ErrorMessage } from 'formik';
-import TextField from './TextField';
+import TextField from '../common/TextField';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import Api from "../utilities/Api";
+import Api from "../../utilities/Api";
 
 
 function LoginForm() {

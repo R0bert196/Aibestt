@@ -1,4 +1,4 @@
-import photo from '../images/loginPhoto.jpg'
+import photo from '../../images/loginPhoto.jpg'
 
 function LoginImage() {
   return (

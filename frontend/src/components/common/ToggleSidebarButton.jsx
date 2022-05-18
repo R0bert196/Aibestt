@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 // import { x } from '@fortawesome/react-fontawesome'
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import { faBars } from '@fortawesome/free-solid-svg-icons'
-import state from "../state";
+import state from "../../state";
 import { useAtom } from "jotai";
 
 function ToggleSidebarButton() {

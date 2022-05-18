@@ -1,12 +1,12 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserCircle } from "@fortawesome/free-solid-svg-icons";
 import { useState, useEffect } from "react";
-import useAxiosPrivate from "../hooks/useAxiosPrivate";
+import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import { Link } from "react-router-dom";
-import ToggleSidebarButton from "./ToggleSidebarButton";
+import ToggleSidebarButton from "./ToggleSidebarButton"
 import { useNavigate } from "react-router-dom";
 import { useAtom } from "jotai";
-import state from "../state";
+import state from "../../state";
 import Dropdown from "./Dropdown";
 
 function NavBar() {

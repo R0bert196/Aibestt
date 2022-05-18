@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom"
 import { useNavigate } from "react-router-dom";
 import { useAtom } from "jotai";
-import state from "../state";
+import state from "../../state";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { faTable } from '@fortawesome/free-solid-svg-icons';

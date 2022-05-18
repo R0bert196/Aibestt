@@ -1,8 +1,8 @@
 import { useNavigate } from "react-router-dom";
-import SideBar from "../components/SideBar";
+import SideBar from "../components/common/SideBar";
 import { useState } from "react";
-import NavBar from "../components/NavBar";
-import ToggleSidebarButton from "../components/ToggleSidebarButton";
+import NavBar from "../components/common/NavBar";
+import ToggleSidebarButton from "../components/common/ToggleSidebarButton";
 import { useAtom } from "jotai";
 import state from "../state";
 

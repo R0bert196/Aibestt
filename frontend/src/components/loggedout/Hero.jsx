@@ -1,4 +1,4 @@
-import landingImage from '../images/landingImage.jpg';
+import landingImage from '../../images/landingImage.jpg';
 import { Link } from 'react-router-dom';
 
 
