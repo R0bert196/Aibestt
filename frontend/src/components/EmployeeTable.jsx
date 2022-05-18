@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from "react";
-import FileUploadButton from "./FileUploadButton";
+import FileUploadButton from "./common/FileUploadButton";
 import useAxiosPrivate from "../hooks/useAxiosPrivate";
 
 function BasicTable() {

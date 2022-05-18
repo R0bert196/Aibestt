@@ -1,8 +1,8 @@
 import React from 'react'
 import { useState } from 'react';
-import AutoCompleteBox from "./AutoCompleteBox";
+import AutoCompleteBox from "./common/AutoCompleteBox";
 import { Formik, Form, ErrorMessage } from 'formik';
-import TextField from './TextField';
+import TextField from './common/TextField';
 import Api, { axiosPrivate } from '../utilities/Api';
 import { ToastContainer, toast } from 'react-toastify';
 import { useNavigate } from "react-router-dom";

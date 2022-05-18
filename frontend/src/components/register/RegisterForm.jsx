@@ -1,11 +1,11 @@
 import {useState} from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAtom } from "jotai";
-import state from "../state";
-import RegisterSchema from '../validations/RegisterSchema';
+import state from "../../state";
+import RegisterSchema from '../../validations/RegisterSchema';
 import { Formik, Form, ErrorMessage } from 'formik';
-import TextField from './TextField';
-import Api from '../utilities/Api'
+import TextField from '../common/TextField';
+import Api from '../../utilities/Api'
 import { toast } from 'react-toastify';
 
 

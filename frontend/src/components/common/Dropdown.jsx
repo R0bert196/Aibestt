@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { useAtom } from "jotai";
-import state from "../state";
+import state from "../../state";
 
 function Dropdown({ setDropdown }) {
 

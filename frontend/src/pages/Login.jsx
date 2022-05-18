@@ -1,6 +1,6 @@
-import LoginForm from '../components/LoginForm'
-import RegisterSection from '../components/RegisterSection'
-import LoginImage from '../components/LoginImage'
+import LoginForm from '../components/login/LoginForm'
+import RegisterSection from '../components/register/RegisterSection'
+import LoginImage from '../components/login/LoginImage'
 
 function Login({setToken}) {
   return (

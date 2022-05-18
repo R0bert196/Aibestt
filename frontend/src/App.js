@@ -7,9 +7,9 @@ import ErrorPage from './pages/ErrorPage';
 import { ToastContainer, toast } from 'react-toastify';
 import DashOrHome from './pages/DashOrHome';
 import MainDashPage from './components/MainDashPage';
-import Footer from './components/Footer';
+import Footer from './components/common/Footer';
 import Companies from './components/Companies';
-import NavBar from './components/NavBar';
+import NavBar from './components/common/NavBar';
 
 
 function App() {
