@@ -4,6 +4,8 @@ import { useAtom } from "jotai";
 import state from "../../state";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from '@fortawesome/free-solid-svg-icons';
+import { faUsers } from '@fortawesome/free-solid-svg-icons';
+import { faHome } from '@fortawesome/free-solid-svg-icons';
 import { faTable } from '@fortawesome/free-solid-svg-icons';
 import { faArrowRightFromBracket } from '@fortawesome/free-solid-svg-icons';
 // import { faUsers } from '@fortawesome/free-solid-svg-icons';
@@ -33,8 +35,12 @@ function SideBar( ) {
 
           <ul style={{ color: 'rgba(255,255,255,.8)', left: '-50px' }} className="relative md:hidden">
               <li className="py-4 flex">
-                  <FontAwesomeIcon icon={faUser} className='mr-1'/>
-                  <Link to={'/'} className="hover:text-white">Dashboard</Link>
+                  <FontAwesomeIcon icon={faHome} className='mr-1'/>
+                  <Link to={'/'} className="hover:text-white">Home</Link>
+              </li>
+              <li className="py-4 flex">
+                  <FontAwesomeIcon icon={faUsers} className='mr-1'/>
+                  <Link to={'/group'} className="hover:text-white">Group</Link>
               </li>
               <li className="py-4 flex">
                   <FontAwesomeIcon icon={faUser} className='mr-1'/>
@@ -42,7 +48,7 @@ function SideBar( ) {
               </li>
               <li className="py-4 flex">
                   <FontAwesomeIcon icon={faTable} className='mr-1'/>
-                  <Link to={'/employees'} className="hover:text-white">UPLOAD</Link>
+                  <Link to={'/employees'} className="hover:text-white">Uplaod</Link>
               </li>
               {/* <li className="py-4">
                   <Link to={'/login'} className="hover:text-white">Login</Link>
