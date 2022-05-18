@@ -4,7 +4,7 @@ import NavBar from './NavBar'
 
 function Employees() {
   return (
-    <div className='mx-4 my-14 px-5 w-full mt-16 verflow-hidden'>
+    <div className='mx-4 my-14 px-5 w-full mt-16 overflow-hidden'>
       <div>
         <div className='mb-4 text-3xl'> 
           <h1>Empoyees</h1>

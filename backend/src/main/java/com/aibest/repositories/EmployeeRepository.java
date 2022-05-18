@@ -27,11 +27,11 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long> {
 
 //    @Query("SELECT AVG(e.salary) FROM Employee e where Company.id = :companyId")
     @Query(value = "select AVG(salary) FROM employee where company_id = :companyId" ,nativeQuery = true)
-    int getAllAverageSalariesByCompany(@Param("companyId") long companyId);
+    long getAllAverageSalariesByCompany(@Param("companyId") long companyId);
 
     @Query("SELECT count(e) FROM Employee e where e.company.id = :companyId")
-    int getCompanyEmployeesCount(@Param("companyId") long companyId);
+    long getCompanyEmployeesCount(@Param("companyId") long companyId);
 
-    @Query(value = "select total_income / avg(e.id) as turnoverEmployee From company INNER JOIN employee e on company.id = e.company_id WHERE e.company_id = :companyId group by total_income", nativeQuery = true)
+    @Query(value = "select total_income / count(e) as turnoverEmployee From company INNER JOIN employee e on company.id = e.company_id WHERE e.company_id = :companyId group by total_income", nativeQuery = true)
     long getCompanyTurnoverEmployee(long companyId);
 }

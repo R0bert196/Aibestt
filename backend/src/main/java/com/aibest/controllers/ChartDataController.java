@@ -89,12 +89,12 @@ public class ChartDataController {
     }
 
     @GetMapping(value = "/getAverageSalaries")
-    public int getAverageSalariesForCompany(@RequestParam("companyId") long companyId) {
+    public long getAverageSalariesForCompany(@RequestParam("companyId") long companyId) {
         return employeeService.getCompanyAverageSalaries(companyId);
     }
 
     @GetMapping(value = "/getEmployeesCount")
-    public int getEmployeesCount(@RequestParam("companyId") long companyId) {
+    public long getEmployeesCount(@RequestParam("companyId") long companyId) {
         return employeeService.getCompanyEmployeesCount(companyId);
     }
 

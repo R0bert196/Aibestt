@@ -30,17 +30,18 @@ function CompanyTable() {
 
  
   return (
-    <div> 
+    <div className="shadow rounded-md" style={{
+      border: "1px solid #e3e6f0",
+    }}> 
       <div
         style={{
-          border: "1px solid #e3e6f0",
-          height: toggleUpload ? "25rem" : "5rem",
+          height: toggleUpload ? "18rem" : "5rem",
         }}
         className='rounded-t-md p-4 transition-all duration-300'
       >
         <div>
           <button
-            className='px-4 py-3 bg-primary text-white hover:brightness-125 w-full rounded-lg'
+            className='px-4 py-3 bg-primary text-white hover:brightness-125 w-full rounded-3xl'
             onClick={() =>
               setToggleUpload((prevToggleUpload) => !prevToggleUpload)
             }
@@ -51,16 +52,15 @@ function CompanyTable() {
         {<AddNewCompany toggleUpload={toggleUpload} />}
       </div>
       {companies.length > 0 && (
-        <table>
+        <table className="mx-auto rounded-b-md my-2 w-full text-left">
             <thead>
-              <tr>
-                <th scope="col">#</th>
-                <th scope="col">First</th>
-                <th scope="col">Last</th>
-                <th scope="col">Handle</th>
+              <tr className="table-header">
+                <th scope="col">Company Name</th>
+                <th scope="col">Caen</th>
+                <th scope="col">Cui</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody className="table-body">
                {companies.map(company => {
                 return <tr key={company.id}>
                   <td>

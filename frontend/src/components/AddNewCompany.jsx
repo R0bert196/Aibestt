@@ -68,7 +68,7 @@ function AddNewCompany({toggleUpload}) {
                     </div>                   
                     <div className='w-max mx-auto my-4'>
                         <button
-                            className="py-4 bg-primary text-white hover:brightness-125 px-4 rounded-3xl"
+                            className="py-3 bg-primary text-white hover:brightness-125 px-4 rounded-3xl"
                             type="submit">
                             Add company
                         </button>
