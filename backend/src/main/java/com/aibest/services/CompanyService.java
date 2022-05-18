@@ -4,13 +4,12 @@ import com.aibest.entities.AppUser;
 import com.aibest.entities.Company;
 import com.aibest.entities.CompanyGroup;
 import com.aibest.entities.Employee;
-import com.aibest.models.CompanyRegParams;
+import com.aibest.models.CompanyDetails;
 import com.aibest.repositories.CompanyRepository;
 import com.aibest.repositories.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -25,13 +24,13 @@ public class CompanyService {
         return companyRepository.findCompaniesByCompanyGroup(user.getCompanyGroup());
     }
 
-    public void addCompany(CompanyGroup group, CompanyRegParams params) {
+    public void addCompany(CompanyGroup group, CompanyDetails companyDetails, String cui) {
         Company c = Company
                 .builder()
-                .caen(params.getCaen())
-                .deni(params.getDeni())
-                .cui(params.getCui())
-                .codPostal(params.getCodPostal())
+                .caen(companyDetails.getCaen())
+                .deni(companyDetails.getDeni())
+                .cui(cui)
+//                .codPostal(params.getCodPostal())
                 .companyGroup(group)
                 .build();
 

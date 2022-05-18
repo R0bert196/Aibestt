@@ -11,10 +11,5 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class CompanyRegParams {
-
     private String cui;
-    private String caen;
-    private String deni;
-    private String codPostal;
-
 }

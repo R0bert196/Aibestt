@@ -21,7 +21,7 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
+
 
 @RestController
 public class ReportDataReceiverController {
@@ -101,6 +101,7 @@ public class ReportDataReceiverController {
                     .salary(salariat.getContracte().getContract().get(salariat.getContracte().getContract().size() - 1).getSalariu())
                     .build();
             dbInsertList.add(dbInsert);
+
         }
         return dbInsertList;
     }

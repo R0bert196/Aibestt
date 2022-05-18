@@ -43,4 +43,5 @@ public class AppUser {
     private String verificationCode;
 
     private Boolean enabled =  false;
+
 }
