@@ -137,7 +137,7 @@ function CompanyTable() {
       <div
         style={{
           border: "1px solid #e3e6f0",
-          height: toggleUpload ? "25rem" : "5rem",
+          height: toggleUpload ? "18rem" : "5rem",
         }}
         className='rounded-t-md p-4 transition-all duration-300'
       >
