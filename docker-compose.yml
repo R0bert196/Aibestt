@@ -1,0 +1,43 @@
+version: '3'
+
+services:
+  server:
+    image: 'openjdk:17-jdk-alpine'
+    build: ./backend
+    container_name: server
+    ports:
+      - 8080:8080
+    depends_on:
+      - db4
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db4:5432/${DB}
+      - SPRING_DATASOURCE_USERNAME=${USERNAME}
+      - SPRING_DATASOURCE_PASSWORD=${PASSWORD}
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+
+  client:
+    build: ./frontend
+    environment:
+      - CLIENT_PORT=${CLIENT_PORT}
+    expose:
+      - ${CLIENT_PORT}
+    ports:
+    - ${CLIENT_PORT}:${CLIENT_PORT}
+    links:
+      - server
+    command: npm start
+          
+  db4:
+    image: 'postgres:13-alpine'
+    container_name: aibest4
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=${USERNAME}
+      - POSTGRES_PASSWORD=${PASSWORD}
+      - POSTGRES_DB=aibest4
+
+  admin:    
+    image: adminer    
+    ports:      
+      - "8085:8080"
