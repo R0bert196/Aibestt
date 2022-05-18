@@ -22,7 +22,7 @@ function Dashbord({ component }) {
     <>
       <div className='mx-auto min-h-[92vh]'>
         <NavBar />
-        <div className='container h-full min-h-[92vh]'>
+        <div className='container flex h-full min-h-[92vh]'>
           <SideBar />
           {/* <ToggleSidebarButton activeSidebar={activeSidebar} setActiveSidebar={setActiveSidebar}/> */}
           {component}

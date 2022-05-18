@@ -6,7 +6,7 @@ function GroupProfile() {
     const [toggleUpload, setToggleUpload] = useState(false);
 
   return (
-<div className="shadow rounded-md" style={{
+<div className="container mx-4 my-14 px-5 w-full mt-16 overflow-hidden" style={{
       border: "1px solid #e3e6f0",
     }}> 
       <div
