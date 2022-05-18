@@ -4,6 +4,7 @@ import state from "../state";
 import useAxiosPrivate from "../hooks/useAxiosPrivate";
 import { Link } from "react-router-dom"
 import AddNewCompany from "./AddNewCompany"
+import { useNavigate } from "react-router-dom";
 
 function CompanyTable() {
   const [companies, setCompanies] = useState([]);
@@ -12,13 +13,17 @@ function CompanyTable() {
   const [toggleUpload, setToggleUpload] = useState(false);
 
   const controller = new AbortController();
+  let navigate = useNavigate()
   const getCompanies = async () => {
     try {
       const response = await axiosPrivate.get("getCompanies", {
         signal: controller.signal,
       });
+      if(response.data.length === 1){
+        let url = "/companies/" + response.data[0].id
+        navigate(url)
+      }
       setCompanies(response.data);
-      console.log(response.data)
     } catch (err) {
       console.error(err);
     }
