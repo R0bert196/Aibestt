@@ -62,13 +62,13 @@ function AddNewCompany({toggleUpload}) {
 
         {formik => {
             return <Form
-                    className="ml-12 grid grid-cols-7 border-b border-solid gap-4">
-                    <div className='col-span-7'>
+                    className="border-b border-solid gap-4">
+                    <div>
                         <TextField label='CUI' name='cui' type='text' />
                     </div>                   
-                    <div className='col-start-3 col-span-2'>
+                    <div className='w-max mx-auto my-4'>
                         <button
-                            className="py-4 bg-primary text-white hover:brightness-125 w-full px-4 my-4 rounded-3xl"
+                            className="py-4 bg-primary text-white hover:brightness-125 px-4 rounded-3xl"
                             type="submit">
                             Add company
                         </button>

@@ -133,7 +133,7 @@ function CompanyTable() {
     tableInstance;
 
   return (
-    <div>
+    <div className="container mx-auto px-4 overflow-hidden">
       <div
         style={{
           border: "1px solid #e3e6f0",
@@ -143,7 +143,7 @@ function CompanyTable() {
       >
         <div>
           <button
-            className='px-4 py-3 bg-primary text-white hover:brightness-125 w-full rounded-lg'
+            className='py-3 w-full bg-primary text-white hover:brightness-125 rounded-lg text-center'
             onClick={() =>
               setToggleUpload((prevToggleUpload) => !prevToggleUpload)
             }
