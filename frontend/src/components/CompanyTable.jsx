@@ -153,7 +153,9 @@ function CompanyTable() {
         </div>
         {<AddNewCompany toggleUpload={toggleUpload} />}
       </div>
-      <div>
+      <div style={{
+          borderBottom: "1px solid #e3e6f0", borderLeft: "1px solid #e3e6f0", borderRight: "1px solid #e3e6f0"
+        }} className='rounded-b-md'>
         <table className='w-full' {...getTableProps()}>
           <thead>
             {headerGroups.map((headerGroup) => (
