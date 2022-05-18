@@ -32,7 +32,24 @@ function BasicTable() {
 
   return (
     <div className='bg-white shadow-md'>
-      
+            <div style={{ border: "1px solid #e3e6f0"}} className='rounded-t-md p-4'>
+        <div>
+          <button
+            className='px-4 py-3 bg-primary text-white hover:brightness-125 w-full rounded-lg'
+            onClick={() =>
+              setToggleUpload((prevToggleUpload) => !prevToggleUpload)
+            }
+          >
+            Upload From File
+          </button>
+        </div>
+        {
+          <FileUploadButton
+            toggleUpload={toggleUpload}
+            setData={setTableData}
+          />
+        }
+      </div>
     </div>
   );
 }
