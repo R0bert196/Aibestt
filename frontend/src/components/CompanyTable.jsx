@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 
 function CompanyTable() {
   const [companies, setCompanies] = useState([]);
-  const [token, setToken] = useAtom(state.token);
+  const [addedCompany, setAddedCompany] = useState();
   const axiosPrivate = useAxiosPrivate();
   const [toggleUpload, setToggleUpload] = useState(false);
 
@@ -31,7 +31,7 @@ function CompanyTable() {
 
   useEffect(() => {
     getCompanies();
-  }, []); //TODO figure out a workaround to update teh companies if the user adds one
+  }, [addedCompany]); //TODO figure out a workaround to update teh companies if the user adds one
 
  
   return (
@@ -54,7 +54,7 @@ function CompanyTable() {
             Add new company
           </button>
         </div>
-        {<AddNewCompany toggleUpload={toggleUpload} />}
+        {<AddNewCompany toggleUpload={toggleUpload} setAddedCompany={setAddedCompany} />}
       </div>
       {companies.length > 0 && (
         <table className="mx-auto rounded-b-md my-2 w-full text-left">

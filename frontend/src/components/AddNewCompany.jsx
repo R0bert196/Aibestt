@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 import CompanyRegistrationSchema from "../validations/CompanyRegistrationSchema"
 import useAxiosPrivate from "../hooks/useAxiosPrivate";
 
-function AddNewCompany({toggleUpload}) {
+function AddNewCompany({toggleUpload, setAddedCompany}) {
 
     let navigate = useNavigate();       
     const [isSelectedField, setIsSelectedField] = useState(false);
@@ -50,6 +50,7 @@ function AddNewCompany({toggleUpload}) {
              )
 
              .then((data) => {
+               setAddedCompany(data)
                toast.success("Company added");
              })
              .catch((err) => {
