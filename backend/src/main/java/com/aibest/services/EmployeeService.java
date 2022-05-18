@@ -38,11 +38,11 @@ public class EmployeeService {
         return objects;
     }
 
-    public int getCompanyAverageSalaries(long companyId) {
+    public long getCompanyAverageSalaries(long companyId) {
         return employeeRepository.getAllAverageSalariesByCompany(companyId);
     }
 
-    public int getCompanyEmployeesCount(long companyId) {
+    public long getCompanyEmployeesCount(long companyId) {
         return employeeRepository.getCompanyEmployeesCount(companyId);
     }
 

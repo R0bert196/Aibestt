@@ -44,3 +44,17 @@ html,body {
     background: #efefef;
     border-radius: 3px;
 }
+
+.table-header {
+    background: #EEEEEE;
+}
+
+.table-header th {
+    padding: 1rem;
+    margin: 0 1rem;
+}
+
+.table-body td{
+    padding: 1rem;
+    margin: 0 1rem;
+}

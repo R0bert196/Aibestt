@@ -70,7 +70,7 @@ function FileUploadButton({ setData, toggleUpload }) {
     > 
       <div className='md:grid grid-cols-3  gap-6'>
         <div
-          style={{ border: "1.6px solid #e3e6f0" }}
+
           className='shadow flex-auto col-start-1 col-end-3 rounded bg-white h-max'
         >
           <input
@@ -79,7 +79,6 @@ function FileUploadButton({ setData, toggleUpload }) {
               setIsSelectedField(true);
               setInputValue(e.target.value);
             }}
-            // style={{ borderBottom: "1.6px solid #e3e6f0" }}
             className='shadow min-w-0 max-h-10 block w-full px-3 py-1.5 text-base font-normal bg-white bg-clip-padding  transition ease-in-out m-0 focus:outline-none'
             id='companyId'
             type='text'
@@ -99,7 +98,6 @@ function FileUploadButton({ setData, toggleUpload }) {
         </div>
         <div className="mw768:mt-8 col-start-3 col-end-4">
           <input
-            style={{ border: "1.6px solid #e3e6f0" }}
             className='shadow block w-full max-h-10 text-xl font-normal text-gray-700 bg-white bg-clip-padding rounded transition ease-in-out m-0'
             id='file'
             onChange={() => setIsFileUploaded(true)}
@@ -108,7 +106,7 @@ function FileUploadButton({ setData, toggleUpload }) {
 
           <div className='mt-8'>
             <button
-              className='upload-button p-2 mt-6 bg-primary rounded-lg text-white hover:brightness-125 disabled:opacity-75 disabled:cursor-not-allowed disabled:brightness-100'
+              className='upload-button p-2 mt-6 bg-primary rounded-3xl text-white hover:brightness-125 disabled:opacity-75 disabled:cursor-not-allowed disabled:brightness-100'
               onClick={onSelectFile}
               type='submit'
               disabled={!(isCompanySelected && isFileUploaded)}

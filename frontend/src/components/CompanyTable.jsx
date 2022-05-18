@@ -35,19 +35,17 @@ function CompanyTable() {
 
  
   return (
-    <div> 
-
+    <div>   
       {companies.length > 0 && (
-        <table>
+        <table className="mx-auto rounded-b-md my-2 w-full text-left">
             <thead>
-              <tr>
-                <th scope="col">#</th>
-                <th scope="col">First</th>
-                <th scope="col">Last</th>
-                <th scope="col">Handle</th>
+              <tr className="table-header">
+                <th scope="col">Company Name</th>
+                <th scope="col">Caen</th>
+                <th scope="col">Cui</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody className="table-body">
                {companies.map(company => {
                 return <tr key={company.id}>
                   <td>

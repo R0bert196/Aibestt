@@ -8,7 +8,7 @@ import lombok.Data;
 public class i {
 
     private String indicator;
-    private long val_indicator;
+    private Long val_indicator;
     private String val_den_indicator;
 
 }
