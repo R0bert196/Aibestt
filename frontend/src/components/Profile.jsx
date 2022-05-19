@@ -1,13 +1,39 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import avatar from "../images/avatar.png";
 import GraphHeader from "./GraphHeader";
+import { Formik, Form, ErrorMessage } from "formik";
+import EditCredentialsSchema from "../validations/EditCredentialsSchema";
+import { toast } from "react-toastify";
+import TextField from "./common/TextField";
+import Api from "../utilities/Api";
+import useAxiosPrivate from "../hooks/useAxiosPrivate";
+
 
 function Profile() {
 
-
-  const [fullName, setFullName] = useState("John Doe");
+  const axiosPrivate = useAxiosPrivate();
 
   
+  const [fullName, setFullName] = useState("");
+
+  const getData = async () => {
+    const controller = new AbortController();
+    try {
+      await Promise.all([
+        axiosPrivate.get(`getFullName`, {
+          signal: controller.signal,
+        }),
+      ]).then((response) => {
+        setFullName(response[0].data);
+      });
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  useEffect(() => {
+    getData();
+  }, []);
 
   return (
     <div className='container mx-4 my-14 px-5 w-full mt-16 overflow-hidden'>
@@ -37,65 +63,76 @@ function Profile() {
             }}
             className='p-2 rounded-b-md'
           >
-            <form>
-              <div className='px-8'>
-                <div className='flex gap-2 justify-between'>
-                  <div className=''>
-                    <label className='block' htmlFor='email'>
-                      Email Address
-                    </label>
-                    <input
-                      type='text'
-                      name='email'
-                      className='py-2 px-4 rounded-3xl'
-                      style={{ border: "1px solid #e3e6f0" }}
-                    />
-                  </div>
+            <Formik
+              initialValues={{
+                email: "",
+                password: "",
+                confirmPassword: "",
+              }}
+              validationSchema={EditCredentialsSchema}
+              onSubmit={(values) => {
+                Api.post(
+                  "updateAccountCredentials",
 
-                  <div className=''>
-                    <label className='block' htmlFor='old-pw'>
-                      Old Password
-                    </label>
-                    <input
-                      type='text'
-                      name='old-pw'
-                      className='py-2 px-4 rounded-3xl'
-                      style={{ border: "1px solid #e3e6f0" }}
-                    />
-                  </div>
-                </div>
-                <div className='flex gap-2 justify-between'>
-                  <div className=''>
-                    <label className='block' htmlFor='password'>
-                      New Password
-                    </label>
-                    <input
-                      type='text'
-                      name='password'
-                      className='py-2 px-4 rounded-3xl'
-                      style={{ border: "1px solid #e3e6f0" }}
-                    />
-                  </div>
-
-                  <div>
-                    <label className='block' htmlFor='confirm'>
-                      Confirm New Password
-                    </label>
-                    <input
-                      type='text'
-                      name='confirm'
-                      className='py-2 px-4 rounded-3xl'
-                      style={{ border: "1px solid #e3e6f0" }}
-                    />
-                  </div>
-                </div>
-                <input
-                  type='submit'
-                  value='Save Changes'
-                  className=' py-2 px-4 bg-primary text-white hover:brightness-125 w-max my-4 rounded-3xl'
-                />
-              </div>
-            </form>
+                  {
+                    email: values.email,
+                    password: values.password,
+                  }
+                )
+                  .then((data) => {
+                    console.log(data);
+                    toast.success("Changes Saved!");
+                    // set it up later as an access token (data.accessToken)
+                  })
+                  .catch((error) => {
+                    console.log(error.response.status);
+                    toast.error("Wrong Old Password");
+                  });
+              }}
+            >
+              {(formik) => {
+                return (
+                  <Form className='center-center px-2'>
+                    <div className='flex justify-between'>
+                      <div>
+                        <TextField label='Email' name='email' type='email' />
+                      </div>
+                      <div>
+                        <TextField
+                          label='Old Password'
+                          name='oldPassword'
+                          type='password'
+                        />
+                      </div>
+                    </div>
+                    <div className='flex justify-between'>
+                      <div>
+                        <TextField
+                          label='Password'
+                          name='password'
+                          type='password'
+                        />
+                      </div>
+                      <div>
+                        <TextField
+                          label='Confirm Password'
+                          name='confirmPassword'
+                          type='password'
+                        />
+                      </div>
+                    </div>
+                    <div>
+                      <button
+                        className='py-4 bg-primary text-white hover:brightness-125 w-full px-4 my-4 rounded-3xl'
+                        type='submit'
+                      >
+                        Save Changes
+                      </button>
+                    </div>
+                  </Form>
+                );
+              }}
+            </Formik>
           </div>
         </div>
 

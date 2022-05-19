@@ -195,6 +195,7 @@ public class UserService implements UserDetailsService {
          return userRepository.findByEmail(username);
     }
 
+
     public CompanyGroup getCompanyByToken(String token) {
         String username =  jwtUtility.getUsernameFromToken(token);
         return userRepository.findByEmail(username).getCompanyGroup();
