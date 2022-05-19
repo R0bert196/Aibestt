@@ -65,7 +65,7 @@ const [chart, setChart] = useState([])
 
   
     return (
-      <div className=" mx-4 shadow-md rounded-b-md"> 
+      <div style={{maxWidth: "23rem"}} className=" mx-4 shadow-md rounded-b-md mt-4"> 
         <GraphHeader title={title} />
         <Doughnut style={{ backgroundColor: '#f8f9fc', border: '1px solid #e3e6f0' }} data={nutData} className="p-2 rounded-b-md outline-2 text-primary font-bold "/>
       </div>

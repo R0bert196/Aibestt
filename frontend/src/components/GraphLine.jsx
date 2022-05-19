@@ -83,7 +83,7 @@ function GraphLine({ title, yourUrl, averageUrl }) {
   };
 
   return (
-    <div className=' mx-4 shadow-md rounded-b-md'>
+    <div className=' mx-auto shadow-md rounded-b-md sm:w-4/5'>
       <GraphHeader title={title} />
       <Line
         style={{ backgroundColor: "#f8f9fc", border: "1px solid #e3e6f0" }}
