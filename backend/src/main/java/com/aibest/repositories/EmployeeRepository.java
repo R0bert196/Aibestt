@@ -12,7 +12,7 @@ import java.util.Map;
 @Repository
 public interface EmployeeRepository extends JpaRepository<Employee, Long> {
 
-    @Query(value = "SELECT * FROM employee WHERE company_id=:comp_id AND upload_date = ( SELECT MAX(upload_date) FROM employee)", nativeQuery = true)
+    @Query(value = "SELECT count(*) FROM employee WHERE company_id=:comp_id AND upload_date = ( SELECT MAX(upload_date) FROM employee)", nativeQuery = true)
     List<Employee> getLatestEmployees(@Param("comp_id") long companyId);
 
     @Query(value = "SELECT EXTRACT(YEAR FROM upload_date) AS year , EXTRACT(MONTH FROM upload_date) AS month, AVG(salary) as value FROM employee GROUP BY EXTRACT (MONTH FROM upload_date), EXTRACT(YEAR FROM upload_date) ORDER BY EXTRACT(YEAR FROM upload_date), EXTRACT (MONTH FROM upload_date);", nativeQuery = true)
@@ -29,7 +29,7 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long> {
     @Query(value = "select AVG(salary) FROM employee where company_id = :companyId", nativeQuery = true)
     long getAllAverageSalariesByCompany(@Param("companyId") long companyId);
 
-    @Query("SELECT count(e) FROM Employee e where e.company.id = :companyId")
+    @Query(value = "SELECT count(*) FROM employee WHERE company_id=:companyId AND upload_date = ( SELECT MAX(upload_date) FROM employee)", nativeQuery = true)
     long getCompanyEmployeesCount(@Param("companyId") long companyId);
 
     @Query(value = "select total_income / count(e) as turnoverEmployee From company INNER JOIN employee e on company.id = e.company_id WHERE e.company_id = :companyId group by total_income", nativeQuery = true)
