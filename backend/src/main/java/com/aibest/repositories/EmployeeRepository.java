@@ -34,4 +34,7 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long> {
 
     @Query(value = "select total_income / count(e) as turnoverEmployee From company INNER JOIN employee e on company.id = e.company_id WHERE e.company_id = :companyId group by total_income", nativeQuery = true)
     long getCompanyTurnoverEmployee(long companyId);
+
+    @Query(value = "SELECT norm, COUNT(norm) FROM employee WHERE company_id = 2 GROUP BY norm;", nativeQuery = true)
+    List<Map<String, String>> getEmployeeNormForCompany(long companyId);
 }

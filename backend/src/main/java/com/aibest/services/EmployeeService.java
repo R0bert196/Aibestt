@@ -49,4 +49,8 @@ public class EmployeeService {
     public long getCompanyTurnoverEmployee(long companyId) {
         return employeeRepository.getCompanyTurnoverEmployee(companyId);
     }
+
+    public List<Map<String, String>> getEmployeeNormsForCompany(long companyId) {
+        return employeeRepository.getEmployeeNormForCompany(companyId);
+    }
 }

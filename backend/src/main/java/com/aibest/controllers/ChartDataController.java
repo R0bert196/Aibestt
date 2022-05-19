@@ -108,5 +108,8 @@ public class ChartDataController {
         return employeeService.getCompanyTurnoverEmployee(companyId);
     }
 
-
+    @GetMapping("/getEmployeeNorms")
+    public List<Map<String, String>> getEmployeeNorms(@RequestParam("companyId") long companyId){
+        return employeeService.getEmployeeNormsForCompany(companyId);
+    }
 }

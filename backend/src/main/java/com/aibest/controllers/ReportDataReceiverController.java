@@ -92,6 +92,7 @@ public class ReportDataReceiverController {
                     .builder()
                     .uploadDate(LocalDate.parse("2018-05-05"))
                     .company(company)
+                    .norm(salariat.getContracte().getContract().get(salariat.getContracte().getContract().size() - 1).getTimpMunca().getNorma())
                     .anonymised_employee_id((int) (Math.random()*1000000000))
                     .sex(salariat.getCnp().charAt(0)=='1'? 1: 2)
                     .shiftDuration(salariat.getContracte().getContract().get(salariat.getContracte().getContract().size() - 1).getTimpMunca().getDurata())
