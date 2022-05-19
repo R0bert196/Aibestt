@@ -24,7 +24,12 @@ public class AppUser {
 
     @Column(unique=true)
     private String email;
+    @Column(nullable = false)
     private String password;
+    private String address;
+    private String city;
+    private String county;
+    private String phoneNr;
 
     @ManyToOne(
             cascade = CascadeType.ALL,

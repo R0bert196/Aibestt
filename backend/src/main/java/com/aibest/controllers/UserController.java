@@ -132,8 +132,8 @@ public class UserController {
         return userService.getUsernameByToken(token.substring(7)).getFirstName();
     }
 
-    @PostMapping("/updateUser")
-    public ResponseEntity<String> updateUser(@RequestHeader(name = "Authorization") String token,
+    @PostMapping("/updateAccountCredentials")
+    public ResponseEntity<String> updateAccountCredentials(@RequestHeader(name = "Authorization") String token,
                                         @RequestBody UserParams userParams){
         AppUser user = userService.getUsernameByToken(token.substring(7));
        if(encoder.matches(userParams.getOldPassword(), user.getPassword())){
@@ -150,4 +150,16 @@ public class UserController {
         return ResponseEntity.ok("User modified successfully");
     }
 
+    @PostMapping("/updateUser")
+    public ResponseEntity<String> updateUser(@RequestHeader(name = "Authorization") String token,
+                                             @RequestBody UserAttributes userAttributes) {
+        AppUser user = userService.getUsernameByToken(token.substring(7));
+        if(user != null){
+            userService.updateUser(user, userAttributes);
+        }
+        else{
+            return new ResponseEntity<String>("Request failed.", HttpStatus.BAD_REQUEST);
+        }
+        return ResponseEntity.ok("User modified successfully");
+    }
 }
