@@ -73,4 +73,4 @@ const [chart, setChart] = useState([])
   )
 }
 
-export default GraphDoughnut
+export default GraphDoughnut;

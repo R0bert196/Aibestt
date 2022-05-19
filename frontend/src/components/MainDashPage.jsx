@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import GraphLine from "./GraphLine";
 // import EmployeeGraph from "../components/EmployeeGraph";
 import IndiactorCard from "../components/IndicatorCard";
-import ShiftDurationDoughnut from "./GraphDoughnut";
+import GraphDougnut from "./GraphDoughnut";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { faUsers } from "@fortawesome/free-solid-svg-icons";
 import { faEuroSign } from "@fortawesome/free-solid-svg-icons";
@@ -89,12 +89,12 @@ function MainDashPage() {
         <div style={{maxWidth: "82%"}} className='flex mx-auto justify-between flex-wrap mw1024:justify-center'>
           {/* <LineGraph title="Employees Salaries"  averageUrl={"api/globalEmployeeSalary"} yourUrl={"empGraph"} /> */}
           {/* <DoughnutGraph title="Employees Average Salaries" label="# of Votes" url={"average-salaries"}/> */}
-          <ShiftDurationDoughnut
+          <GraphDougnut
             url={"getEmployeesByShiftCount"}
             title={"Angajati per durata schimb"}
             hoverValue='ore'
           />
-          <ShiftDurationDoughnut
+          <GraphDougnut
             url={"getEmployeeNorms"}
             title={"Angajati sortati dupa tipul normei de lucru"}
             hoverValue='Tip'
