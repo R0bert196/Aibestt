@@ -1,10 +1,7 @@
 package com.aibest.controllers;
 
 import com.aibest.entities.AppUser;
-import com.aibest.models.CompanyDetails;
-import com.aibest.models.JwtRequest;
-import com.aibest.models.JwtResponse;
-import com.aibest.models.RegistrationParams;
+import com.aibest.models.*;
 import com.aibest.security.JWTUtility;
 import com.aibest.services.EmailSenderService;
 import com.aibest.services.RestGetService;
@@ -14,11 +11,13 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import io.jsonwebtoken.impl.DefaultClaims;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.mail.MessagingException;
@@ -30,25 +29,27 @@ import java.util.Map;
 @RestController
 public class UserController {
 
-    final
-    UserService userService;
+    private final UserService userService;
 
-    @Autowired
-    private JWTUtility jwtUtility;
+    private final JWTUtility jwtUtility;
 
-    @Autowired
-    private AuthenticationManager authenticationManager;
+    private final AuthenticationManager authenticationManager;
 
-    @Autowired
-    RestGetService restGetService;
+    private final RestGetService restGetService;
 
-    @Autowired
-    EmailSenderService emailSenderService;
+    private final EmailSenderService emailSenderService;
+
+    private final BCryptPasswordEncoder encoder;
 
 
     @Autowired
-    public UserController(UserService userService) {
+    public UserController(UserService userService, JWTUtility jwtUtility, AuthenticationManager authenticationManager, RestGetService restGetService, EmailSenderService emailSenderService, BCryptPasswordEncoder encoder) {
         this.userService = userService;
+        this.jwtUtility = jwtUtility;
+        this.authenticationManager = authenticationManager;
+        this.restGetService = restGetService;
+        this.emailSenderService = emailSenderService;
+        this.encoder = encoder;
     }
 
 
@@ -128,8 +129,37 @@ public class UserController {
 
     @GetMapping("/getUsername")
     public String getUsername(@RequestHeader(name = "Authorization") String token) {
-        System.out.println(token.substring(7));
-        return userService.getUsernameByToken(token.substring(7));
+        return userService.getUsernameByToken(token.substring(7)).getFirstName();
     }
 
+    @PostMapping("/updateAccountCredentials")
+    public ResponseEntity<String> updateAccountCredentials(@RequestHeader(name = "Authorization") String token,
+                                        @RequestBody UserParams userParams){
+        AppUser user = userService.getUsernameByToken(token.substring(7));
+       if(encoder.matches(userParams.getOldPassword(), user.getPassword())){
+           if(userParams.getNewPassword() != null){
+               userService.changeUserPassword(user, userParams.getNewPassword());
+           }
+           if(userParams.getEmail() != null){
+               userService.changeUserEmail(user, userParams.getEmail());
+           }
+       }
+       else{
+           return new ResponseEntity<String>("Request failed.", HttpStatus.BAD_REQUEST);
+       }
+        return ResponseEntity.ok("User modified successfully");
+    }
+
+    @PostMapping("/updateUser")
+    public ResponseEntity<String> updateUser(@RequestHeader(name = "Authorization") String token,
+                                             @RequestBody UserAttributes userAttributes) {
+        AppUser user = userService.getUsernameByToken(token.substring(7));
+        if(user != null){
+            userService.updateUser(user, userAttributes);
+        }
+        else{
+            return new ResponseEntity<String>("Request failed.", HttpStatus.BAD_REQUEST);
+        }
+        return ResponseEntity.ok("User modified successfully");
+    }
 }

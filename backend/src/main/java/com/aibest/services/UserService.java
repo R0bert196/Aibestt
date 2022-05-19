@@ -4,6 +4,7 @@ package com.aibest.services;
 import com.aibest.entities.*;
 import com.aibest.models.CompanyDetails;
 import com.aibest.models.RegistrationParams;
+import com.aibest.models.UserAttributes;
 import com.aibest.models.i;
 import com.aibest.repositories.CompanyGroupRepository;
 import com.aibest.repositories.CompanyRepository;
@@ -189,14 +190,46 @@ public class UserService implements UserDetailsService {
         return userRepository.findByEmail(email);
     }
 
-    public String getUsernameByToken(String token) {
+    public AppUser getUsernameByToken(String token) {
          String username =  jwtUtility.getUsernameFromToken(token);
-         return userRepository.findByEmail(username).getFirstName();
+         return userRepository.findByEmail(username);
     }
 
     public CompanyGroup getCompanyByToken(String token) {
         String username =  jwtUtility.getUsernameFromToken(token);
         return userRepository.findByEmail(username).getCompanyGroup();
 
+    }
+
+    public void changeUserPassword(AppUser user, String newPassword) {
+        user.setPassword(bCryptPasswordEncoder.encode(newPassword));
+        userRepository.save(user);
+    }
+
+    public void changeUserEmail(AppUser user, String email) {
+        user.setEmail(email);
+        userRepository.save(user);
+    }
+
+    public void updateUser(AppUser user, UserAttributes userAttributes) {
+        if(userAttributes.getFirstName() != null){
+            user.setFirstName(userAttributes.getFirstName());
+        }
+        if(userAttributes.getLastName() != null){
+            user.setLastName(userAttributes.getLastName());
+        }
+        if(userAttributes.getAddress() != null){
+            user.setAddress(userAttributes.getAddress());
+        }
+        if(userAttributes.getCity() != null){
+            user.setCity(userAttributes.getCity());
+        }
+        if(userAttributes.getCounty() != null){
+            user.setCounty(userAttributes.getCounty());
+        }
+        if(userAttributes.getPhoneNr() != null){
+            user.setPhoneNr(userAttributes.getPhoneNr());
+        }
+        userRepository.save(user);
     }
 }
