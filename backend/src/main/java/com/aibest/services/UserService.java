@@ -189,14 +189,24 @@ public class UserService implements UserDetailsService {
         return userRepository.findByEmail(email);
     }
 
-    public String getUsernameByToken(String token) {
+    public AppUser getUsernameByToken(String token) {
          String username =  jwtUtility.getUsernameFromToken(token);
-         return userRepository.findByEmail(username).getFirstName();
+         return userRepository.findByEmail(username);
     }
 
     public CompanyGroup getCompanyByToken(String token) {
         String username =  jwtUtility.getUsernameFromToken(token);
         return userRepository.findByEmail(username).getCompanyGroup();
 
+    }
+
+    public void changeUserPassword(AppUser user, String newPassword) {
+        user.setPassword(bCryptPasswordEncoder.encode(newPassword));
+        userRepository.save(user);
+    }
+
+    public void changeUserEmail(AppUser user, String email) {
+        user.setEmail(email);
+        userRepository.save(user);
     }
 }
