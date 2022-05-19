@@ -95,9 +95,9 @@ function MainDashPage() {
             hoverValue='ore'
           />
           <ShiftDurationDoughnut
-            url={"getEmployeesByGender"}
-            title={"Angajati sortati dupa gen"}
-            hoverValue='gen'
+            url={"getEmployeeNorms"}
+            title={"Angajati sortati dupa tipul normei de lucru"}
+            hoverValue='Tip'
           />
         </div>
         <div className='my-8'>

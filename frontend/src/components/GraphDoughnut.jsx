@@ -27,6 +27,7 @@ const [chart, setChart] = useState([])
           signal: controller.signal,
         }
       );
+      console.log(response.data)
     setChart(response.data.filter(obj => obj.name != null));
     } catch(err) {
         console.error(err);
