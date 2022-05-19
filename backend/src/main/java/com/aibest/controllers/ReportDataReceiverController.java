@@ -94,7 +94,7 @@ public class ReportDataReceiverController {
                     .company(company)
                     .norm(salariat.getContracte().getContract().get(salariat.getContracte().getContract().size() - 1).getTimpMunca().getNorma())
                     .anonymised_employee_id((int) (Math.random()*1000000000))
-                    .sex(salariat.getCnp().charAt(0)=='1'? 1: 2)
+                    .sex(salariat.getCnp().charAt(0)=='1' || salariat.getCnp().charAt(0)=='5' ? 1: 2)
                     .shiftDuration(salariat.getContracte().getContract().get(salariat.getContracte().getContract().size() - 1).getTimpMunca().getDurata())
                     .contractNumber(salariat.getContracte().getContract().get(salariat.getContracte().getContract().size() - 1).getNumarContract())
                     .contractStartDate(salariat.getContracte().getContract().get(salariat.getContracte().getContract().size() - 1).getDataInceputContract().toInstant().atZone(ZoneId.systemDefault()).toLocalDate())

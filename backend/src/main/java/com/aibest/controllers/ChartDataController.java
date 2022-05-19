@@ -103,10 +103,17 @@ public class ChartDataController {
         return employeeService.getEmployeeCountByShiftDuration(companyId);
     }
 
+    @GetMapping("/getEmployeesByGender")
+    public List<Map<String, String>> getEmployeesByGender(@RequestParam("companyId") long companyId){
+        return employeeService.getEmployeesByGender(companyId);
+    }
+
+
     @GetMapping("/getTurnoverEmployee")
     public long getCompanyTurnoverEmployee(@RequestParam("companyId") long companyId){
         return employeeService.getCompanyTurnoverEmployee(companyId);
     }
+
 
     @GetMapping("/getEmployeeNorms")
     public List<Map<String, String>> getEmployeeNorms(@RequestParam("companyId") long companyId){

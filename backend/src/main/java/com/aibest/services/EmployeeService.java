@@ -50,7 +50,12 @@ public class EmployeeService {
         return employeeRepository.getCompanyTurnoverEmployee(companyId);
     }
 
+
     public List<Map<String, String>> getEmployeeNormsForCompany(long companyId) {
         return employeeRepository.getEmployeeNormForCompany(companyId);
+    }
+
+    public List<Map<String, String>> getEmployeesByGender(long companyId) {
+        return employeeRepository.getEmployeesByGender(companyId);
     }
 }

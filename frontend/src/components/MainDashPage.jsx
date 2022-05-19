@@ -56,7 +56,7 @@ function MainDashPage() {
         <div className='mb-4 text-3xl'>
           <h1>Dashboard</h1>
         </div>
-        <div className='flex flex-wrap justify-center gap-4'>
+        <div className='flex flex-wrap justify-center lg:gap-9 gap-2'>
           <IndiactorCard
             text='AVERAGE EMPLOYEE SALARY'
             inidcatorValue={averageSalaries}
@@ -86,13 +86,18 @@ function MainDashPage() {
             color='gold'
           />
         </div>
-        <div className='flex mx-auto justify-center gap-4 flex-wrap'>
+        <div style={{maxWidth: "82%"}} className='flex mx-auto justify-between flex-wrap mw1024:justify-center'>
           {/* <LineGraph title="Employees Salaries"  averageUrl={"api/globalEmployeeSalary"} yourUrl={"empGraph"} /> */}
           {/* <DoughnutGraph title="Employees Average Salaries" label="# of Votes" url={"average-salaries"}/> */}
           <ShiftDurationDoughnut
             url={"getEmployeesByShiftCount"}
             title={"Angajati per durata schimb"}
-            hoverValue=' ore'
+            hoverValue='ore'
+          />
+          <ShiftDurationDoughnut
+            url={"getEmployeesByGender"}
+            title={"Angajati sortati dupa gen"}
+            hoverValue='gen'
           />
         </div>
         <div className='my-8'>
