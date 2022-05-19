@@ -34,4 +34,8 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long> {
 
     @Query(value = "select total_income / count(e) as turnoverEmployee From company INNER JOIN employee e on company.id = e.company_id WHERE e.company_id = :companyId group by total_income", nativeQuery = true)
     long getCompanyTurnoverEmployee(long companyId);
+
+
+    @Query(value = "SELECT COUNT(e.sex) as value, e.sex as name FROM employee e WHERE company_id =:comp_id GROUP BY sex;", nativeQuery = true)
+    List<Map<String, String>> getEmployeesByGender(@Param("comp_id") long companyId);
 }

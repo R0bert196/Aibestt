@@ -92,7 +92,12 @@ function MainDashPage() {
           <ShiftDurationDoughnut
             url={"getEmployeesByShiftCount"}
             title={"Angajati per durata schimb"}
-            hoverValue=' ore'
+            hoverValue='ore'
+          />
+          <ShiftDurationDoughnut
+            url={"getEmployeesByGender"}
+            title={"Angajati sortati dupa gen"}
+            hoverValue='gen'
           />
         </div>
         <div className='my-8'>

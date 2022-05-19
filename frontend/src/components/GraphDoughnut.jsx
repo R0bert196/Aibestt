@@ -27,7 +27,7 @@ const [chart, setChart] = useState([])
           signal: controller.signal,
         }
       );
-    setChart(response.data);
+    setChart(response.data.filter(obj => obj.name != null));
     } catch(err) {
         console.error(err);
     }
@@ -37,7 +37,7 @@ const [chart, setChart] = useState([])
 }, [])
 
       let nutData = {
-        labels: chart?.map(x => `${x.name} ${hoverValue}`),
+        labels: chart?.map(x => `${hoverValue} ${x.name}`),
         datasets: [
           {
             label: '# of Votes',
