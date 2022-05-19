@@ -66,19 +66,22 @@ function Profile() {
             <Formik
               initialValues={{
                 email: "",
-                password: "",
+                oldPassword: "",
+                newPassword: "",
                 confirmPassword: "",
               }}
               validationSchema={EditCredentialsSchema}
               onSubmit={(values) => {
-                Api.post(
-                  "updateAccountCredentials",
+                axiosPrivate
+                  .post(
+                    "updateAccountCredentials",
 
-                  {
-                    email: values.email,
-                    password: values.password,
-                  }
-                )
+                    {
+                      email: values.email,
+                      oldPassword: values.oldPassword,
+                      newPassword: values.newPassword,
+                    }
+                  )
                   .then((data) => {
                     console.log(data);
                     toast.success("Changes Saved!");
@@ -108,8 +111,8 @@ function Profile() {
                     <div className='flex justify-between'>
                       <div>
                         <TextField
-                          label='Password'
-                          name='password'
+                          label='New Password'
+                          name='newPassword'
                           type='password'
                         />
                       </div>
