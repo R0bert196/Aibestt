@@ -39,7 +39,7 @@ function Profile() {
               </form>
             </div>
 
-            <div style={{ border: "1px solid #e3e6f0" }} className="my-[2rem] col-start-2 col-end-7 bg-white px-2 rounded">
+            <div style={{ border: "1px solid #e3e6f0" }} className="my-[2rem] col-start-2 col-end-8 bg-white px-2 rounded">
               <h3 className='mb-3 text-center'>Detalii de contact</h3>
               <form className='grid grid-cols-4 gap-4'>
                 <label htmlFor="address">Adresa</label>                

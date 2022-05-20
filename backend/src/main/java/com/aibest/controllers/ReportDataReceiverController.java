@@ -90,7 +90,7 @@ public class ReportDataReceiverController {
         for (Salariat salariat : salariati) {
             Employee dbInsert = Employee
                     .builder()
-                    .uploadDate(LocalDate.parse("2018-05-05"))
+                    .uploadDate(LocalDate.parse("2018-06-05"))
                     .company(company)
                     .norm(salariat.getContracte().getContract().get(salariat.getContracte().getContract().size() - 1).getTimpMunca().getNorma())
                     .anonymised_employee_id((int) (Math.random()*1000000000))
