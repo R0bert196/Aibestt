@@ -6,7 +6,7 @@ import GraphDougnut from "./GraphDoughnut";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { faUsers } from "@fortawesome/free-solid-svg-icons";
 import { faEuroSign } from "@fortawesome/free-solid-svg-icons";
-import { faTrophy } from "@fortawesome/free-solid-svg-icons";
+import { faPercentage } from "@fortawesome/free-solid-svg-icons";
 import { useParams } from "react-router-dom";
 import useAxiosPrivate from "../hooks/useAxiosPrivate";
 
@@ -16,6 +16,7 @@ function MainDashPage() {
   const [averageSalaries, setAverageSalaries] = useState();
   const [employeeCount, setEmployeeCount] = useState();
   const [turnoverEmployee, setTurnoverEmployee] = useState();
+  const [femalePercentage, setFemalePercentage] = useState();
   let { id } = useParams();
 
   const getData = async () => {
@@ -32,11 +33,15 @@ function MainDashPage() {
         axiosPrivate.get(`getTurnoverEmployee?companyId=${id}`, {
           signal: controller.signal,
         }),
+
+         axiosPrivate.get(`getEmployeesByGender?companyId=${id}`, {
+          signal: controller.signal,
+        }),
       ]).then((response) => {
-        console.log(response[0]);
         setAverageSalaries(response[0].data + " RON");
         setEmployeeCount(response[1].data);
         setTurnoverEmployee(response[2].data);
+        setFemalePercentage(Math.round(response[3].data[1].value * 100 / (response[3].data[0].value + response[3].data[1].value)));
       });
     } catch (err) {
       console.error(err);
@@ -79,11 +84,11 @@ function MainDashPage() {
             color='primary'
           />
           <IndiactorCard
-            text='AIB COMPANY RANKING TM'
-            inidcatorValue='2'
+            text='Female employees percentage'
+            inidcatorValue={femalePercentage}
             height='7rem'
-            icon={faTrophy}
-            color='gold'
+            icon={faPercentage}
+            color='primary'
           />
         </div>
         <div style={{maxWidth: "82%"}} className='flex mx-auto justify-between flex-wrap mw1024:justify-center'>

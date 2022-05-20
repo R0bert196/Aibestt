@@ -132,6 +132,12 @@ public class UserController {
         return userService.getUsernameByToken(token.substring(7)).getFirstName();
     }
 
+    @GetMapping("/getFullName")
+    public String getFullName(@RequestHeader(name = "Authorization") String token) {
+        AppUser user =  userService.getUsernameByToken(token.substring(7));
+        return user.getFirstName() + " " + user.getLastName();
+    }
+
     @PostMapping("/updateAccountCredentials")
     public ResponseEntity<String> updateAccountCredentials(@RequestHeader(name = "Authorization") String token,
                                         @RequestBody UserParams userParams){
