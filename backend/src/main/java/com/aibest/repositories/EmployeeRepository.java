@@ -1,11 +1,15 @@
 package com.aibest.repositories;
 
+import com.aibest.entities.Company;
 import com.aibest.entities.Employee;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 
@@ -44,4 +48,8 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long> {
     @Query(value = "SELECT COUNT(e.sex) as value, e.sex as name FROM employee e WHERE company_id =:comp_id GROUP BY sex;", nativeQuery = true)
     List<Map<String, String>> getEmployeesByGender(@Param("comp_id") long companyId);
 
+    @Modifying
+    @Transactional
+    @Query(value = "DELETE FROM employee WHERE company_id = :comp_id AND EXTRACT(MONTH FROM upload_date) = :month AND EXTRACT(YEAR FROM upload_date) = :year ;", nativeQuery = true)
+    void deleteOldReportData(@Param("comp_id") long company, @Param("month") int month, @Param("year") int year);
 }
