@@ -21,7 +21,7 @@ Aibest uses a number of open source projects to work properly:
 
 1. Clone the repo
      ```sh
-    git clone git@github.com:R0bert196/aibest.git
+    git clone git@github.com:R0bert196/aibestt.git
     ```
 2. Open a new terminal in the frontend folder and run npm start to enable the frontend
     ```sh
