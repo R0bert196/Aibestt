@@ -18,6 +18,16 @@ A KPI calculator that can parse the standard REVISAL report and allow companies 
 
 <hr>
 
+## Installation
+
+<ol>
+    <li>Clone the repository</li>
+    <li>Rename the .env.template to .env and fill in your database credentials</li>
+    <li>Create the Python virtual environment</li>
+    <li>Run the application with Python</li>
+</ol>
+
+<hr>
 
 ## Usage
 
@@ -25,7 +35,7 @@ Create account, upload the unzipped revisal document and check the charts to com
 
 ![homepage](https://gligoravram.github.io/img/projectscreenshots/aibest-homepage.jpg)
 ![dashboard](https://gligoravram.github.io/img/projectscreenshots/aibest-dashboard.jpg)
-![table](https://gligoravram.github.io/img/projectscreenshots/aibest-table.png.jpg)
+![table](https://gligoravram.github.io/img/projectscreenshots/aibest-table.jpg)
 ![upload](https://gligoravram.github.io/img/projectscreenshots/aibest-upload.jpg)
 <hr>
 
