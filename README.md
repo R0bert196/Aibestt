@@ -19,6 +19,16 @@ A KPI calculator that can parse the standard REVISAL report and allow companies 
 <hr>
 
 
+## How to contribute
+
+<ol>
+<li>Clone repo and create a new branch: $ git checkout https://github.com/GligorAvram/ProMan -b name_for_new_branch.</li>
+<li>Make changes and test</li>
+<li>Submit Pull Request with comprehensive description of changes</li>
+</ol>
+
+<hr>
+
 ## License
 
 unlicense
