@@ -17,3 +17,11 @@ A KPI calculator that can parse the standard REVISAL report and allow companies 
 ![shield](https://img.shields.io/github/license/GligorAvram/aibest)
 
 <hr>
+
+
+## You may also like
+
+<ul>
+    <li> <a href="https://github.com/GligorAvram/ProMan">ProMan</a></li>
+    <li> <a href="https://github.com/GligorAvram/CodeCool-shop">CodeCool shop</a></li>
+</ul>
