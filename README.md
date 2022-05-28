@@ -19,6 +19,12 @@ A KPI calculator that can parse the standard REVISAL report and allow companies 
 <hr>
 
 
+## License
+
+unlicense
+
+<hr>
+
 ## You may also like
 
 <ul>
