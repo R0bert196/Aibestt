@@ -26,7 +26,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.mail.MessagingException;
-import javax.mail.internet.MimeMessage;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Objects;
@@ -76,7 +75,7 @@ public class UserService implements UserDetailsService {
 
         String companyDetailsString = restGetService.getCompanyDetails("https://webservicesp.anaf.ro/bilant?an=2020&cui=" + registrationParams.getCui());
 
-
+        System.out.println(companyDetailsString);
         CompanyDetails companyDetails = new ObjectMapper().readValue(companyDetailsString, CompanyDetails.class);
 
         CompanyGroup group = CompanyGroup.builder().name(registrationParams.getGroup()).build();

@@ -1,22 +1,25 @@
 version: '3'
 
 services:
-  server:
-    image: 'openjdk:17-jdk-alpine'
+
+  server2:
+    image: 'elproyectegrande.azurecr.io/openjdk:17-jdk-alpine'
     build: ./backend
-    container_name: server
+    container_name: server2
     ports:
       - 8080:8080
     depends_on:
-      - db4
+      - db5
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://db4:5432/${DB}
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://ec2-52-18-116-67.eu-west-1.compute.amazonaws.com:5432/dbpe6e1u04r28
       - SPRING_DATASOURCE_USERNAME=${USERNAME}
       - SPRING_DATASOURCE_PASSWORD=${PASSWORD}
       - SPRING_JPA_HIBERNATE_DDL_AUTO=update
 
-  client:
+  client2:
+    image: elproyectegrande.azurecr.io/node:alpine3.12
     build: ./frontend
+    container_name: client2
     environment:
       - CLIENT_PORT=${CLIENT_PORT}
     expose:
@@ -24,20 +27,15 @@ services:
     ports:
     - ${CLIENT_PORT}:${CLIENT_PORT}
     links:
-      - server
+      - server2
     command: npm start
           
-  db4:
+  db5:
     image: 'postgres:13-alpine'
-    container_name: aibest4
+    container_name: aibest5
     ports:
       - 5432:5432
     environment:
       - POSTGRES_USER=${USERNAME}
       - POSTGRES_PASSWORD=${PASSWORD}
-      - POSTGRES_DB=aibest4
-
-  admin:    
-    image: adminer    
-    ports:      
-      - "8085:8080"
+      - POSTGRES_DB=aibest5
