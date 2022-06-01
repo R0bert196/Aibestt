@@ -84,7 +84,7 @@ function MainDashPage() {
             color='primary'
           />
           <IndiactorCard
-            text='Female employees percentage'
+            text='MALE / FEMALE RATIO'
             inidcatorValue={femalePercentage}
             height='7rem'
             icon={faPercentage}

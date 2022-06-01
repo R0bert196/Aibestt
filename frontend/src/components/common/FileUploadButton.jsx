@@ -5,10 +5,11 @@ import { useAtom } from "jotai";
 import state from "../../state";
 import AutoCompleteBox from "./AutoCompleteBox";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
+import DatePicker from "react-date-picker";
+
 
 function FileUploadButton({ setData, toggleUpload }) {
   const [companies, setCompanies] = useState();
-
   const [companyId, setCompanyId] = useState();
 
   const axiosPrivate = useAxiosPrivate();
@@ -18,6 +19,9 @@ function FileUploadButton({ setData, toggleUpload }) {
 
   // const [inputValue, setInputValue] = useState("");
   const [inputValue, setInputValue] = useState("");
+  const [reportDate, setReportDate] = useState(
+    new Date()
+  );
 
   const [isSelectedField, setIsSelectedField] = useState(false);
 
@@ -44,7 +48,7 @@ function FileUploadButton({ setData, toggleUpload }) {
     let bodyFormData = new FormData();
     bodyFormData.append("file", content.file);
     bodyFormData.append("companyId", content.companyId);
-    bodyFormData.append("reportDate", new Date().toLocaleDateString('en-CA'));
+    bodyFormData.append("reportDate", reportDate);
 
     let headers = {
       'Content-Type': 'multipart/form-data'
@@ -60,32 +64,34 @@ function FileUploadButton({ setData, toggleUpload }) {
 
   return (
     <div
-      className='p-4 transition-all duration-300'
+      className="p-4 transition-all duration-300"
       style={{
         opacity: toggleUpload ? "1000" : "0",
         position: "relative",
-        display: toggleUpload ? "block" : 'none'
+        display: toggleUpload ? "block" : "none",
         // top: toggleUpload ? "0px" : "-1000px",
       }}
-    > 
-      <div className='md:grid grid-cols-3  gap-6'>
-        <div
-
-          className='shadow flex-auto col-start-1 col-end-3 rounded bg-white h-max'
-        >
+    >
+      <div className="md:grid grid-cols-3  gap-6">
+        <div className="shadow flex-auto col-start-1 col-end-3 rounded bg-white h-max">
           <input
             onChange={(e) => {
               getCompanies(e);
               setIsSelectedField(true);
               setInputValue(e.target.value);
             }}
-            className='shadow min-w-0 max-h-10 block w-full px-3 py-1.5 text-base font-normal bg-white bg-clip-padding  transition ease-in-out m-0 focus:outline-none'
-            id='companyId'
-            type='text'
-            autoComplete='off'
-            placeholder='Search for your company'
+            className="shadow min-w-0 max-h-10 block w-full px-3 py-1.5 text-base font-normal bg-white bg-clip-padding  transition ease-in-out m-0 focus:outline-none"
+            id="companyId"
+            type="text"
+            autoComplete="off"
+            placeholder="Search for your company"
             value={inputValue}
           />
+
+          <div>
+            <DatePicker onChange={setReportDate} value={reportDate} />
+          </div>
+
           {isSelectedField && (
             <AutoCompleteBox
               setIsSelectedField={setIsSelectedField}
@@ -98,25 +104,23 @@ function FileUploadButton({ setData, toggleUpload }) {
         </div>
         <div className="mw768:mt-8 col-start-3 col-end-4">
           <input
-            className='shadow block w-full max-h-10 text-xl font-normal text-gray-700 bg-white bg-clip-padding rounded transition ease-in-out m-0'
-            id='file'
+            className="shadow block w-full max-h-10 text-xl font-normal text-gray-700 bg-white bg-clip-padding rounded transition ease-in-out m-0"
+            id="file"
             onChange={() => setIsFileUploaded(true)}
-            type='file'
+            type="file"
           />
 
-          <div className='mt-8'>
+          <div className="mt-8">
             <button
-              className='upload-button p-2 mt-6 bg-primary rounded-3xl text-white hover:brightness-125 disabled:opacity-75 disabled:cursor-not-allowed disabled:brightness-100'
+              className="upload-button p-2 mt-6 bg-primary rounded-3xl text-white hover:brightness-125 disabled:opacity-75 disabled:cursor-not-allowed disabled:brightness-100"
               onClick={onSelectFile}
-              type='submit'
+              type="submit"
               disabled={!(isCompanySelected && isFileUploaded)}
             >
               Upload Employees
             </button>
           </div>
         </div>
-
-        
       </div>
     </div>
   );
