@@ -11,7 +11,7 @@ services:
     depends_on:
       - db5
     environment:
-      - SPRING_DATASOURCE_URL=${DBURL}
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://ec2-52-18-116-67.eu-west-1.compute.amazonaws.com:5432/dbpe6e1u04r28
       - SPRING_DATASOURCE_USERNAME=${USERNAME}
       - SPRING_DATASOURCE_PASSWORD=${PASSWORD}
       - SPRING_JPA_HIBERNATE_DDL_AUTO=update
