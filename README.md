@@ -48,7 +48,7 @@ Aibest uses a number of open source projects to work properly:
     
 7. Run the spring application to enable the backend
 
-8. Enter on http://localhost:8080/ and enjoy!
+8. Enter on http://localhost:3000/ and enjoy!
 
 
 [Spring Boot]: https://spring.io/projects/spring-boot
